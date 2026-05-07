@@ -39,7 +39,6 @@ body {
   min-height: 100vh;
 }
 
-/* ═══ HIDDEN ADMIN TRIGGER ═══ */
 .admin-trigger {
   position: fixed;
   bottom: 16px;
@@ -52,9 +51,7 @@ body {
   z-index: 200;
   border-radius: 50%;
 }
-/* Triple-click activates */
 
-/* ═══ NAV ═══ */
 .nav {
   background: var(--g1);
   height: 60px;
@@ -99,11 +96,9 @@ body {
   margin-top: -2px;
 }
 
-/* ═══ PAGE ═══ */
 .page { display: none; }
 .page.active { display: block; }
 
-/* ═══ HERO ═══ */
 .hero {
   background: var(--g1);
   position: relative;
@@ -174,7 +169,6 @@ body {
   margin: 0 auto 1.75rem;
 }
 
-/* XP bar in hero */
 .hero-xp {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.1);
@@ -217,7 +211,6 @@ body {
   text-align: right;
 }
 
-/* ═══ STEP INDICATORS ═══ */
 .steps-bar {
   background: var(--white);
   border-bottom: 1px solid var(--border2);
@@ -275,14 +268,12 @@ body {
   box-shadow: 0 0 0 3px rgba(30,94,30,0.15);
 }
 
-/* ═══ FORM OUTER ═══ */
 .form-outer {
   max-width: 740px;
   margin: 0 auto;
   padding: 2rem 1.5rem 5rem;
 }
 
-/* ═══ CARD ═══ */
 .card {
   background: var(--white);
   border-radius: 20px;
@@ -309,7 +300,6 @@ body {
 }
 .card:focus-within::before { opacity: 1; }
 
-/* ═══ CARD HEADER ═══ */
 .card-header {
   display: flex;
   align-items: flex-start;
@@ -353,7 +343,6 @@ body {
   line-height: 1.5;
 }
 
-/* ═══ PURPOSE CARD ═══ */
 .purpose-card {
   background: var(--g1);
   border-radius: 20px;
@@ -385,7 +374,6 @@ body {
 }
 .purpose-card p + p { margin-top: 0.6rem; }
 
-/* ═══ FIELDS ═══ */
 .field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -442,7 +430,6 @@ select {
 }
 .err-msg.show { display: flex; }
 
-/* ═══ CONSENT ═══ */
 .consent-text {
   background: var(--pale);
   border: 1px solid var(--border);
@@ -487,7 +474,6 @@ select {
 }
 .choice-btn input[type=radio] { display: none; }
 
-/* ═══ RATING GAMIFIED ═══ */
 .rating-section-intro {
   background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
   border-radius: 14px;
@@ -601,7 +587,6 @@ select {
 }
 .face-btn.selected .face-label { color: rgba(255,255,255,0.75); }
 
-/* checkmark on answered */
 .rating-item.answered::after {
   content: '✓';
   position: absolute;
@@ -616,7 +601,6 @@ select {
 }
 .rating-item { position: relative; }
 
-/* answered count pill */
 .rating-counter {
   display: flex;
   align-items: center;
@@ -635,7 +619,6 @@ select {
 }
 .counter-pill span { color: var(--ink4); font-weight: 400; }
 
-/* ═══ FEEDBACK TEXTAREA ═══ */
 .feedback-header {
   display: flex;
   align-items: center;
@@ -664,7 +647,6 @@ select {
   margin-top: 4px;
 }
 
-/* ═══ ALUMNI ID ═══ */
 .alumni-promo {
   background: linear-gradient(135deg, var(--g1), var(--g2));
   border-radius: 16px;
@@ -758,7 +740,6 @@ select {
   font-size: 1rem; padding: 0 4px;
 }
 
-/* ═══ SUBMIT ═══ */
 .submit-area { text-align: center; padding: 2rem 0 1rem; }
 .submit-btn {
   display: inline-flex;
@@ -800,7 +781,6 @@ select {
 .submit-note { font-size: 0.72rem; color: var(--ink4); margin-top: 10px; }
 .submit-error { font-size: 0.8rem; color: var(--err); margin-bottom: 10px; display: none; }
 
-/* ═══ SUCCESS ═══ */
 .success-page { display: none; }
 .success-page.show { display: block; }
 .success-wrap {
@@ -849,7 +829,6 @@ select {
 }
 .success-card p { font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
 
-/* ═══ FOOTER ═══ */
 .form-footer {
   text-align: center;
   padding: 1.25rem;
@@ -858,9 +837,7 @@ select {
   border-top: 1px solid var(--border2);
 }
 
-/* ══════════════════════════════
-   ADMIN
-══════════════════════════════ */
+/* ADMIN */
 .admin-page { min-height: 100vh; background: #f0f4f0; display: none; }
 .admin-page.active { display: block; }
 
@@ -932,7 +909,6 @@ select {
   border: none;
 }
 
-/* DASHBOARD */
 .dashboard-wrap { display: none; padding: 2rem; max-width: 1100px; margin: 0 auto; }
 .dashboard-wrap.visible { display: block; }
 .dash-head {
@@ -965,18 +941,6 @@ select {
 .btn-refresh:hover { background: var(--g2); }
 .btn-logout { background: transparent; border: 1.5px solid var(--border); color: var(--ink3); }
 .btn-logout:hover { background: var(--pale); }
-
-.config-alert {
-  background: #fff8e1;
-  border: 1px solid #ffd54f;
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.5rem;
-  font-size: 0.82rem;
-  color: #5d4037;
-  line-height: 1.6;
-}
-.config-alert code { background: #fff3e0; padding: 1px 5px; border-radius: 4px; font-size: 0.78rem; }
 
 .stat-row {
   display: grid;
@@ -1064,10 +1028,8 @@ select {
 </head>
 <body>
 
-<!-- HIDDEN ADMIN TRIGGER: triple-click bottom-right corner -->
 <button class="admin-trigger" id="adminTrigger" title=""></button>
 
-<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
     <div class="nav-seal">🎓</div>
@@ -1078,7 +1040,7 @@ select {
   </div>
 </nav>
 
-<!-- ═══════════════════════════ SURVEY ═══════════════════════════ -->
+<!-- SURVEY PAGE -->
 <div id="page-survey" class="page active">
 
   <div class="hero">
@@ -1096,7 +1058,6 @@ select {
     </div>
   </div>
 
-  <!-- STEP INDICATOR -->
   <div class="steps-bar" id="stepsBar">
     <div class="step-pill active" id="step0"><div class="step-dot">1</div>Profile</div>
     <div class="step-pill" id="step1"><div class="step-dot">2</div>Privacy</div>
@@ -1108,7 +1069,6 @@ select {
   <div class="form-outer">
     <div id="surveyForm">
 
-      <!-- PURPOSE -->
       <div class="purpose-card">
         <h2>Why We're Asking</h2>
         <p><strong>Purpose:</strong> To gather meaningful feedback from graduates about every aspect of the graduation experience — from finance and registration to the ceremony itself. Your insights directly shape how MVGFC serves future graduates.</p>
@@ -1363,6 +1323,7 @@ select {
           </div>
 
           <div class="field-row">
+            <!-- E-SIGNATURE UPLOAD — FIXED -->
             <div class="field">
               <label>E-Signature <span class="req">*</span></label>
               <div class="upload-zone" id="zone-esig"
@@ -1383,7 +1344,10 @@ select {
                 </div>
                 <button class="remove-file" onclick="removeFile('esig')">✕</button>
               </div>
+              <div class="err-msg" id="err-esig">⚠ Please upload your e-signature.</div>
             </div>
+
+            <!-- 2x2 PHOTO UPLOAD — FIXED -->
             <div class="field">
               <label>2×2 ID Photo <span class="req">*</span></label>
               <div class="upload-zone" id="zone-photo"
@@ -1404,6 +1368,7 @@ select {
                 </div>
                 <button class="remove-file" onclick="removeFile('photo')">✕</button>
               </div>
+              <div class="err-msg" id="err-photo">⚠ Please upload your 2×2 ID photo.</div>
             </div>
           </div>
         </div>
@@ -1434,16 +1399,15 @@ select {
       </div>
     </div>
 
-  </div><!-- form-outer -->
+  </div>
 
   <div class="form-footer">
     © MVGFC Student Affairs Office · Graduation Satisfaction Survey System · Powered by Google Sheets
   </div>
 </div>
 
-<!-- ═══════════════════════════ ADMIN ═══════════════════════════ -->
+<!-- ADMIN PAGE -->
 <div id="page-admin" class="admin-page">
-
   <div class="admin-login-wrap" id="adminLoginWrap">
     <div class="login-box">
       <div class="login-icon">🔒</div>
@@ -1487,21 +1451,21 @@ select {
 
 <script>
 // ═══════════════════════════════════════
-// CONFIG
+// CONFIG — update these two values
 // ═══════════════════════════════════════
-const SCRIPT_URL   = 'https://script.google.com/macros/s/AKfycbyps9DMk56mrKiFyRvFoJ2fzip0eaC3njV_8F4pN58rPxl6y6vjLcJ3Q8FnYOkBiLNi/exec'; // ← paste your deployed Apps Script URL here
-const ADMIN_PASS   = 'mvgfcES123';            // ← change this password
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyps9DMk56mrKiFyRvFoJ2fzip0eaC3njV_8F4pN58rPxl6y6vjLcJ3Q8FnYOkBiLNi/exec';
+const ADMIN_PASS = 'mvgfcES123';
 
 // ─── RATING QUESTIONS ─────────────────
 const RQS = [
-  {id:'r1', num:'1', text:'Finance Office services and payment processing'},
-  {id:'r2', num:'2', text:'Registrar\'s Office assistance and graduation requirements'},
-  {id:'r3', num:'3', text:'Clarity of graduation fees and procedures'},
-  {id:'r4', num:'4', text:'Efficiency of clearance signing and requirement completion'},
-  {id:'r5', num:'5', text:'Graduation photoshoot and attire arrangements'},
-  {id:'r6', num:'6', text:'Venue comfort and event setup'},
-  {id:'r7', num:'7', text:'Organization and flow of the graduation ceremony'},
-  {id:'r8', num:'8', text:'Overall graduation experience at MVGFC'},
+  {id:'r1', num:'1',  text:'Finance Office services and payment processing'},
+  {id:'r2', num:'2',  text:'Registrar\'s Office assistance and graduation requirements'},
+  {id:'r3', num:'3',  text:'Clarity of graduation fees and procedures'},
+  {id:'r4', num:'4',  text:'Efficiency of clearance signing and requirement completion'},
+  {id:'r5', num:'5',  text:'Graduation photoshoot and attire arrangements'},
+  {id:'r6', num:'6',  text:'Venue comfort and event setup'},
+  {id:'r7', num:'7',  text:'Organization and flow of the graduation ceremony'},
+  {id:'r8', num:'8',  text:'Overall graduation experience at MVGFC'},
   {id:'r9', num:'15', text:'Overall flow and organization of the graduation program'},
 ];
 const FACES = [
@@ -1511,6 +1475,7 @@ const FACES = [
   {v:1, emoji:'😞', label:'Strongly\nDissatisfied'},
 ];
 const ratings = {};
+const fileData = {};
 
 // ─── BUILD RATING ITEMS ───────────────
 function buildRatings() {
@@ -1519,14 +1484,14 @@ function buildRatings() {
     ratings[q.id] = null;
     const div = document.createElement('div');
     div.className = 'rating-item';
-    div.id = 'ri-'+q.id;
+    div.id = 'ri-' + q.id;
     div.innerHTML = `
       <div class="rating-q">
         <span class="q-num">${q.num}</span>
         <span>${q.text} <span class="req">*</span></span>
       </div>
       <div class="rating-faces">
-        ${FACES.map(f=>`
+        ${FACES.map(f => `
           <button type="button" class="face-btn" data-q="${q.id}" data-v="${f.v}" onclick="pickRating('${q.id}',${f.v})">
             <span class="face-emoji">${f.emoji}</span>
             <span class="face-score">${f.v}</span>
@@ -1545,8 +1510,8 @@ function pickRating(qId, val) {
   document.querySelectorAll(`[data-q="${qId}"]`).forEach(btn => {
     btn.classList.toggle('selected', parseInt(btn.dataset.v) === val);
   });
-  document.getElementById('err-'+qId)?.classList.remove('show');
-  document.getElementById('ri-'+qId)?.classList.add('answered');
+  document.getElementById('err-' + qId)?.classList.remove('show');
+  document.getElementById('ri-' + qId)?.classList.add('answered');
   updateCounter();
   updateXP();
   updateSteps();
@@ -1557,27 +1522,27 @@ function updateCounter() {
   document.getElementById('ratingCounter').innerHTML = `${done} <span>/ ${RQS.length} answered</span>`;
 }
 
-// ─── CONSENT & ALUMNI CHOICE ──────────
+// ─── CONSENT & ALUMNI ─────────────────
 let consentVal = null, alumniVal = null;
 
 function selectConsent(val) {
   consentVal = val;
-  document.getElementById('btnAgree').className = 'choice-btn' + (val==='I Agree'?' selected-yes':'');
-  document.getElementById('btnDisagree').className = 'choice-btn' + (val==='I Disagree'?' selected-no':'');
+  document.getElementById('btnAgree').className    = 'choice-btn' + (val === 'I Agree'    ? ' selected-yes' : '');
+  document.getElementById('btnDisagree').className = 'choice-btn' + (val === 'I Disagree' ? ' selected-no'  : '');
   document.getElementById('err-consent').classList.remove('show');
   onFieldChange();
 }
 
 function selectAlumni(val) {
   alumniVal = val;
-  document.getElementById('btnAlumniYes').className = 'choice-btn' + (val==='Yes'?' selected-yes':'');
-  document.getElementById('btnAlumniNo').className = 'choice-btn' + (val==='No'?' selected-no':'');
+  document.getElementById('btnAlumniYes').className = 'choice-btn' + (val === 'Yes' ? ' selected-yes' : '');
+  document.getElementById('btnAlumniNo').className  = 'choice-btn' + (val === 'No'  ? ' selected-no'  : '');
   document.getElementById('err-alumni').classList.remove('show');
-  document.getElementById('alumniFields').classList.toggle('open', val==='Yes');
+  document.getElementById('alumniFields').classList.toggle('open', val === 'Yes');
   onFieldChange();
 }
 
-// ─── PROGRESS XP ──────────────────────
+// ─── PROGRESS ─────────────────────────
 function updateXP() {
   const fields = ['email','name','program','yearGrad','contact','address','fbName'];
   let done = 0, total = fields.length + RQS.length + 3 + 1 + 1;
@@ -1585,56 +1550,70 @@ function updateXP() {
   RQS.forEach(q => { if (ratings[q.id]) done++; });
   ['appreciate','improve','suggestions'].forEach(f => { if (document.getElementById(f)?.value?.trim()) done++; });
   if (consentVal) done++;
-  if (alumniVal) done++;
-  const pct = Math.min(100, Math.round((done/total)*100));
-  document.getElementById('xpBar').style.width = pct+'%';
-  document.getElementById('xpPct').textContent = pct+'%';
+  if (alumniVal)  done++;
+  const pct = Math.min(100, Math.round((done / total) * 100));
+  document.getElementById('xpBar').style.width = pct + '%';
+  document.getElementById('xpPct').textContent  = pct + '%';
 }
 
 function updateSteps() {
-  const s0 = ['email','name','program','yearGrad','contact','address','fbName'].every(f=>document.getElementById(f)?.value?.trim());
+  const s0 = ['email','name','program','yearGrad','contact','address','fbName'].every(f => document.getElementById(f)?.value?.trim());
   const s1 = !!consentVal;
-  const s2 = Object.values(ratings).every(v=>v!==null);
-  const s3 = ['appreciate','improve','suggestions'].every(f=>document.getElementById(f)?.value?.trim());
+  const s2 = Object.values(ratings).every(v => v !== null);
+  const s3 = ['appreciate','improve','suggestions'].every(f => document.getElementById(f)?.value?.trim());
   const s4 = !!alumniVal;
-  [s0,s1,s2,s3,s4].forEach((done,i)=>{
-    const el = document.getElementById('step'+i);
-    if(!el)return;
-    const idx = [s0,s1,s2,s3,s4].findIndex((v,j)=>j>=i&&!v);
-    const active = (idx===-1?4:idx)===i||(done&&(idx===-1?4:idx)===i+1);
-    el.className = 'step-pill' + (done?' done':'') + (!done&&(i===(idx===-1?4:idx))?' active':'');
+  [s0,s1,s2,s3,s4].forEach((done, i) => {
+    const el = document.getElementById('step' + i);
+    if (!el) return;
+    const idx = [s0,s1,s2,s3,s4].findIndex((v, j) => j >= i && !v);
+    el.className = 'step-pill' + (done ? ' done' : '') + (!done && (i === (idx === -1 ? 4 : idx)) ? ' active' : '');
   });
 }
 
 function onFieldChange() { updateXP(); updateSteps(); }
-function countChars(el,id){ document.getElementById(id).textContent=el.value.length; }
+function countChars(el, id) { document.getElementById(id).textContent = el.value.length; }
 
-// ─── FILE HANDLING (with preview) ─────
-const fileData = {};
-
+// ─── FILE HANDLING — FIXED ────────────
 function handleFile(input, key) {
   const file = input.files[0];
   if (!file) return;
-  if (file.size > 2*1024*1024) {
+
+  if (!file.type.startsWith('image/')) {
+    alert('Please upload an image file (PNG or JPG).');
+    input.value = '';
+    return;
+  }
+  if (file.size > 2 * 1024 * 1024) {
     alert('File is too large. Please upload an image under 2MB.');
     input.value = '';
     return;
   }
+
   const reader = new FileReader();
   reader.onload = e => {
-    fileData[key] = { base64: e.target.result.split(',')[1], name: file.name, type: file.type };
-    document.getElementById('prev-'+key+'-img').src = e.target.result;
-    document.getElementById('prev-'+key+'-name').textContent = file.name;
-    document.getElementById('prev-'+key+'-size').textContent = (file.size/1024).toFixed(0)+' KB';
-    document.getElementById('prev-'+key).classList.add('show');
-    document.getElementById('zone-'+key).style.display='none';
+    fileData[key] = {
+      base64: e.target.result.split(',')[1],
+      name: file.name,
+      type: file.type
+    };
+    document.getElementById('prev-' + key + '-img').src  = e.target.result;
+    document.getElementById('prev-' + key + '-name').textContent = file.name;
+    document.getElementById('prev-' + key + '-size').textContent = (file.size / 1024).toFixed(0) + ' KB';
+    document.getElementById('prev-' + key).classList.add('show');
+    document.getElementById('zone-' + key).style.display = 'none';
+
+    // Clear error state on successful upload
+    const errEl = document.getElementById('err-' + key);
+    if (errEl) errEl.classList.remove('show');
+    const zone = document.getElementById('zone-' + key);
+    if (zone) zone.style.borderColor = '';
   };
   reader.readAsDataURL(file);
 }
 
 function handleDrop(e, key) {
   e.preventDefault();
-  document.getElementById('zone-'+key).classList.remove('dragover');
+  document.getElementById('zone-' + key).classList.remove('dragover');
   const file = e.dataTransfer.files[0];
   if (!file) return;
   const dt = new DataTransfer();
@@ -1647,156 +1626,178 @@ function handleDrop(e, key) {
 function removeFile(key) {
   fileData[key] = null;
   document.getElementById(key).value = '';
-  document.getElementById('prev-'+key).classList.remove('show');
-  document.getElementById('zone-'+key).style.display='';
+  document.getElementById('prev-' + key).classList.remove('show');
+  document.getElementById('zone-' + key).style.display = '';
+  // Reset error state so user can re-upload cleanly
+  const errEl = document.getElementById('err-' + key);
+  if (errEl) errEl.classList.remove('show');
+  const zone = document.getElementById('zone-' + key);
+  if (zone) zone.style.borderColor = '';
 }
 
-// ─── VALIDATION ───────────────────────
+// ─── VALIDATION — FIXED ───────────────
 function validate() {
   let ok = true;
+
   function chk(id, errId, cond) {
     const el = document.getElementById(id);
     const er = document.getElementById(errId);
     if (cond(el)) {
       el?.classList.add('err');
       er?.classList.add('show');
-      if (ok) { el?.scrollIntoView({behavior:'smooth',block:'center'}); ok=false; }
+      if (ok) { el?.scrollIntoView({ behavior: 'smooth', block: 'center' }); ok = false; }
     } else {
       el?.classList.remove('err');
       er?.classList.remove('show');
     }
   }
-  chk('email','err-email', el=>!el.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
-  chk('name','err-name', el=>!el.value.trim());
-  chk('program','err-program', el=>!el.value);
-  chk('yearGrad','err-yearGrad', el=>!el.value.trim());
-  chk('contact','err-contact', el=>!el.value.trim());
-  chk('address','err-address', el=>!el.value.trim());
-  chk('fbName','err-fbName', el=>!el.value.trim());
+
+  chk('email',    'err-email',    el => !el.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
+  chk('name',     'err-name',     el => !el.value.trim());
+  chk('program',  'err-program',  el => !el.value);
+  chk('yearGrad', 'err-yearGrad', el => !el.value.trim());
+  chk('contact',  'err-contact',  el => !el.value.trim());
+  chk('address',  'err-address',  el => !el.value.trim());
+  chk('fbName',   'err-fbName',   el => !el.value.trim());
 
   if (!consentVal) {
     document.getElementById('err-consent').classList.add('show');
-    if (ok){document.getElementById('err-consent').scrollIntoView({behavior:'smooth',block:'center'});ok=false;}
+    if (ok) { document.getElementById('err-consent').scrollIntoView({ behavior: 'smooth', block: 'center' }); ok = false; }
   }
-  if (consentVal==='I Disagree') {
-    document.getElementById('submitError').textContent='You must agree to the Data Privacy Consent to submit this survey.';
-    document.getElementById('submitError').style.display='block';
-    ok=false;
+  if (consentVal === 'I Disagree') {
+    document.getElementById('submitError').textContent = 'You must agree to the Data Privacy Consent to submit this survey.';
+    document.getElementById('submitError').style.display = 'block';
+    ok = false;
   }
 
-  RQS.forEach(q=>{
+  RQS.forEach(q => {
     if (!ratings[q.id]) {
-      document.getElementById('err-'+q.id)?.classList.add('show');
-      if (ok){document.getElementById('ri-'+q.id)?.scrollIntoView({behavior:'smooth',block:'center'});ok=false;}
+      document.getElementById('err-' + q.id)?.classList.add('show');
+      if (ok) { document.getElementById('ri-' + q.id)?.scrollIntoView({ behavior: 'smooth', block: 'center' }); ok = false; }
     }
   });
 
-  chk('appreciate','err-appreciate', el=>!el.value.trim());
-  chk('improve','err-improve', el=>!el.value.trim());
-  chk('suggestions','err-suggestions', el=>!el.value.trim());
+  chk('appreciate',  'err-appreciate',  el => !el.value.trim());
+  chk('improve',     'err-improve',     el => !el.value.trim());
+  chk('suggestions', 'err-suggestions', el => !el.value.trim());
 
   if (!alumniVal) {
     document.getElementById('err-alumni').classList.add('show');
-    if (ok){document.getElementById('err-alumni').scrollIntoView({behavior:'smooth',block:'center'});ok=false;}
+    if (ok) { document.getElementById('err-alumni').scrollIntoView({ behavior: 'smooth', block: 'center' }); ok = false; }
   }
+
+  // File upload validation — only required when alumni ID is requested
+  if (alumniVal === 'Yes') {
+    if (!fileData['esig']) {
+      const zone   = document.getElementById('zone-esig');
+      const errEl  = document.getElementById('err-esig');
+      if (zone)  zone.style.borderColor = 'var(--err)';
+      if (errEl) errEl.classList.add('show');
+      if (ok) { zone?.scrollIntoView({ behavior: 'smooth', block: 'center' }); ok = false; }
+    }
+    if (!fileData['photo']) {
+      const zone   = document.getElementById('zone-photo');
+      const errEl  = document.getElementById('err-photo');
+      if (zone)  zone.style.borderColor = 'var(--err)';
+      if (errEl) errEl.classList.add('show');
+      if (ok) { zone?.scrollIntoView({ behavior: 'smooth', block: 'center' }); ok = false; }
+    }
+  }
+
   return ok;
 }
 
 // ─── SUBMIT ───────────────────────────
 async function submitSurvey() {
-  document.getElementById('submitError').style.display='none';
+  document.getElementById('submitError').style.display = 'none';
   if (!validate()) return;
 
   const btn = document.querySelector('.submit-btn');
-  btn.disabled=true;
-  btn.innerHTML='Submitting… <span>⏳</span>';
+  btn.disabled = true;
+  btn.innerHTML = 'Submitting… <span>⏳</span>';
 
   const payload = {
-    action:'submit',
-    timestamp: new Date().toLocaleString('en-PH'),
-    email: document.getElementById('email').value,
-    name: document.getElementById('name').value,
-    program: document.getElementById('program').value,
-    yearGrad: document.getElementById('yearGrad').value,
-    contact: document.getElementById('contact').value,
-    address: document.getElementById('address').value,
-    fbName: document.getElementById('fbName').value,
+    action: 'submit',
+    timestamp:  new Date().toLocaleString('en-PH'),
+    email:      document.getElementById('email').value,
+    name:       document.getElementById('name').value,
+    program:    document.getElementById('program').value,
+    yearGrad:   document.getElementById('yearGrad').value,
+    contact:    document.getElementById('contact').value,
+    address:    document.getElementById('address').value,
+    fbName:     document.getElementById('fbName').value,
     employment: document.getElementById('employment').value,
-    consent: consentVal,
-    r1:ratings.r1, r2:ratings.r2, r3:ratings.r3,
-    r4:ratings.r4, r5:ratings.r5, r6:ratings.r6,
-    r7:ratings.r7, r8:ratings.r8, r9:ratings.r9,
-    appreciate: document.getElementById('appreciate').value,
-    improve: document.getElementById('improve').value,
+    consent:    consentVal,
+    r1: ratings.r1, r2: ratings.r2, r3: ratings.r3,
+    r4: ratings.r4, r5: ratings.r5, r6: ratings.r6,
+    r7: ratings.r7, r8: ratings.r8, r9: ratings.r9,
+    appreciate:  document.getElementById('appreciate').value,
+    improve:     document.getElementById('improve').value,
     suggestions: document.getElementById('suggestions').value,
-    alumniId: alumniVal,
-    dob: document.getElementById('dob').value,
-    citizenship: document.getElementById('citizenship').value,
-    homeAddress: document.getElementById('homeAddress').value,
-    primaryContact: document.getElementById('primaryContact').value,
-    emergencyPerson: document.getElementById('emergencyPerson').value,
+    alumniId:    alumniVal,
+    dob:              document.getElementById('dob').value,
+    citizenship:      document.getElementById('citizenship').value,
+    homeAddress:      document.getElementById('homeAddress').value,
+    primaryContact:   document.getElementById('primaryContact').value,
+    emergencyPerson:  document.getElementById('emergencyPerson').value,
     emergencyContact: document.getElementById('emergencyContact').value,
-    relationship: document.getElementById('relationship').value,
+    relationship:     document.getElementById('relationship').value,
     emergencyAddress: document.getElementById('emergencyAddress').value,
-    esig: fileData['esig']?.base64 || null,
-    esigName: fileData['esig']?.name || null,
-    photo: fileData['photo']?.base64 || null,
-    photoName: fileData['photo']?.name || null,
+    esig:      fileData['esig']?.base64  || null,
+    esigName:  fileData['esig']?.name    || null,
+    photo:     fileData['photo']?.base64 || null,
+    photoName: fileData['photo']?.name   || null,
   };
 
   if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
-    setTimeout(()=>showSuccess(), 1200);
+    setTimeout(() => showSuccess(), 1200);
     return;
   }
 
   try {
-    const res = await fetch(SCRIPT_URL, { method:'POST', body: JSON.stringify(payload) });
+    const res  = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
     const data = await res.json();
     if (data.status === 'success') { showSuccess(); }
-    else throw new Error(data.message||'Unknown error');
-  } catch(e) {
-    document.getElementById('submitError').textContent = 'Submission failed: '+e.message+'. Please try again.';
-    document.getElementById('submitError').style.display='block';
-    btn.disabled=false;
-    btn.innerHTML='Submit My Feedback <span class="btn-arrow">→</span>';
+    else throw new Error(data.message || 'Unknown error');
+  } catch (e) {
+    document.getElementById('submitError').textContent = 'Submission failed: ' + e.message + '. Please try again.';
+    document.getElementById('submitError').style.display = 'block';
+    btn.disabled = false;
+    btn.innerHTML = 'Submit My Feedback <span class="btn-arrow">→</span>';
   }
 }
 
 function showSuccess() {
-  document.getElementById('surveyForm').style.display='none';
+  document.getElementById('surveyForm').style.display = 'none';
   document.getElementById('successPage').classList.add('show');
-  document.getElementById('xpBar').style.width='100%';
-  document.getElementById('xpPct').textContent='100%';
-  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('xpBar').style.width = '100%';
+  document.getElementById('xpPct').textContent  = '100%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ─── HIDDEN ADMIN TRIGGER ─────────────
-// Triple-click the invisible dot in bottom-right corner
-let adminClickCount=0, adminTimer=null;
-document.getElementById('adminTrigger').addEventListener('click',()=>{
+// ─── ADMIN TRIGGER ────────────────────
+let adminClickCount = 0, adminTimer = null;
+document.getElementById('adminTrigger').addEventListener('click', () => {
   adminClickCount++;
   clearTimeout(adminTimer);
-  if(adminClickCount>=3){
-    adminClickCount=0;
+  if (adminClickCount >= 3) {
+    adminClickCount = 0;
     showAdmin();
   } else {
-    adminTimer=setTimeout(()=>{ adminClickCount=0; }, 600);
+    adminTimer = setTimeout(() => { adminClickCount = 0; }, 600);
   }
 });
-
-// Keyboard shortcut: Ctrl+Shift+A
-document.addEventListener('keydown', e=>{
-  if(e.ctrlKey && e.shiftKey && e.key==='A') showAdmin();
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.shiftKey && e.key === 'A') showAdmin();
 });
 
 function showAdmin() {
   document.getElementById('page-survey').classList.remove('active');
   document.getElementById('page-admin').classList.add('active');
-  document.getElementById('adminLoginWrap').style.display='flex';
+  document.getElementById('adminLoginWrap').style.display = 'flex';
   document.getElementById('dashWrap').classList.remove('visible');
-  document.getElementById('adminPwd').value='';
+  document.getElementById('adminPwd').value = '';
 }
-
 function showSurvey() {
   document.getElementById('page-admin').classList.remove('active');
   document.getElementById('page-survey').classList.add('active');
@@ -1804,101 +1805,99 @@ function showSurvey() {
 
 // ─── ADMIN LOGIN ──────────────────────
 function doLogin() {
-  const pwd = document.getElementById('adminPwd').value;
-  if (pwd===ADMIN_PASS) {
-    document.getElementById('adminLoginWrap').style.display='none';
+  if (document.getElementById('adminPwd').value === ADMIN_PASS) {
+    document.getElementById('adminLoginWrap').style.display = 'none';
     document.getElementById('dashWrap').classList.add('visible');
     loadDash();
   } else {
     document.getElementById('loginErr').classList.add('show');
-    document.getElementById('adminPwd').value='';
+    document.getElementById('adminPwd').value = '';
   }
 }
 function doLogout() {
   document.getElementById('dashWrap').classList.remove('visible');
-  document.getElementById('adminLoginWrap').style.display='flex';
-  document.getElementById('adminPwd').value='';
+  document.getElementById('adminLoginWrap').style.display = 'flex';
+  document.getElementById('adminPwd').value = '';
   document.getElementById('loginErr').classList.remove('show');
 }
 
 // ─── DASHBOARD ────────────────────────
 async function loadDash() {
-  const sr=document.getElementById('statRow');
-  sr.innerHTML='<div class="loading-box" style="grid-column:1/-1"><div class="spinner"></div>Loading analytics…</div>';
-  document.getElementById('chartGrid').style.display='none';
-  document.getElementById('respCard').style.display='none';
-  document.getElementById('fbCard').style.display='none';
+  const sr = document.getElementById('statRow');
+  sr.innerHTML = '<div class="loading-box" style="grid-column:1/-1"><div class="spinner"></div>Loading analytics…</div>';
+  document.getElementById('chartGrid').style.display = 'none';
+  document.getElementById('respCard').style.display  = 'none';
+  document.getElementById('fbCard').style.display    = 'none';
 
-  if(SCRIPT_URL==='YOUR_APPS_SCRIPT_URL'){
-    renderDash(mockData());
-    return;
-  }
+  if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') { renderDash(mockData()); return; }
   try {
-    const res=await fetch(SCRIPT_URL+'?action=getAnalytics');
+    const res = await fetch(SCRIPT_URL + '?action=getAnalytics');
     renderDash(await res.json());
-  } catch(e){
-    sr.innerHTML='<div class="loading-box" style="grid-column:1/-1;color:var(--err);">⚠ Failed to load. Check your Apps Script URL.</div>';
+  } catch (e) {
+    sr.innerHTML = '<div class="loading-box" style="grid-column:1/-1;color:var(--err);">⚠ Failed to load. Check your Apps Script URL.</div>';
   }
 }
 
-function mockData(){
+function mockData() {
   return {
-    total:52, programs:{'BSN':13,'BSCRIM':9,'BSED-ENGLISH':6,'BSBA-MM':8,'BSCS':7,'BEED':5,'Other':4},
-    consent:{'I Agree':50,'I Disagree':2}, alumni:{'Yes':34,'No':18},
-    avgRatings:{r1:3.6,r2:3.4,r3:3.2,r4:3.5,r5:3.7,r6:3.8,r7:3.6,r8:3.9,r9:3.7},
-    ratingDist:{'4':22,'3':21,'2':6,'1':3},
-    recentResponses:[
+    total: 52,
+    programs: {'BSN':13,'BSCRIM':9,'BSED-ENGLISH':6,'BSBA-MM':8,'BSCS':7,'BEED':5,'Other':4},
+    consent:  {'I Agree':50,'I Disagree':2},
+    alumni:   {'Yes':34,'No':18},
+    avgRatings: {r1:3.6,r2:3.4,r3:3.2,r4:3.5,r5:3.7,r6:3.8,r7:3.6,r8:3.9,r9:3.7},
+    ratingDist: {'4':22,'3':21,'2':6,'1':3},
+    recentResponses: [
       {ts:'5/7/2026 10:23',name:'Santos, Maria L.',program:'BSN',year:'2025',consent:'I Agree',alumni:'Yes',avg:'3.8'},
       {ts:'5/7/2026 10:41',name:'Reyes, Juan M.',program:'BSCRIM',year:'2025',consent:'I Agree',alumni:'No',avg:'3.4'},
       {ts:'5/7/2026 11:02',name:'Cruz, Anna B.',program:'BSBA-MM',year:'2025',consent:'I Agree',alumni:'Yes',avg:'3.7'},
       {ts:'5/7/2026 11:15',name:'Garcia, Pedro S.',program:'BSCS',year:'2025',consent:'I Agree',alumni:'Yes',avg:'3.9'},
     ],
-    appreciation:[
+    appreciation: [
       {name:'Santos, M.',text:'The overall ceremony was well-organized. The venue was beautiful and the program flow was smooth.'},
       {name:'Cruz, A.',text:'The photoshoot arrangements were excellent — the photographer was professional and very accommodating.'},
     ]
   };
 }
 
-function renderDash(d){
-  const RLS={r1:'Finance Office',r2:'Registrar\'s Office',r3:'Fees & Procedures',r4:'Clearance Signing',r5:'Photoshoot & Attire',r6:'Venue & Setup',r7:'Ceremony Flow',r8:'Overall Experience',r9:'Program Organization'};
-  const overallAvg=Object.values(d.avgRatings).reduce((a,b)=>a+parseFloat(b),0)/Object.keys(d.avgRatings).length;
-  const alumniY=d.alumni?.Yes||0;
-  const top=Object.entries(d.programs).sort((a,b)=>b[1]-a[1])[0];
+function renderDash(d) {
+  const RLS = {r1:'Finance Office',r2:'Registrar\'s Office',r3:'Fees & Procedures',r4:'Clearance Signing',r5:'Photoshoot & Attire',r6:'Venue & Setup',r7:'Ceremony Flow',r8:'Overall Experience',r9:'Program Organization'};
+  const overallAvg = Object.values(d.avgRatings).reduce((a,b) => a + parseFloat(b), 0) / Object.keys(d.avgRatings).length;
+  const alumniY = d.alumni?.Yes || 0;
+  const top = Object.entries(d.programs).sort((a,b) => b[1]-a[1])[0];
 
-  document.getElementById('statRow').innerHTML=`
+  document.getElementById('statRow').innerHTML = `
     <div class="stat-box accent"><div class="s-label">Total Responses</div><div class="s-val">${d.total}</div><div class="s-sub">Survey submissions</div></div>
     <div class="stat-box"><div class="s-label">Overall Avg Rating</div><div class="s-val">${overallAvg.toFixed(2)}</div><div class="s-sub">Out of 4.00</div></div>
     <div class="stat-box"><div class="s-label">Alumni ID Requests</div><div class="s-val">${alumniY}</div><div class="s-sub">${Math.round(alumniY/d.total*100)}% of respondents</div></div>
     <div class="stat-box"><div class="s-label">Top Program</div><div class="s-val" style="font-size:1.3rem">${top?.[0]||'—'}</div><div class="s-sub">${top?.[1]||0} respondents</div></div>
   `;
 
-  const cg=document.getElementById('chartGrid');
-  cg.style.display='grid';
+  const cg = document.getElementById('chartGrid');
+  cg.style.display = 'grid';
 
-  const progTotal=Object.values(d.programs).reduce((a,b)=>a+b,0);
-  const progBars=Object.entries(d.programs).sort((a,b)=>b[1]-a[1]).map(([p,c])=>{
-    const pct=Math.round(c/progTotal*100);
+  const progTotal = Object.values(d.programs).reduce((a,b) => a+b, 0);
+  const progBars  = Object.entries(d.programs).sort((a,b) => b[1]-a[1]).map(([p,c]) => {
+    const pct = Math.round(c/progTotal*100);
     return `<div class="bar-r"><div class="bar-lbl">${p}</div><div class="bar-bg"><div class="bar-fg" style="width:${pct}%"><span class="bv">${pct}%</span></div></div><div class="bar-n">${c}</div></div>`;
   }).join('');
 
-  const rdTotal=Object.values(d.ratingDist).reduce((a,b)=>a+b,0);
-  const rdColors={'4':'#1e5e1e','3':'#2d7a2d','2':'#c9a84c','1':'#c0392b'};
-  const rdBars=[['4','Strongly Satisfied'],['3','Satisfied'],['2','Dissatisfied'],['1','Strongly Dissatisfied']].map(([v,l])=>{
-    const c=d.ratingDist[v]||0, pct=Math.round(c/rdTotal*100);
+  const rdTotal  = Object.values(d.ratingDist).reduce((a,b) => a+b, 0);
+  const rdColors = {'4':'#1e5e1e','3':'#2d7a2d','2':'#c9a84c','1':'#c0392b'};
+  const rdBars   = [['4','Strongly Satisfied'],['3','Satisfied'],['2','Dissatisfied'],['1','Strongly Dissatisfied']].map(([v,l]) => {
+    const c = d.ratingDist[v]||0, pct = Math.round(c/rdTotal*100);
     return `<div class="bar-r"><div class="bar-lbl">${v} — ${l}</div><div class="bar-bg"><div class="bar-fg" style="width:${pct}%;background:${rdColors[v]}"><span class="bv">${pct}%</span></div></div><div class="bar-n">${c}</div></div>`;
   }).join('');
 
-  const avgRows=RQS.map(q=>{
-    const s=parseFloat(d.avgRatings[q.id]||0);
-    const stars=[1,2,3,4].map(x=>`<span class="${x<=Math.round(s)?'s-on':'s-off'}">★</span>`).join('');
+  const avgRows = RQS.map(q => {
+    const s = parseFloat(d.avgRatings[q.id]||0);
+    const stars = [1,2,3,4].map(x => `<span class="${x<=Math.round(s)?'s-on':'s-off'}">★</span>`).join('');
     return `<div class="avg-r"><div class="avg-lbl">${RLS[q.id]}</div><div class="avg-stars">${stars}</div><div class="avg-n">${s.toFixed(1)}</div></div>`;
   }).join('');
 
-  const ay=d.alumni?.Yes||0,an=d.alumni?.No||0,at=ay+an,apct=Math.round(ay/at*100);
-  const R=48,CX=60,CY=60,circ=2*Math.PI*R,filled=(apct/100)*circ;
+  const ay=d.alumni?.Yes||0, an=d.alumni?.No||0, at=ay+an, apct=Math.round(ay/at*100);
+  const R=48, CX=60, CY=60, circ=2*Math.PI*R, filled=(apct/100)*circ;
 
-  cg.innerHTML=`
+  cg.innerHTML = `
     <div class="chart-box" style="grid-column:span 2"><h3>Average Satisfaction per Parameter</h3>${avgRows}</div>
     <div class="chart-box"><h3>Respondents by Program</h3><div>${progBars}</div></div>
     <div class="chart-box"><h3>Rating Distribution</h3><div>${rdBars}</div></div>
@@ -1920,32 +1919,30 @@ function renderDash(d){
     </div>
     <div class="chart-box">
       <h3>Consent Distribution</h3>
-      ${Object.entries(d.consent).map(([k,v])=>{
-        const tot=(d.consent['I Agree']||0)+(d.consent['I Disagree']||0);
-        const pct=Math.round(v/tot*100);
+      ${Object.entries(d.consent).map(([k,v]) => {
+        const tot = (d.consent['I Agree']||0)+(d.consent['I Disagree']||0);
+        const pct = Math.round(v/tot*100);
         return `<div class="bar-r"><div class="bar-lbl">${k}</div><div class="bar-bg"><div class="bar-fg" style="width:${pct}%;background:${k==='I Agree'?'#1e5e1e':'#c0392b'}"><span class="bv">${pct}%</span></div></div><div class="bar-n">${v}</div></div>`;
       }).join('')}
     </div>
   `;
 
-  const rb=document.getElementById('respBody');
-  rb.innerHTML=(d.recentResponses||[]).map((r,i)=>`
+  const rb = document.getElementById('respBody');
+  rb.innerHTML = (d.recentResponses||[]).map((r,i) => `
     <tr><td>${i+1}</td><td>${r.ts}</td><td style="font-weight:600">${r.name}</td><td>${r.program}</td><td>${r.year}</td>
     <td><span class="bdg ${r.consent==='I Agree'?'bdg-g':'bdg-r'}">${r.consent}</span></td>
     <td><span class="bdg ${r.alumni==='Yes'?'bdg-g':'bdg-r'}">${r.alumni}</span></td>
     <td><strong>${r.avg}</strong>/4.0</td></tr>
   `).join('');
-  document.getElementById('respCard').style.display='block';
+  document.getElementById('respCard').style.display = 'block';
 
-  document.getElementById('fbList').innerHTML=(d.appreciation||[]).map(f=>`
+  document.getElementById('fbList').innerHTML = (d.appreciation||[]).map(f => `
     <div class="fb-item"><div class="fb-who">— ${f.name}</div>${f.text}</div>
   `).join('');
-  document.getElementById('fbCard').style.display='block';
-
-  if(SCRIPT_URL!=='YOUR_APPS_SCRIPT_URL') document.getElementById('cfgAlert').style.display='none';
+  document.getElementById('fbCard').style.display = 'block';
 }
 
-// ─── INIT ──────────────────────────────
+// ─── INIT ─────────────────────────────
 buildRatings();
 updateXP();
 </script>
