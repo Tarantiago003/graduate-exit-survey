@@ -1573,45 +1573,57 @@ function updateSteps() {
 function onFieldChange() { updateXP(); updateSteps(); }
 function countChars(el, id) { document.getElementById(id).textContent = el.value.length; }
 
-// ─── FILE HANDLING — FIXED ────────────
+// ─── FILE HANDLING — auto-compress so big phone photos still upload ────
 function handleFile(input, key) {
   const file = input.files[0];
   if (!file) return;
-
-  // NOTE: Do NOT check file.type — browsers sometimes leave it empty
-  // for valid images. The accept="image/*" attribute already filters in the picker.
-  if (file.size > 2 * 1024 * 1024) {
-    alert('File is too large. Please upload an image under 2MB.');
+  if (!file.type || !file.type.startsWith('image/')) {
+    alert('Please select an image file (PNG or JPG).');
     input.value = '';
     return;
   }
 
   const reader = new FileReader();
-
   reader.onload = e => {
-    const result = e.target.result;
-    // Safety check — readAsDataURL always produces a comma-separated data URL
-    if (!result || result.indexOf(',') === -1) {
-      alert('Could not read this file. Please try a different image.');
-      input.value = '';
-      return;
-    }
-    fileData[key] = {
-      base64: result.split(',')[1],
-      name:   file.name,
-      type:   file.type || 'image/jpeg' // fallback so GAS gets a valid MIME
-    };
-    document.getElementById('prev-' + key + '-img').src           = result;
-    document.getElementById('prev-' + key + '-name').textContent  = file.name;
-    document.getElementById('prev-' + key + '-size').textContent  = (file.size / 1024).toFixed(0) + ' KB';
-    document.getElementById('prev-' + key).classList.add('show');
-    document.getElementById('zone-' + key).style.display = 'none';
+    const img = new Image();
+    img.onload = () => {
+      // Resize down so the longest edge is <= 1000px (keeps payload small)
+      const MAX = 1000;
+      let w = img.width, h = img.height;
+      if (w > MAX || h > MAX) {
+        const r = Math.min(MAX / w, MAX / h);
+        w = Math.round(w * r);
+        h = Math.round(h * r);
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+      const base64 = dataUrl.split(',')[1];
 
-    // Clear error state
-    const errEl = document.getElementById('err-' + key);
-    if (errEl) errEl.classList.remove('show');
-    const zone = document.getElementById('zone-' + key);
-    if (zone) zone.style.borderColor = '';
+      fileData[key] = {
+        base64: base64,
+        name:   file.name.replace(/\.[^.]+$/, '') + '.jpg',
+        type:   'image/jpeg'
+      };
+
+      document.getElementById('prev-' + key + '-img').src = dataUrl;
+      document.getElementById('prev-' + key + '-name').textContent = file.name;
+      document.getElementById('prev-' + key + '-size').textContent =
+        Math.round(base64.length * 0.75 / 1024) + ' KB';
+      document.getElementById('prev-' + key).classList.add('show');
+      document.getElementById('zone-' + key).style.display = 'none';
+
+      const errEl = document.getElementById('err-' + key);
+      if (errEl) errEl.classList.remove('show');
+      const zone = document.getElementById('zone-' + key);
+      if (zone) zone.style.borderColor = '';
+    };
+    img.onerror = () => {
+      alert('Could not read this image. Please try another file.');
+      input.value = '';
+    };
+    img.src = e.target.result;
   };
 
   reader.onerror = () => {
@@ -1756,8 +1768,10 @@ async function submitSurvey() {
     emergencyAddress: document.getElementById('emergencyAddress').value,
     esig:      fileData['esig']?.base64  || null,
     esigName:  fileData['esig']?.name    || null,
+    esigType:  fileData['esig']?.type    || 'image/jpeg',
     photo:     fileData['photo']?.base64 || null,
     photoName: fileData['photo']?.name   || null,
+    photoType: fileData['photo']?.type   || 'image/jpeg',
   };
 
   if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
