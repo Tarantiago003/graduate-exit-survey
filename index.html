@@ -4,1063 +4,1405 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MVGFC Graduation Satisfaction Survey</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --mvg-green: #2d6a2d;
-    --mvg-green-dark: #1a4a1a;
-    --mvg-green-light: #4a8c4a;
-    --mvg-green-pale: #e8f3e8;
-    --mvg-green-mid: #3d7a3d;
-    --mvg-gold: #c8a84b;
-    --mvg-gold-light: #f0d98a;
-    --mvg-cream: #fafdf7;
-    --white: #ffffff;
-    --text-dark: #1a2e1a;
-    --text-mid: #3a4e3a;
-    --text-light: #6a7e6a;
-    --border: #c0d8c0;
-    --border-light: #daeeda;
-    --error: #c0392b;
-    --success: #27ae60;
-    --shadow: 0 4px 24px rgba(45,106,45,0.10);
-    --shadow-sm: 0 2px 8px rgba(45,106,45,0.08);
-  }
+:root {
+  --g1: #0f3d0f;
+  --g2: #1e5e1e;
+  --g3: #2d7a2d;
+  --g4: #3d8c3d;
+  --g5: #5aaa5a;
+  --glow: #7dd87d;
+  --pale: #eaf5ea;
+  --pale2: #f3fbf3;
+  --gold: #c9a84c;
+  --gold2: #f0d88a;
+  --gold3: #fff5d6;
+  --white: #ffffff;
+  --ink: #0d1f0d;
+  --ink2: #2a3d2a;
+  --ink3: #4a5e4a;
+  --ink4: #7a8e7a;
+  --border: #c5ddc5;
+  --border2: #dceadc;
+  --err: #c0392b;
+  --shadow: 0 8px 40px rgba(15,61,15,0.12);
+  --shadow2: 0 2px 12px rgba(15,61,15,0.08);
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+*{box-sizing:border-box;margin:0;padding:0}
 
-  body {
-    font-family: 'Nunito Sans', sans-serif;
-    background: var(--mvg-cream);
-    color: var(--text-dark);
-    min-height: 100vh;
-  }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--pale2);
+  color: var(--ink);
+  min-height: 100vh;
+}
 
-  /* ─── NAV ─── */
-  .top-nav {
-    background: var(--mvg-green-dark);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-    height: 56px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .nav-brand {
-    color: var(--mvg-gold);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-  }
-  .nav-brand span { color: rgba(255,255,255,0.65); font-family: 'Nunito Sans', sans-serif; font-size: 0.75rem; font-weight: 300; margin-left: 8px; letter-spacing: 0.08em; text-transform: uppercase; }
-  .admin-btn {
-    background: transparent;
-    border: 1px solid rgba(200,168,75,0.4);
-    color: var(--mvg-gold-light);
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .admin-btn:hover { background: rgba(200,168,75,0.15); border-color: var(--mvg-gold); }
+/* ═══ HIDDEN ADMIN TRIGGER ═══ */
+.admin-trigger {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border: none;
+  cursor: default;
+  z-index: 200;
+  border-radius: 50%;
+}
+/* Triple-click activates */
 
-  /* ─── PAGE TOGGLE ─── */
-  .page { display: none; }
-  .page.active { display: block; }
+/* ═══ NAV ═══ */
+.nav {
+  background: var(--g1);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid rgba(201,168,76,0.3);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-seal {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.3);
+}
+.nav-text {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--gold2);
+  letter-spacing: 0.04em;
+}
+.nav-text small {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  display: block;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: -2px;
+}
 
-  /* ─── HERO ─── */
-  .hero {
-    background: linear-gradient(135deg, var(--mvg-green-dark) 0%, var(--mvg-green) 60%, var(--mvg-green-light) 100%);
-    padding: 3.5rem 2rem 3rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -40px; right: -40px;
-    width: 220px; height: 220px;
-    border-radius: 50%;
-    border: 44px solid rgba(200,168,75,0.13);
-    animation: heroFloat 6s ease-in-out infinite;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -60px; left: -30px;
-    width: 180px; height: 180px;
-    border-radius: 50%;
-    border: 32px solid rgba(255,255,255,0.07);
-    animation: heroFloat 8s ease-in-out infinite reverse;
-  }
-  @keyframes heroFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); }
-  }
-  .hero-badge {
-    display: inline-block;
-    background: rgba(200,168,75,0.18);
-    border: 1px solid rgba(200,168,75,0.4);
-    color: var(--mvg-gold-light);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding: 5px 16px;
-    border-radius: 20px;
-    margin-bottom: 1.1rem;
-    font-family: 'Nunito Sans', sans-serif;
-  }
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 5.5vw, 3.4rem);
-    color: #ffffff;
-    font-weight: 600;
-    line-height: 1.1;
-    margin-bottom: 0.85rem;
-    letter-spacing: 0.01em;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--mvg-gold-light);
-  }
-  .hero-sub {
-    color: rgba(255,255,255,0.78);
-    font-size: 0.95rem;
-    font-weight: 400;
-    max-width: 520px;
-    margin: 0 auto;
-    line-height: 1.75;
-    font-family: 'Nunito Sans', sans-serif;
-  }
+/* ═══ PAGE ═══ */
+.page { display: none; }
+.page.active { display: block; }
 
-  /* ─── PROGRESS ─── */
-  .progress-wrap {
-    background: var(--white);
-    border-bottom: 1px solid var(--border-light);
-    padding: 1rem 2rem;
-    position: sticky;
-    top: 56px;
-    z-index: 90;
-  }
-  .progress-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-  }
-  .progress-label { font-size: 0.78rem; font-weight: 500; color: var(--text-mid); }
-  .progress-pct { font-size: 0.78rem; font-weight: 600; color: var(--mvg-green); }
-  .progress-bar-bg {
-    background: var(--mvg-green-pale);
-    border-radius: 8px;
-    height: 6px;
-    overflow: hidden;
-  }
-  .progress-bar-fill {
-    background: linear-gradient(90deg, var(--mvg-green), var(--mvg-green-light));
-    height: 100%;
-    border-radius: 8px;
-    transition: width 0.4s ease;
-    width: 0%;
-  }
+/* ═══ HERO ═══ */
+.hero {
+  background: var(--g1);
+  position: relative;
+  overflow: hidden;
+  padding: 3.5rem 2rem 4rem;
+  text-align: center;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(61,140,61,0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 80% 30%, rgba(201,168,76,0.12) 0%, transparent 60%);
+}
+.hero-lines {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 48px, rgba(255,255,255,0.025) 48px, rgba(255,255,255,0.025) 49px),
+    repeating-linear-gradient(90deg, transparent, transparent 48px, rgba(255,255,255,0.015) 48px, rgba(255,255,255,0.015) 49px);
+}
+.hero-content { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
 
-  /* ─── FORM CONTAINER ─── */
-  .form-outer {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
-  }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.35);
+  color: var(--gold2);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 1.25rem;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold2);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.4;transform:scale(0.8)}
+}
 
-  /* ─── SECTION CARDS ─── */
-  .section-card {
-    background: var(--white);
-    border-radius: 16px;
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-sm);
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    transition: box-shadow 0.2s;
-  }
-  .section-card:hover { box-shadow: var(--shadow); }
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 5.5vw, 3.2rem);
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.08;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold2);
+}
+.hero-sub {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.75;
+  max-width: 480px;
+  margin: 0 auto 1.75rem;
+}
 
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--mvg-green-pale);
-  }
-  .section-icon {
-    width: 40px; height: 40px;
-    background: var(--mvg-green-pale);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem;
-    border: 1.5px solid var(--border-light);
-    transition: transform 0.2s;
-  }
-  .section-card:hover .section-icon { transform: scale(1.1) rotate(-4deg); }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--mvg-green-dark);
-    letter-spacing: 0.01em;
-  }
-  .section-num {
-    font-size: 0.65rem;
-    font-weight: 800;
-    color: var(--mvg-green-light);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    font-family: 'Nunito Sans', sans-serif;
-  }
+/* XP bar in hero */
+.hero-xp {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 12px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 360px;
+  width: 100%;
+}
+.xp-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.xp-bar-track {
+  flex: 1;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.xp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--g4), var(--glow));
+  border-radius: 8px;
+  transition: width 0.5s cubic-bezier(.34,1.56,.64,1);
+  width: 0%;
+  box-shadow: 0 0 8px rgba(125,216,125,0.5);
+}
+.xp-pct {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--glow);
+  min-width: 34px;
+  text-align: right;
+}
 
-  /* ─── FORM FIELDS ─── */
-  .field-group { margin-bottom: 1.25rem; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
+/* ═══ STEP INDICATORS ═══ */
+.steps-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border2);
+  padding: 0 2rem;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: sticky;
+  top: 60px;
+  z-index: 90;
+}
+.steps-bar::-webkit-scrollbar { display: none; }
+.step-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 16px;
+  white-space: nowrap;
+  border-bottom: 2.5px solid transparent;
+  transition: all 0.2s;
+  cursor: default;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink4);
+}
+.step-pill.done {
+  color: var(--g3);
+  border-bottom-color: var(--g3);
+}
+.step-pill.active {
+  color: var(--g1);
+  border-bottom-color: var(--g1);
+  font-weight: 700;
+}
+.step-dot {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--ink4);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.step-pill.done .step-dot {
+  background: var(--g3);
+  color: white;
+}
+.step-pill.active .step-dot {
+  background: var(--g1);
+  color: white;
+  box-shadow: 0 0 0 3px rgba(30,94,30,0.15);
+}
 
-  label {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--text-mid);
-    margin-bottom: 6px;
-    font-family: 'Nunito Sans', sans-serif;
-    letter-spacing: 0.02em;
-  }
-  label .req { color: var(--mvg-green); margin-left: 2px; }
+/* ═══ FORM OUTER ═══ */
+.form-outer {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 5rem;
+}
 
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="date"],
-  select,
-  textarea {
-    width: 100%;
-    padding: 11px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: var(--text-dark);
-    background: var(--white);
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
-    outline: none;
-  }
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--mvg-green);
-    box-shadow: 0 0 0 3px rgba(45,106,45,0.1);
-    transform: translateY(-1px);
-  }
-  input.error, select.error, textarea.error {
-    border-color: var(--error);
-    box-shadow: 0 0 0 3px rgba(192,57,43,0.08);
-  }
-  textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
-  select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236a7e6a' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+/* ═══ CARD ═══ */
+.card {
+  background: var(--white);
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  box-shadow: var(--shadow2);
+  padding: 2rem 2rem 2rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--g2), var(--g4), var(--gold));
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.card:focus-within::before { opacity: 1; }
 
-  .error-msg {
-    font-size: 0.75rem;
-    color: var(--error);
-    margin-top: 4px;
-    display: none;
-  }
-  .error-msg.show { display: block; }
+/* ═══ CARD HEADER ═══ */
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border2);
+}
+.card-badge {
+  width: 44px; height: 44px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  position: relative;
+  background: var(--pale);
+  border: 1.5px solid var(--border2);
+  transition: transform 0.2s;
+}
+.card:hover .card-badge { transform: rotate(-5deg) scale(1.08); }
+.card-meta {}
+.card-step {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--g4);
+  margin-bottom: 3px;
+}
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--g1);
+  line-height: 1.2;
+}
+.card-desc {
+  font-size: 0.8rem;
+  color: var(--ink4);
+  margin-top: 3px;
+  line-height: 1.5;
+}
 
-  /* ─── CONSENT BOX ─── */
-  .consent-box {
-    background: var(--mvg-green-pale);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem;
-    font-size: 0.82rem;
-    line-height: 1.7;
-    color: var(--text-mid);
-    margin-bottom: 1.25rem;
-  }
-  .radio-row {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 0.75rem;
-  }
-  .radio-opt {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
-  .radio-opt input[type="radio"] {
-    width: 18px; height: 18px;
-    accent-color: var(--mvg-green);
-    cursor: pointer;
-  }
+/* ═══ PURPOSE CARD ═══ */
+.purpose-card {
+  background: var(--g1);
+  border-radius: 20px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+.purpose-card::before {
+  content: '🎓';
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3.5rem;
+  opacity: 0.08;
+}
+.purpose-card h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold2);
+  margin-bottom: 0.6rem;
+}
+.purpose-card p {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.75;
+}
+.purpose-card p + p { margin-top: 0.6rem; }
 
-  /* ─── RATING SCALE ─── */
-  .rating-item {
-    border: 1.5px solid var(--border-light);
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 0.75rem;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .rating-item:hover { border-color: var(--border); background: #fafff8; }
-  .rating-q {
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--text-dark);
-    margin-bottom: 0.75rem;
-  }
-  .rating-q .req { color: var(--mvg-green); }
-  .rating-options {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-  }
-  @media (max-width: 480px) { .rating-options { grid-template-columns: repeat(2,1fr); } }
-  .rating-btn {
-    border: 1.5px solid var(--border);
-    background: var(--white);
-    border-radius: 10px;
-    padding: 8px 6px;
-    cursor: pointer;
-    transition: all 0.15s;
-    text-align: center;
-  }
-  .rating-btn:hover { border-color: var(--mvg-green-light); background: var(--mvg-green-pale); }
-  .rating-btn.selected {
-    background: var(--mvg-green);
-    border-color: var(--mvg-green-dark);
-    color: white;
-  }
-  .rating-btn .score {
-    display: block;
-    font-size: 1.3rem;
-    font-weight: 700;
-    font-family: 'Cormorant Garamond', serif;
-    color: var(--mvg-green);
-    transition: color 0.15s;
-  }
-  .rating-btn.selected .score { color: var(--mvg-gold-light); }
-  .rating-btn .label {
-    display: block;
-    font-size: 0.6rem;
-    font-weight: 700;
-    font-family: 'Nunito Sans', sans-serif;
-    color: var(--text-light);
-    margin-top: 2px;
-    transition: color 0.15s;
-    line-height: 1.3;
-    letter-spacing: 0.02em;
-  }
-  .rating-btn.selected .label { color: rgba(255,255,255,0.85); }
+/* ═══ FIELDS ═══ */
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media(max-width:560px){ .field-row{ grid-template-columns:1fr; } }
+.field { margin-bottom: 1.1rem; }
 
-  /* ─── SCALE LEGEND ─── */
-  .scale-legend {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    background: #f6faf6;
-    border-radius: 10px;
-    padding: 10px 14px;
-    margin-bottom: 1.25rem;
-    font-size: 0.78rem;
-    color: var(--text-mid);
-  }
-  .scale-legend span { font-weight: 600; color: var(--mvg-green-dark); margin-right: 4px; }
+label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink3);
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+label .req { color: var(--g3); margin-left: 2px; }
 
-  /* ─── ALUMNI SECTION ─── */
-  .toggle-section {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.4s ease, opacity 0.3s;
-    opacity: 0;
-  }
-  .toggle-section.open { max-height: 2000px; opacity: 1; }
+input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  color: var(--ink);
+  background: var(--white);
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+input:focus,select:focus,textarea:focus {
+  border-color: var(--g3);
+  box-shadow: 0 0 0 3px rgba(45,122,45,0.12);
+}
+input.err,select.err,textarea.err {
+  border-color: var(--err);
+  box-shadow: 0 0 0 3px rgba(192,57,43,0.09);
+}
+textarea { resize: vertical; min-height: 88px; line-height: 1.65; }
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%234a5e4a' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  cursor: pointer;
+}
+.err-msg {
+  font-size: 0.72rem;
+  color: var(--err);
+  margin-top: 4px;
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+.err-msg.show { display: flex; }
 
-  .alumni-banner {
-    background: linear-gradient(135deg, var(--mvg-green-dark), var(--mvg-green-mid));
-    border-radius: 14px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: white;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .alumni-banner .icon { font-size: 2rem; }
-  .alumni-banner h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-    letter-spacing: 0.01em;
-  }
-  .alumni-banner p { font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.5; }
+/* ═══ CONSENT ═══ */
+.consent-text {
+  background: var(--pale);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  font-size: 0.81rem;
+  line-height: 1.75;
+  color: var(--ink3);
+  margin-bottom: 1rem;
+}
+.consent-text strong { color: var(--g1); }
 
-  .file-upload-area {
-    border: 2px dashed var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-    background: #fafff8;
-  }
-  .file-upload-area:hover { border-color: var(--mvg-green); background: var(--mvg-green-pale); }
-  .file-upload-area input[type="file"] { display: none; }
-  .file-upload-area .upload-icon { font-size: 1.8rem; margin-bottom: 6px; }
-  .file-upload-area .upload-label { font-size: 0.85rem; font-weight: 500; color: var(--mvg-green-dark); }
-  .file-upload-area .upload-hint { font-size: 0.75rem; color: var(--text-light); margin-top: 4px; }
-  .file-name-display { font-size: 0.78rem; color: var(--mvg-green); margin-top: 6px; font-weight: 500; }
+.choice-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.choice-btn {
+  flex: 1; min-width: 120px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  background: var(--white);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink3);
+}
+.choice-btn:hover { border-color: var(--g3); background: var(--pale); }
+.choice-btn.selected-yes {
+  border-color: var(--g3);
+  background: var(--pale);
+  color: var(--g1);
+}
+.choice-btn.selected-no {
+  border-color: var(--err);
+  background: #fdf0ef;
+  color: var(--err);
+}
+.choice-btn input[type=radio] { display: none; }
 
-  /* ─── SUBMIT ─── */
-  .submit-wrap {
-    text-align: center;
-    padding: 1rem 0;
-  }
-  .submit-btn {
-    background: var(--mvg-green-dark);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 15px 52px;
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.04em;
-    box-shadow: 0 4px 20px rgba(26,74,26,0.35);
-    position: relative;
-    overflow: hidden;
-  }
-  .submit-btn::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-    transition: left 0.5s;
-  }
-  .submit-btn:hover::after { left: 150%; }
-  .submit-btn:hover { background: var(--mvg-green); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(26,74,26,0.4); }
-  .submit-btn:active { transform: translateY(0); }
-  .submit-btn:disabled { background: #999; cursor: not-allowed; transform: none; box-shadow: none; }
+/* ═══ RATING GAMIFIED ═══ */
+.rating-section-intro {
+  background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.rating-section-intro .trophy { font-size: 1.5rem; }
+.rating-section-intro p {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.5;
+}
+.rating-section-intro strong { color: var(--gold2); }
 
-  /* ─── SUCCESS ─── */
-  .success-screen {
-    display: none;
-    text-align: center;
-    padding: 4rem 2rem;
-    max-width: 560px;
-    margin: 0 auto;
-  }
-  .success-screen.show { display: block; }
-  .success-icon {
-    width: 80px; height: 80px;
-    background: var(--mvg-green-pale);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2.5rem;
-    margin: 0 auto 1.5rem;
-    border: 3px solid var(--mvg-green-light);
-  }
-  .success-screen h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--mvg-green-dark);
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.02em;
-  }
-  .success-screen p { color: var(--text-mid); font-size: 0.95rem; line-height: 1.7; }
+.rating-item {
+  border: 1.5px solid var(--border2);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s;
+  background: var(--white);
+}
+.rating-item.answered {
+  border-color: var(--g4);
+  background: var(--pale2);
+}
+.rating-q {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink2);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.rating-q .q-num {
+  width: 22px; height: 22px;
+  background: var(--g2);
+  color: white;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.rating-item.answered .rating-q .q-num { background: var(--g3); }
 
-  /* ═══════════════════════════════════════
-     ADMIN DASHBOARD
-  ═══════════════════════════════════════ */
-  .admin-page { min-height: 100vh; background: #f0f4f0; }
+.rating-faces {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 8px;
+}
+@media(max-width:480px){ .rating-faces{ grid-template-columns: repeat(2,1fr); } }
 
-  .admin-login {
-    display: flex; align-items: center; justify-content: center;
-    min-height: calc(100vh - 56px);
-    padding: 2rem;
-  }
-  .login-card {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 2.5rem;
-    width: 100%;
-    max-width: 380px;
-    box-shadow: var(--shadow);
-    text-align: center;
-  }
-  .login-card .lock-icon {
-    width: 56px; height: 56px;
-    background: var(--mvg-green-pale);
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.5rem;
-    margin: 0 auto 1.25rem;
-  }
-  .login-card h2 {
-    font-family: 'Syne', sans-serif;
-    color: var(--mvg-green-dark);
-    font-size: 1.4rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.4rem;
-  }
-  .login-card p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.5rem; font-family: 'Plus Jakarta Sans', sans-serif; }
-  .login-card input {
-    width: 100%;
-    padding: 11px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    outline: none;
-  }
-  .login-card input:focus { border-color: var(--mvg-green); box-shadow: 0 0 0 3px rgba(45,106,45,0.1); }
-  .login-error { font-size: 0.78rem; color: var(--error); margin-bottom: 0.75rem; display: none; }
-  .login-error.show { display: block; }
-  .login-submit {
-    width: 100%;
-    background: var(--mvg-green-dark);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 12px;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s;
-    letter-spacing: 0.03em;
-  }
-  .login-submit:hover { background: var(--mvg-green); }
+.face-btn {
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 6px 8px;
+  background: var(--white);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.face-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45,122,45,0.15);
+}
+.face-btn.selected {
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(45,122,45,0.25);
+}
+.face-btn[data-v="4"].selected { background: linear-gradient(135deg,#1e5e1e,#2d7a2d); }
+.face-btn[data-v="3"].selected { background: linear-gradient(135deg,#2d7a2d,#3d8c3d); }
+.face-btn[data-v="2"].selected { background: linear-gradient(135deg,#8c6a00,#c9a84c); }
+.face-btn[data-v="1"].selected { background: linear-gradient(135deg,#8c1a0f,#c0392b); }
 
-  /* ─── DASHBOARD ─── */
-  .dashboard { display: none; padding: 2rem; }
-  .dashboard.visible { display: block; }
+.face-emoji {
+  font-size: 1.4rem;
+  display: block;
+  margin-bottom: 4px;
+  transition: transform 0.2s;
+}
+.face-btn:hover .face-emoji, .face-btn.selected .face-emoji { transform: scale(1.15); }
+.face-score {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Fraunces', serif;
+  color: var(--g2);
+  transition: color 0.15s;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.face-btn.selected .face-score { color: rgba(255,255,255,0.9); }
+.face-label {
+  display: block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--ink4);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: color 0.15s;
+  line-height: 1.3;
+}
+.face-btn.selected .face-label { color: rgba(255,255,255,0.75); }
 
-  .dash-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .dash-header h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--mvg-green-dark);
-    letter-spacing: -0.02em;
-  }
-  .dash-header p { font-size: 0.82rem; color: var(--text-light); margin-top: 2px; }
+/* checkmark on answered */
+.rating-item.answered::after {
+  content: '✓';
+  position: absolute;
+  top: 0.75rem; right: 0.75rem;
+  width: 20px; height: 20px;
+  background: var(--g3);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.rating-item { position: relative; }
 
-  .refresh-btn {
-    background: var(--mvg-green-dark);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 18px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .refresh-btn:hover { background: var(--mvg-green); }
+/* answered count pill */
+.rating-counter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+  gap: 8px;
+}
+.counter-pill {
+  background: var(--pale);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 3px 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--g2);
+}
+.counter-pill span { color: var(--ink4); font-weight: 400; }
 
-  /* ─── STAT CARDS ─── */
-  .stat-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-  .stat-card {
-    background: var(--white);
-    border-radius: 14px;
-    padding: 1.25rem;
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-sm);
-  }
-  .stat-card .stat-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 6px;
-  }
-  .stat-card .stat-value {
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--mvg-green-dark);
-    line-height: 1;
-  }
-  .stat-card .stat-sub {
-    font-size: 0.75rem;
-    color: var(--text-light);
-    margin-top: 4px;
-  }
-  .stat-card.highlight { background: var(--mvg-green-dark); border-color: transparent; }
-  .stat-card.highlight .stat-label { color: rgba(255,255,255,0.65); }
-  .stat-card.highlight .stat-value { color: var(--mvg-gold-light); }
-  .stat-card.highlight .stat-sub { color: rgba(255,255,255,0.5); }
+/* ═══ FEEDBACK TEXTAREA ═══ */
+.feedback-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.6rem;
+}
+.feedback-num {
+  width: 24px; height: 24px;
+  background: var(--g1);
+  color: var(--gold2);
+  border-radius: 7px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.feedback-q {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink2);
+}
+.char-count {
+  font-size: 0.68rem;
+  color: var(--ink4);
+  text-align: right;
+  margin-top: 4px;
+}
 
-  /* ─── CHART SECTION ─── */
-  .chart-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .chart-card {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 1.5rem;
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-sm);
-  }
-  .chart-card h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: var(--mvg-green-dark);
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border-light);
-    letter-spacing: 0.01em;
-  }
+/* ═══ ALUMNI ID ═══ */
+.alumni-promo {
+  background: linear-gradient(135deg, var(--g1), var(--g2));
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+.alumni-promo::after {
+  content: '🪪';
+  position: absolute;
+  right: 1rem;
+  font-size: 3rem;
+  opacity: 0.12;
+}
+.alumni-promo-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+.alumni-promo h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--gold2);
+  margin-bottom: 4px;
+}
+.alumni-promo p {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.55;
+}
 
-  /* ─── BAR CHARTS ─── */
-  .bar-chart { display: flex; flex-direction: column; gap: 8px; }
-  .bar-row { display: flex; align-items: center; gap: 10px; }
-  .bar-label { font-size: 0.75rem; color: var(--text-mid); width: 130px; flex-shrink: 0; font-weight: 500; }
-  .bar-track { flex: 1; background: var(--mvg-green-pale); border-radius: 6px; height: 22px; overflow: hidden; }
-  .bar-fill { height: 100%; background: linear-gradient(90deg, var(--mvg-green-dark), var(--mvg-green-light)); border-radius: 6px; transition: width 0.6s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; }
-  .bar-fill .bar-val { font-size: 0.7rem; font-weight: 600; color: white; }
-  .bar-count { font-size: 0.72rem; color: var(--text-light); width: 28px; text-align: right; }
+.toggle-section {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease, opacity 0.3s;
+  opacity: 0;
+}
+.toggle-section.open { max-height: 2400px; opacity: 1; }
 
-  /* ─── DONUT ─── */
-  .donut-wrap { display: flex; align-items: center; gap: 1.5rem; }
-  .donut-legend { flex: 1; }
-  .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 0.78rem; color: var(--text-mid); }
-  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  background: var(--pale2);
+  transition: all 0.2s;
+  position: relative;
+}
+.upload-zone:hover, .upload-zone.dragover {
+  border-color: var(--g3);
+  background: var(--pale);
+}
+.upload-zone input[type=file] { display: none; }
+.upload-zone .up-icon { font-size: 2rem; margin-bottom: 6px; }
+.upload-zone .up-title { font-size: 0.85rem; font-weight: 700; color: var(--g1); margin-bottom: 3px; }
+.upload-zone .up-hint { font-size: 0.72rem; color: var(--ink4); }
+.upload-preview {
+  margin-top: 10px;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  background: var(--pale);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.upload-preview.show { display: flex; }
+.upload-preview img {
+  width: 36px; height: 36px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+.upload-preview .fname {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--g1);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.upload-preview .fsize { font-size: 0.68rem; color: var(--ink4); }
+.upload-preview .remove-file {
+  background: none; border: none;
+  color: var(--err); cursor: pointer;
+  font-size: 1rem; padding: 0 4px;
+}
 
-  /* ─── RATING AVERAGES ─── */
-  .avg-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  .avg-label { font-size: 0.75rem; color: var(--text-mid); flex: 1; }
-  .avg-score {
-    font-size: 1rem; font-weight: 600; color: var(--mvg-green-dark);
-    width: 32px; text-align: right;
-  }
-  .avg-stars { display: flex; gap: 2px; }
-  .star-filled { color: var(--mvg-gold); font-size: 0.8rem; }
-  .star-empty { color: #ddd; font-size: 0.8rem; }
+/* ═══ SUBMIT ═══ */
+.submit-area { text-align: center; padding: 2rem 0 1rem; }
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--g1);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  padding: 16px 48px;
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 20px rgba(15,61,15,0.35), 0 0 0 0 rgba(45,122,45,0);
+  position: relative;
+  overflow: hidden;
+}
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+.submit-btn:hover::before { transform: translateX(100%); }
+.submit-btn:hover {
+  background: var(--g2);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(15,61,15,0.4), 0 0 0 4px rgba(45,122,45,0.15);
+}
+.submit-btn:disabled { background: #bbb; cursor: not-allowed; transform: none; box-shadow: none; }
+.submit-btn .btn-arrow { font-size: 1.1rem; transition: transform 0.2s; }
+.submit-btn:hover .btn-arrow { transform: translateX(4px); }
 
-  /* ─── RESPONSES TABLE ─── */
-  .table-wrap { overflow-x: auto; }
-  .responses-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.78rem;
-  }
-  .responses-table th {
-    background: var(--mvg-green-pale);
-    color: var(--mvg-green-dark);
-    font-weight: 600;
-    padding: 10px 12px;
-    text-align: left;
-    white-space: nowrap;
-    border-bottom: 2px solid var(--border);
-  }
-  .responses-table td {
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--border-light);
-    color: var(--text-mid);
-    max-width: 180px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .responses-table tr:hover td { background: #fafff8; }
-  .badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-size: 0.68rem;
-    font-weight: 600;
-  }
-  .badge-green { background: #d4edda; color: #155724; }
-  .badge-red { background: #f8d7da; color: #721c24; }
+.submit-note { font-size: 0.72rem; color: var(--ink4); margin-top: 10px; }
+.submit-error { font-size: 0.8rem; color: var(--err); margin-bottom: 10px; display: none; }
 
-  /* ─── OPEN FEEDBACK ─── */
-  .feedback-list { display: flex; flex-direction: column; gap: 10px; }
-  .feedback-item {
-    background: #fafff8;
-    border-left: 3px solid var(--mvg-green-light);
-    border-radius: 0 8px 8px 0;
-    padding: 10px 14px;
-    font-size: 0.82rem;
-    color: var(--text-mid);
-    line-height: 1.6;
-  }
-  .feedback-item .fb-meta { font-size: 0.72rem; color: var(--text-light); margin-bottom: 4px; font-weight: 500; }
+/* ═══ SUCCESS ═══ */
+.success-page { display: none; }
+.success-page.show { display: block; }
+.success-wrap {
+  max-width: 560px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+.success-confetti {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: bounce 1s ease-in-out;
+}
+@keyframes bounce {
+  0%,100%{transform:translateY(0)}
+  30%{transform:translateY(-20px)}
+  60%{transform:translateY(-8px)}
+}
+.success-wrap h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--g1);
+  margin-bottom: 0.75rem;
+  line-height: 1.1;
+}
+.success-wrap p {
+  font-size: 0.95rem;
+  color: var(--ink3);
+  line-height: 1.75;
+}
+.success-card {
+  background: var(--g1);
+  border-radius: 18px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  color: white;
+  text-align: left;
+}
+.success-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gold2);
+  margin-bottom: 0.5rem;
+}
+.success-card p { font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
 
-  .loading-state {
-    text-align: center;
-    padding: 3rem 2rem;
-    color: var(--text-light);
-    font-size: 0.9rem;
-  }
-  .spinner {
-    width: 32px; height: 32px;
-    border: 3px solid var(--border);
-    border-top-color: var(--mvg-green);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto 1rem;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+/* ═══ FOOTER ═══ */
+.form-footer {
+  text-align: center;
+  padding: 1.25rem;
+  font-size: 0.7rem;
+  color: var(--ink4);
+  border-top: 1px solid var(--border2);
+}
 
-  .config-banner {
-    background: #fff8e1;
-    border: 1px solid #ffd54f;
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.82rem;
-    color: #5d4037;
-    line-height: 1.6;
-  }
-  .config-banner strong { color: #bf360c; }
-  .config-banner code {
-    background: #fff3e0;
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-size: 0.78rem;
-  }
+/* ══════════════════════════════
+   ADMIN
+══════════════════════════════ */
+.admin-page { min-height: 100vh; background: #f0f4f0; display: none; }
+.admin-page.active { display: block; }
 
-  /* ─── FOOTER ─── */
-  .form-footer {
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.72rem;
-    color: var(--text-light);
-    border-top: 1px solid var(--border-light);
-    margin-top: 2rem;
-  }
+.admin-login-wrap {
+  display: flex; align-items: center; justify-content: center;
+  min-height: calc(100vh - 60px);
+  padding: 2rem;
+}
+.login-box {
+  background: var(--white);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  width: 100%; max-width: 380px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.login-icon {
+  width: 60px; height: 60px;
+  background: var(--g1);
+  border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 1.25rem;
+  box-shadow: 0 4px 16px rgba(15,61,15,0.3);
+}
+.login-box h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--g1);
+  margin-bottom: 0.3rem;
+}
+.login-box p { font-size: 0.82rem; color: var(--ink4); margin-bottom: 1.5rem; }
+.login-box input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  margin-bottom: 1rem;
+}
+.login-box input:focus { border-color: var(--g3); box-shadow: 0 0 0 3px rgba(45,122,45,0.12); }
+.login-err { font-size: 0.75rem; color: var(--err); margin-bottom: 0.75rem; display: none; }
+.login-err.show { display: block; }
+.login-go {
+  width: 100%;
+  background: var(--g1);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.login-go:hover { background: var(--g2); }
+.back-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.78rem;
+  color: var(--ink4);
+  cursor: pointer;
+  text-decoration: underline;
+  background: none;
+  border: none;
+}
 
-  @media (max-width: 600px) {
-    .hero { padding: 2rem 1.25rem 2rem; }
-    .form-outer { padding: 1.5rem 1rem 3rem; }
-    .section-card { padding: 1.25rem; }
-  }
+/* DASHBOARD */
+.dashboard-wrap { display: none; padding: 2rem; max-width: 1100px; margin: 0 auto; }
+.dashboard-wrap.visible { display: block; }
+.dash-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.dash-head h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--g1);
+}
+.dash-head p { font-size: 0.8rem; color: var(--ink4); margin-top: 2px; }
+.dash-actions { display: flex; gap: 8px; }
+.btn-refresh, .btn-logout {
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+.btn-refresh { background: var(--g1); color: white; }
+.btn-refresh:hover { background: var(--g2); }
+.btn-logout { background: transparent; border: 1.5px solid var(--border); color: var(--ink3); }
+.btn-logout:hover { background: var(--pale); }
+
+.config-alert {
+  background: #fff8e1;
+  border: 1px solid #ffd54f;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.82rem;
+  color: #5d4037;
+  line-height: 1.6;
+}
+.config-alert code { background: #fff3e0; padding: 1px 5px; border-radius: 4px; font-size: 0.78rem; }
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.stat-box {
+  background: white;
+  border-radius: 16px;
+  padding: 1.25rem;
+  border: 1px solid var(--border2);
+  box-shadow: var(--shadow2);
+}
+.stat-box.accent { background: var(--g1); border-color: transparent; }
+.stat-box .s-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink4); margin-bottom: 6px; }
+.stat-box.accent .s-label { color: rgba(255,255,255,0.5); }
+.stat-box .s-val { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; color: var(--g1); line-height: 1; }
+.stat-box.accent .s-val { color: var(--gold2); }
+.stat-box .s-sub { font-size: 0.72rem; color: var(--ink4); margin-top: 4px; }
+.stat-box.accent .s-sub { color: rgba(255,255,255,0.45); }
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+.chart-box {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--border2);
+  box-shadow: var(--shadow2);
+}
+.chart-box h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--g1);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border2);
+}
+
+.bar-r { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.bar-lbl { font-size: 0.72rem; color: var(--ink3); width: 130px; flex-shrink: 0; font-weight: 500; }
+.bar-bg { flex: 1; background: var(--pale); border-radius: 6px; height: 20px; overflow: hidden; }
+.bar-fg { height: 100%; background: linear-gradient(90deg, var(--g1), var(--g4)); border-radius: 6px; display: flex; align-items: center; justify-content: flex-end; padding-right: 7px; transition: width 0.7s ease; }
+.bar-fg .bv { font-size: 0.65rem; font-weight: 700; color: white; }
+.bar-n { font-size: 0.68rem; color: var(--ink4); width: 24px; text-align: right; }
+
+.avg-r { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.avg-lbl { font-size: 0.72rem; color: var(--ink3); flex: 1; }
+.avg-stars { display: flex; gap: 1px; }
+.s-on { color: var(--gold); font-size: 0.75rem; }
+.s-off { color: #ddd; font-size: 0.75rem; }
+.avg-n { font-size: 0.9rem; font-weight: 700; color: var(--g1); width: 28px; text-align: right; }
+
+.donut-r { display: flex; align-items: center; gap: 1.25rem; }
+.leg-item { display: flex; align-items: center; gap: 7px; font-size: 0.75rem; color: var(--ink3); margin-bottom: 7px; }
+.leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+.resp-table { width: 100%; border-collapse: collapse; font-size: 0.76rem; }
+.resp-table th { background: var(--pale); color: var(--g1); font-weight: 700; padding: 9px 11px; text-align: left; white-space: nowrap; border-bottom: 2px solid var(--border); }
+.resp-table td { padding: 9px 11px; border-bottom: 1px solid var(--border2); color: var(--ink3); max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.resp-table tr:hover td { background: var(--pale2); }
+.bdg { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 0.65rem; font-weight: 700; }
+.bdg-g { background: #d4edda; color: #155724; }
+.bdg-r { background: #f8d7da; color: #721c24; }
+
+.fb-item { background: var(--pale2); border-left: 3px solid var(--g4); border-radius: 0 10px 10px 0; padding: 10px 14px; margin-bottom: 8px; font-size: 0.8rem; color: var(--ink3); line-height: 1.65; }
+.fb-who { font-size: 0.68rem; font-weight: 700; color: var(--g3); margin-bottom: 3px; }
+
+.loading-box { text-align: center; padding: 3rem; color: var(--ink4); }
+.spinner { width: 30px; height: 30px; border: 3px solid var(--border); border-top-color: var(--g3); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 1rem; }
+@keyframes spin { to{ transform: rotate(360deg); } }
+
+@media(max-width:600px){
+  .form-outer { padding: 1.25rem 1rem 4rem; }
+  .card { padding: 1.25rem; }
+  .hero { padding: 2.5rem 1.25rem 3rem; }
+}
 </style>
 </head>
 <body>
 
+<!-- HIDDEN ADMIN TRIGGER: triple-click bottom-right corner -->
+<button class="admin-trigger" id="adminTrigger" title=""></button>
+
 <!-- NAV -->
-<nav class="top-nav">
-  <div class="nav-brand">MVGFC <span>Student Affairs Office</span></div>
-  <button class="admin-btn" onclick="showPage('admin')">⚙ Admin</button>
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-seal">🎓</div>
+    <div class="nav-text">
+      MVGFC
+      <small>Student Affairs Office</small>
+    </div>
+  </div>
 </nav>
 
-<!-- ═══════════════════════════════════════
-     SURVEY PAGE
-═══════════════════════════════════════ -->
+<!-- ═══════════════════════════ SURVEY ═══════════════════════════ -->
 <div id="page-survey" class="page active">
 
   <div class="hero">
-    <div class="hero-badge">Academic Year 2022-2023 & 2024–2025</div>
-    <h1>Graduate <em>Exit</em> Survey</h1>
-    <p class="hero-sub">Your feedback helps shape a better graduation experience for future MVGFC graduates. Thank you for taking a few minutes to share your thoughts.</p>
+    <div class="hero-bg"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Academic Year 2024–2025</div>
+      <h1>Graduation<br><em>Satisfaction</em> Survey</h1>
+      <p class="hero-sub">Your voice shapes a better graduation for every MVGFC graduate who comes after you. This takes about 5–7 minutes.</p>
+      <div class="hero-xp">
+        <div class="xp-label">Progress</div>
+        <div class="xp-bar-track"><div class="xp-bar-fill" id="xpBar"></div></div>
+        <div class="xp-pct" id="xpPct">0%</div>
+      </div>
+    </div>
   </div>
 
-  <div class="progress-wrap">
-    <div class="progress-info">
-      <span class="progress-label" id="progressLabel">Personal Information</span>
-      <span class="progress-pct" id="progressPct">0%</span>
-    </div>
-    <div class="progress-bar-bg">
-      <div class="progress-bar-fill" id="progressBar"></div>
-    </div>
+  <!-- STEP INDICATOR -->
+  <div class="steps-bar" id="stepsBar">
+    <div class="step-pill active" id="step0"><div class="step-dot">1</div>Profile</div>
+    <div class="step-pill" id="step1"><div class="step-dot">2</div>Privacy</div>
+    <div class="step-pill" id="step2"><div class="step-dot">3</div>Ratings</div>
+    <div class="step-pill" id="step3"><div class="step-dot">4</div>Feedback</div>
+    <div class="step-pill" id="step4"><div class="step-dot">5</div>Alumni ID</div>
   </div>
 
   <div class="form-outer">
     <div id="surveyForm">
 
-      <!-- PURPOSE CARD -->
-      <div class="section-card">
-        <div style="font-size: 0.82rem; color: var(--text-mid); line-height: 1.7;">
-          <p style="margin-bottom: 0.75rem;"><strong style="color: var(--mvg-green-dark);">Purpose of this Survey:</strong> The purpose of this survey is to gather feedback from graduates about the experiences during the graduation process at MVGFC. Your insights will help us assess communication, organization, and overall satisfaction, allowing us to identify areas for improvement and ensure future ceremonies meet graduates' expectations.</p>
-          <p><strong style="color: var(--mvg-green-dark);">Use of Collected Information:</strong> The responses will be analyzed to improve the graduation process at MVGFC. Your feedback will help us identify strengths and weaknesses, enhance communication, optimize the organization by addressing logistical challenges, and improve support services for graduates and their families.</p>
-        </div>
+      <!-- PURPOSE -->
+      <div class="purpose-card">
+        <h2>Why We're Asking</h2>
+        <p><strong>Purpose:</strong> To gather meaningful feedback from graduates about every aspect of the graduation experience — from finance and registration to the ceremony itself. Your insights directly shape how MVGFC serves future graduates.</p>
+        <p><strong>Data Use:</strong> Responses are analyzed solely for institutional improvement — to strengthen communication, address logistics, and improve support for graduates and their families. All data is kept confidential.</p>
       </div>
 
       <!-- SECTION 1: PERSONAL INFO -->
-      <div class="section-card">
-        <div class="section-header">
-          <div class="section-icon">👤</div>
-          <div>
-            <div class="section-num">Section 1</div>
-            <div class="section-title">Personal Information</div>
+      <div class="card" id="sec0">
+        <div class="card-header">
+          <div class="card-badge">👤</div>
+          <div class="card-meta">
+            <div class="card-step">Section 1 of 5</div>
+            <div class="card-title">Personal Information</div>
+            <div class="card-desc">Tell us about yourself so we can connect your feedback properly.</div>
           </div>
         </div>
 
         <div class="field-row">
-          <div class="field-group">
+          <div class="field">
             <label for="email">Email Address <span class="req">*</span></label>
-            <input type="email" id="email" placeholder="your@email.com">
-            <div class="error-msg" id="err-email">Please enter a valid email address.</div>
+            <input type="email" id="email" placeholder="yourname@email.com" oninput="onFieldChange()">
+            <div class="err-msg" id="err-email">⚠ Please enter a valid email.</div>
           </div>
-          <div class="field-group">
+          <div class="field">
             <label for="name">Full Name <span class="req">*</span></label>
-            <input type="text" id="name" placeholder="Last Name, First Name MI.">
-            <div class="error-msg" id="err-name">Name is required.</div>
+            <input type="text" id="name" placeholder="Last Name, First Name M.I." oninput="onFieldChange()">
+            <div class="err-msg" id="err-name">⚠ Full name is required.</div>
           </div>
         </div>
 
         <div class="field-row">
-          <div class="field-group">
-            <label for="program">Program <span class="req">*</span></label>
-            <select id="program">
+          <div class="field">
+            <label for="program">Degree Program <span class="req">*</span></label>
+            <select id="program" onchange="onFieldChange()">
               <option value="">— Select your program —</option>
-              <option>BSN</option>
-              <option>BSCRIM</option>
-              <option>BSED-ENGLISH</option>
-              <option>BSED-FILIPINO</option>
-              <option>BSED-MATH</option>
-              <option>BSED-SCIENCE</option>
-              <option>BEED</option>
-              <option>BSIS</option>
-              <option>BSCS</option>
-              <option>BSBA-MM</option>
-              <option>BSBA-FM</option>
-              <option>Other</option>
+              <option>BSN</option><option>BSCRIM</option>
+              <option>BSED-ENGLISH</option><option>BSED-FILIPINO</option>
+              <option>BSED-MATH</option><option>BSED-SCIENCE</option>
+              <option>BEED</option><option>BSIS</option><option>BSCS</option>
+              <option>BSBA-MM</option><option>BSBA-FM</option><option>Other</option>
             </select>
-            <div class="error-msg" id="err-program">Please select your program.</div>
+            <div class="err-msg" id="err-program">⚠ Please select a program.</div>
           </div>
-          <div class="field-group">
+          <div class="field">
             <label for="yearGrad">Year Graduated <span class="req">*</span></label>
-            <input type="text" id="yearGrad" placeholder="e.g. 2024">
-            <div class="error-msg" id="err-yearGrad">Year graduated is required.</div>
+            <input type="text" id="yearGrad" placeholder="e.g. 2025" oninput="onFieldChange()">
+            <div class="err-msg" id="err-yearGrad">⚠ Year is required.</div>
           </div>
         </div>
 
         <div class="field-row">
-          <div class="field-group">
+          <div class="field">
             <label for="contact">Contact Number <span class="req">*</span></label>
-            <input type="tel" id="contact" placeholder="09XXXXXXXXX">
-            <div class="error-msg" id="err-contact">Contact number is required.</div>
+            <input type="tel" id="contact" placeholder="09XXXXXXXXX" oninput="onFieldChange()">
+            <div class="err-msg" id="err-contact">⚠ Contact number is required.</div>
           </div>
-          <div class="field-group">
+          <div class="field">
             <label for="fbName">Facebook Name <span class="req">*</span></label>
-            <input type="text" id="fbName" placeholder="Your Facebook display name">
-            <div class="error-msg" id="err-fbName">Facebook name is required.</div>
+            <input type="text" id="fbName" placeholder="Your Facebook display name" oninput="onFieldChange()">
+            <div class="err-msg" id="err-fbName">⚠ Facebook name is required.</div>
           </div>
         </div>
 
-        <div class="field-group">
+        <div class="field">
           <label for="address">Permanent Address <span class="req">*</span></label>
-          <input type="text" id="address" placeholder="House No., Street, Barangay, City/Municipality, Province">
-          <div class="error-msg" id="err-address">Address is required.</div>
+          <input type="text" id="address" placeholder="House No., Street, Barangay, City/Municipality, Province" oninput="onFieldChange()">
+          <div class="err-msg" id="err-address">⚠ Address is required.</div>
         </div>
 
-        <div class="field-group">
-          <label for="employment">Employment Status / Company & Position</label>
-          <input type="text" id="employment" placeholder="e.g. Employed — ABC Company, Staff Nurse (optional)">
+        <div class="field">
+          <label for="employment">Employment Status / Company & Position <span style="color:var(--ink4);font-weight:400;">(optional)</span></label>
+          <input type="text" id="employment" placeholder="e.g. Employed — ABC Hospital, Staff Nurse" oninput="onFieldChange()">
         </div>
       </div>
 
-      <!-- SECTION 2: DATA PRIVACY -->
-      <div class="section-card">
-        <div class="section-header">
-          <div class="section-icon">🔐</div>
-          <div>
-            <div class="section-num">Section 2</div>
-            <div class="section-title">Data Privacy Consent</div>
+      <!-- SECTION 2: CONSENT -->
+      <div class="card" id="sec1">
+        <div class="card-header">
+          <div class="card-badge">🔐</div>
+          <div class="card-meta">
+            <div class="card-step">Section 2 of 5</div>
+            <div class="card-title">Data Privacy Consent</div>
+            <div class="card-desc">Your data is protected under Philippine law.</div>
           </div>
         </div>
-        <div class="consent-box">
-          I hereby authorize MVGFCI Student Affairs to collect and process my personal data in accordance with <strong>RA 10173 or the Data Privacy Act of 2012</strong>. The information gathered will be used solely for survey evaluation, alumni services, and institutional improvement purposes. All data will be treated confidentially and accessed only by authorized personnel. By proceeding with this form, I voluntarily give my consent to the collection, storage, and processing of my personal information.
-          <div class="radio-row">
-            <label class="radio-opt">
-              <input type="radio" name="consent" value="I Agree"> I Agree
-            </label>
-            <label class="radio-opt">
-              <input type="radio" name="consent" value="I Disagree"> I Disagree
-            </label>
-          </div>
-          <div class="error-msg" id="err-consent" style="margin-top:8px;">You must agree to the data privacy consent to proceed.</div>
+
+        <div class="consent-text">
+          I hereby authorize <strong>MVGFCI Student Affairs</strong> to collect and process my personal data in accordance with <strong>RA 10173 (Data Privacy Act of 2012)</strong>. The information gathered will be used solely for survey evaluation, alumni services, and institutional improvement. All data will be treated confidentially and accessed only by authorized personnel. By proceeding, I voluntarily consent to the collection, storage, and processing of my personal information.
         </div>
+
+        <div class="choice-row" id="consentRow">
+          <label class="choice-btn" id="btnAgree" onclick="selectConsent('I Agree')">
+            <input type="radio" name="consent" value="I Agree">
+            <span>✅</span> I Agree
+          </label>
+          <label class="choice-btn" id="btnDisagree" onclick="selectConsent('I Disagree')">
+            <input type="radio" name="consent" value="I Disagree">
+            <span>❌</span> I Disagree
+          </label>
+        </div>
+        <div class="err-msg" id="err-consent" style="margin-top:8px;">⚠ Please indicate your consent.</div>
       </div>
 
-      <!-- SECTION 3: PARAMETERS / RATINGS -->
-      <div class="section-card">
-        <div class="section-header">
-          <div class="section-icon">📊</div>
-          <div>
-            <div class="section-num">Section 3</div>
-            <div class="section-title">Satisfaction Parameters</div>
+      <!-- SECTION 3: RATINGS -->
+      <div class="card" id="sec2">
+        <div class="card-header">
+          <div class="card-badge">⭐</div>
+          <div class="card-meta">
+            <div class="card-step">Section 3 of 5</div>
+            <div class="card-title">Satisfaction Parameters</div>
+            <div class="card-desc">Rate each aspect of your graduation experience.</div>
           </div>
         </div>
 
-        <div class="scale-legend">
-          <div><span>4</span> Strongly Satisfied</div>
-          <div><span>3</span> Satisfied</div>
-          <div><span>2</span> Dissatisfied</div>
-          <div><span>1</span> Strongly Dissatisfied</div>
+        <div class="rating-section-intro">
+          <div class="trophy">🏆</div>
+          <div>
+            <p><strong>How it works:</strong> Select a face that best describes your satisfaction for each item.</p>
+            <p style="margin-top:4px;">😄 <strong>Strongly Satisfied (4)</strong> · 🙂 <strong>Satisfied (3)</strong> · 😕 <strong>Dissatisfied (2)</strong> · 😞 <strong>Strongly Dissatisfied (1)</strong></p>
+          </div>
+        </div>
+
+        <div class="rating-counter">
+          <div class="counter-pill" id="ratingCounter">0 <span>/ 9 answered</span></div>
         </div>
 
         <div id="ratingItems"></div>
       </div>
 
-      <!-- SECTION 4: OPEN FEEDBACK -->
-      <div class="section-card">
-        <div class="section-header">
-          <div class="section-icon">💬</div>
-          <div>
-            <div class="section-num">Section 4</div>
-            <div class="section-title">Open Feedback</div>
+      <!-- SECTION 4: FEEDBACK -->
+      <div class="card" id="sec3">
+        <div class="card-header">
+          <div class="card-badge">💬</div>
+          <div class="card-meta">
+            <div class="card-step">Section 4 of 5</div>
+            <div class="card-title">Open Feedback</div>
+            <div class="card-desc">Your words matter — these responses are read by the administration.</div>
           </div>
         </div>
 
-        <div class="field-group">
-          <label for="appreciate">1. What aspect of the graduation process did you appreciate the most? <span class="req">*</span></label>
-          <textarea id="appreciate" placeholder="Share what you valued most about your graduation experience..."></textarea>
-          <div class="error-msg" id="err-appreciate">This field is required.</div>
+        <div class="field" style="margin-bottom:1.25rem;">
+          <div class="feedback-header">
+            <div class="feedback-num">1</div>
+            <div class="feedback-q">What aspect of the graduation process did you appreciate the most? <span class="req">*</span></div>
+          </div>
+          <textarea id="appreciate" placeholder="Share what made your graduation experience memorable..." oninput="countChars(this,'cc1');onFieldChange()" maxlength="500"></textarea>
+          <div class="char-count"><span id="cc1">0</span>/500</div>
+          <div class="err-msg" id="err-appreciate">⚠ This field is required.</div>
         </div>
-        <div class="field-group">
-          <label for="improve">2. What aspect needs improvement? <span class="req">*</span></label>
-          <textarea id="improve" placeholder="Let us know what could have been done better..."></textarea>
-          <div class="error-msg" id="err-improve">This field is required.</div>
+
+        <div class="field" style="margin-bottom:1.25rem;">
+          <div class="feedback-header">
+            <div class="feedback-num">2</div>
+            <div class="feedback-q">What aspect needs improvement? <span class="req">*</span></div>
+          </div>
+          <textarea id="improve" placeholder="Constructive feedback helps us do better..." oninput="countChars(this,'cc2');onFieldChange()" maxlength="500"></textarea>
+          <div class="char-count"><span id="cc2">0</span>/500</div>
+          <div class="err-msg" id="err-improve">⚠ This field is required.</div>
         </div>
-        <div class="field-group">
-          <label for="suggestions">3. Suggestions for future graduation ceremonies <span class="req">*</span></label>
-          <textarea id="suggestions" placeholder="Your suggestions are very important to us..."></textarea>
-          <div class="error-msg" id="err-suggestions">This field is required.</div>
+
+        <div class="field">
+          <div class="feedback-header">
+            <div class="feedback-num">3</div>
+            <div class="feedback-q">Suggestions for future graduation ceremonies <span class="req">*</span></div>
+          </div>
+          <textarea id="suggestions" placeholder="We read every suggestion — don't hold back!" oninput="countChars(this,'cc3');onFieldChange()" maxlength="500"></textarea>
+          <div class="char-count"><span id="cc3">0</span>/500</div>
+          <div class="err-msg" id="err-suggestions">⚠ This field is required.</div>
         </div>
       </div>
 
       <!-- SECTION 5: ALUMNI ID -->
-      <div class="section-card">
-        <div class="section-header">
-          <div class="section-icon">🪪</div>
+      <div class="card" id="sec4">
+        <div class="card-header">
+          <div class="card-badge">🪪</div>
+          <div class="card-meta">
+            <div class="card-step">Section 5 of 5</div>
+            <div class="card-title">MVGFC Alumni ID</div>
+            <div class="card-desc">Optional — get your official alumni card with exclusive perks.</div>
+          </div>
+        </div>
+
+        <div class="alumni-promo">
+          <div class="alumni-promo-icon">🎓</div>
           <div>
-            <div class="section-num">Section 5</div>
-            <div class="section-title">MVGFC Alumni ID</div>
+            <h3>Enjoy Exclusive Alumni Benefits!</h3>
+            <p>Get discounts from MVGFC alumni-owned businesses by showing your Alumni ID. It's completely free.</p>
           </div>
         </div>
 
-        <div class="alumni-banner">
-          <div class="icon">🎓</div>
-          <div>
-            <h3>Enjoy Exclusive Alumni Benefits</h3>
-            <p>Get discounts from our alumni-owned businesses by showing your MVGFC Alumni ID. It's free!</p>
-          </div>
-        </div>
-
-        <div class="field-group">
-          <label style="font-size:0.9rem; font-weight:500; color: var(--text-dark);">Are you willing to have your MVGFC Alumni ID? <span class="req">*</span></label>
-          <div class="radio-row">
-            <label class="radio-opt">
-              <input type="radio" name="alumniId" value="Yes" onchange="toggleAlumni(true)"> Yes
+        <div class="field">
+          <label style="font-size:0.9rem;font-weight:700;color:var(--ink2);">Would you like an MVGFC Alumni ID? <span class="req">*</span></label>
+          <div class="choice-row" style="margin-top:8px;" id="alumniChoiceRow">
+            <label class="choice-btn" id="btnAlumniYes" onclick="selectAlumni('Yes')">
+              <input type="radio" name="alumniId" value="Yes">
+              <span>🪪</span> Yes, I want one!
             </label>
-            <label class="radio-opt">
-              <input type="radio" name="alumniId" value="No" onchange="toggleAlumni(false)"> No
+            <label class="choice-btn" id="btnAlumniNo" onclick="selectAlumni('No')">
+              <input type="radio" name="alumniId" value="No">
+              <span>✖</span> No, thanks
             </label>
           </div>
-          <div class="error-msg" id="err-alumni">Please select an option.</div>
+          <div class="err-msg" id="err-alumni">⚠ Please select an option.</div>
         </div>
 
-        <div class="toggle-section" id="alumniSection">
-          <p style="font-size:0.82rem; color: var(--text-light); margin-bottom:1.25rem; font-style:italic;">Please fill up this section for your Alumni ID.</p>
+        <div class="toggle-section" id="alumniFields">
+          <div style="background:var(--pale);border-radius:10px;padding:10px 14px;margin:1rem 0 1.25rem;font-size:0.8rem;color:var(--ink3);">
+            📝 Please complete the fields below for your Alumni ID application.
+          </div>
 
           <div class="field-row">
-            <div class="field-group">
+            <div class="field">
               <label for="dob">Date of Birth <span class="req">*</span></label>
               <input type="date" id="dob">
             </div>
-            <div class="field-group">
+            <div class="field">
               <label for="citizenship">Citizenship <span class="req">*</span></label>
               <input type="text" id="citizenship" placeholder="e.g. Filipino">
             </div>
           </div>
 
-          <div class="field-group">
+          <div class="field">
             <label for="homeAddress">Home Address <span class="req">*</span></label>
             <input type="text" id="homeAddress" placeholder="Complete home address">
           </div>
 
           <div class="field-row">
-            <div class="field-group">
+            <div class="field">
               <label for="primaryContact">Primary Contact Number <span class="req">*</span></label>
               <input type="tel" id="primaryContact" placeholder="09XXXXXXXXX">
             </div>
-            <div class="field-group">
-              <label for="emergencyPerson">Contact Person in Case of Emergency <span class="req">*</span></label>
+            <div class="field">
+              <label for="emergencyPerson">Emergency Contact Person <span class="req">*</span></label>
               <input type="text" id="emergencyPerson" placeholder="Full name">
             </div>
           </div>
 
           <div class="field-row">
-            <div class="field-group">
+            <div class="field">
               <label for="emergencyContact">Emergency Contact Number <span class="req">*</span></label>
               <input type="tel" id="emergencyContact" placeholder="09XXXXXXXXX">
             </div>
-            <div class="field-group">
+            <div class="field">
               <label for="relationship">Relationship <span class="req">*</span></label>
-              <input type="text" id="relationship" placeholder="e.g. Parent, Sibling, Spouse">
+              <input type="text" id="relationship" placeholder="e.g. Parent, Sibling">
             </div>
           </div>
 
-          <div class="field-group">
+          <div class="field">
             <label for="emergencyAddress">Emergency Contact Address <span class="req">*</span></label>
             <input type="text" id="emergencyAddress" placeholder="Complete address">
           </div>
 
           <div class="field-row">
-            <div class="field-group">
+            <div class="field">
               <label>E-Signature <span class="req">*</span></label>
-              <div class="file-upload-area" onclick="document.getElementById('esig').click()">
-                <input type="file" id="esig" accept="image/*" onchange="showFileName(this,'esig-name')">
-                <div class="upload-icon">✍️</div>
-                <div class="upload-label">Upload E-Signature</div>
-                <div class="upload-hint">PNG, JPG — max 2MB</div>
-                <div class="file-name-display" id="esig-name"></div>
+              <div class="upload-zone" id="zone-esig"
+                onclick="document.getElementById('esig').click()"
+                ondragover="event.preventDefault();this.classList.add('dragover')"
+                ondragleave="this.classList.remove('dragover')"
+                ondrop="handleDrop(event,'esig')">
+                <input type="file" id="esig" accept="image/*" onchange="handleFile(this,'esig')">
+                <div class="up-icon">✍️</div>
+                <div class="up-title">Upload E-Signature</div>
+                <div class="up-hint">PNG or JPG · max 2MB · click or drag</div>
+              </div>
+              <div class="upload-preview" id="prev-esig">
+                <img id="prev-esig-img" src="" alt="">
+                <div>
+                  <div class="fname" id="prev-esig-name"></div>
+                  <div class="fsize" id="prev-esig-size"></div>
+                </div>
+                <button class="remove-file" onclick="removeFile('esig')">✕</button>
               </div>
             </div>
-            <div class="field-group">
-              <label>2×2 Picture <span class="req">*</span></label>
-              <div class="file-upload-area" onclick="document.getElementById('photo').click()">
-                <input type="file" id="photo" accept="image/*" onchange="showFileName(this,'photo-name')">
-                <div class="upload-icon">📸</div>
-                <div class="upload-label">Upload 2×2 Photo</div>
-                <div class="upload-hint">PNG, JPG — max 2MB</div>
-                <div class="file-name-display" id="photo-name"></div>
+            <div class="field">
+              <label>2×2 ID Photo <span class="req">*</span></label>
+              <div class="upload-zone" id="zone-photo"
+                onclick="document.getElementById('photo').click()"
+                ondragover="event.preventDefault();this.classList.add('dragover')"
+                ondragleave="this.classList.remove('dragover')"
+                ondrop="handleDrop(event,'photo')">
+                <input type="file" id="photo" accept="image/*" onchange="handleFile(this,'photo')">
+                <div class="up-icon">📸</div>
+                <div class="up-title">Upload 2×2 Photo</div>
+                <div class="up-hint">PNG or JPG · max 2MB · click or drag</div>
+              </div>
+              <div class="upload-preview" id="prev-photo">
+                <img id="prev-photo-img" src="" alt="">
+                <div>
+                  <div class="fname" id="prev-photo-name"></div>
+                  <div class="fsize" id="prev-photo-size"></div>
+                </div>
+                <button class="remove-file" onclick="removeFile('photo')">✕</button>
               </div>
             </div>
           </div>
@@ -1068,289 +1410,309 @@
       </div>
 
       <!-- SUBMIT -->
-      <div class="submit-wrap">
-        <div id="submitError" style="font-size:0.82rem; color: var(--error); margin-bottom:1rem; display:none;"></div>
-        <button class="submit-btn" onclick="submitSurvey()">Submit Survey →</button>
-        <p style="font-size:0.75rem; color: var(--text-light); margin-top:0.75rem;">By submitting, you confirm all information provided is accurate.</p>
+      <div class="submit-area">
+        <div class="submit-error" id="submitError"></div>
+        <button class="submit-btn" onclick="submitSurvey()">
+          Submit My Feedback <span class="btn-arrow">→</span>
+        </button>
+        <p class="submit-note">By submitting, you confirm all information provided is accurate and complete.</p>
       </div>
 
     </div><!-- end surveyForm -->
 
     <!-- SUCCESS -->
-    <div class="success-screen" id="successScreen">
-      <div class="success-icon">✅</div>
-      <h2>Thank You!</h2>
-      <p>Your feedback has been successfully submitted. Thank you for sharing your graduation experience with us at MVGFC. Your insights will help us improve future ceremonies for the next batch of graduates.</p>
-      <p style="margin-top:1rem; color: var(--mvg-green-dark); font-weight:500;">🎓 Congratulations, Graduate!</p>
+    <div class="success-page" id="successPage">
+      <div class="success-wrap">
+        <div class="success-confetti">🎉</div>
+        <h2>Thank You,<br>Graduate!</h2>
+        <p>Your feedback has been successfully submitted. Your insights are invaluable in helping MVGFC improve the graduation experience for future batches.</p>
+        <div class="success-card">
+          <h3>🎓 Congratulations on your achievement!</h3>
+          <p>You've completed your degree at MVGFC. Your journey here is just the beginning — the world awaits you. Onward and upward!</p>
+        </div>
+        <p style="font-size:0.82rem;color:var(--ink4);">You may now close this window or share the survey link with your fellow graduates.</p>
+      </div>
     </div>
 
-  </div><!-- end form-outer -->
+  </div><!-- form-outer -->
 
   <div class="form-footer">
-    © MVGFC Student Affairs Office · Satisfaction Survey System · Powered by Google Sheets
+    © MVGFC Student Affairs Office · Graduation Satisfaction Survey System · Powered by Google Sheets
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     ADMIN PAGE
-═══════════════════════════════════════ -->
-<div id="page-admin" class="page admin-page">
+<!-- ═══════════════════════════ ADMIN ═══════════════════════════ -->
+<div id="page-admin" class="admin-page">
 
-  <!-- LOGIN -->
-  <div class="admin-login" id="adminLogin">
-    <div class="login-card">
-      <div class="lock-icon">🔒</div>
-      <h2>Admin Dashboard</h2>
-      <p>Enter the admin password to access survey analytics.</p>
-      <input type="password" id="adminPwd" placeholder="Password" onkeydown="if(event.key==='Enter') adminLogin()">
-      <div class="login-error" id="loginError">Incorrect password. Please try again.</div>
-      <button class="login-submit" onclick="adminLogin()">Sign In</button>
-      <div style="margin-top:1rem;">
-        <button onclick="showPage('survey')" style="background:none; border:none; color: var(--text-light); font-size:0.78rem; cursor:pointer; text-decoration:underline;">← Back to Survey</button>
-      </div>
+  <div class="admin-login-wrap" id="adminLoginWrap">
+    <div class="login-box">
+      <div class="login-icon">🔒</div>
+      <h2>Admin Access</h2>
+      <p>Enter your credentials to view survey analytics.</p>
+      <input type="password" id="adminPwd" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+      <div class="login-err" id="loginErr">Incorrect password. Please try again.</div>
+      <button class="login-go" onclick="doLogin()">Sign In →</button>
+      <button class="back-link" onclick="showSurvey()">← Back to Survey</button>
     </div>
   </div>
 
-  <!-- DASHBOARD -->
-  <div class="dashboard" id="adminDashboard">
-
-    <div class="dash-header">
+  <div class="dashboard-wrap" id="dashWrap">
+    <div class="dash-head">
       <div>
-        <h2>Survey Analytics Dashboard</h2>
-        <p>MVGFC Graduation Satisfaction Survey — Live Data from Google Sheets</p>
+        <h2>Survey Analytics</h2>
+        <p>MVGFC Graduation Satisfaction Survey — Live from Google Sheets</p>
       </div>
-      <div style="display:flex; gap:8px; align-items:center;">
-        <button class="refresh-btn" onclick="loadDashboardData()">↻ Refresh</button>
-        <button onclick="adminLogout()" style="background:transparent; border:1px solid var(--border); border-radius:8px; padding:8px 16px; font-size:0.82rem; cursor:pointer; color: var(--text-mid);">Sign Out</button>
-      </div>
-    </div>
-
-    <!-- STATS -->
-    <div class="stat-grid" id="statGrid">
-      <div class="loading-state" style="grid-column:1/-1">
-        <div class="spinner"></div>
-        Loading analytics...
+      <div class="dash-actions">
+        <button class="btn-refresh" onclick="loadDash()">↻ Refresh</button>
+        <button class="btn-logout" onclick="doLogout()">Sign Out</button>
       </div>
     </div>
-
-    <!-- CHARTS -->
+    <div class="stat-row" id="statRow"><div class="loading-box" style="grid-column:1/-1"><div class="spinner"></div>Loading...</div></div>
     <div class="chart-grid" id="chartGrid" style="display:none;"></div>
-
-    <!-- RECENT RESPONSES -->
-    <div class="chart-card" id="responsesCard" style="display:none; margin-bottom:1.5rem;">
-      <h3>Recent Responses</h3>
-      <div class="table-wrap">
-        <table class="responses-table" id="responsesTable">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Timestamp</th>
-              <th>Name</th>
-              <th>Program</th>
-              <th>Year</th>
-              <th>Consent</th>
-              <th>Alumni ID</th>
-              <th>Avg Rating</th>
-            </tr>
-          </thead>
-          <tbody id="responsesBody"></tbody>
+    <div class="chart-box" id="respCard" style="display:none;margin-bottom:1.25rem;">
+      <h3>Recent Submissions</h3>
+      <div style="overflow-x:auto;">
+        <table class="resp-table">
+          <thead><tr><th>#</th><th>Time</th><th>Name</th><th>Program</th><th>Year</th><th>Consent</th><th>Alumni ID</th><th>Avg</th></tr></thead>
+          <tbody id="respBody"></tbody>
         </table>
       </div>
     </div>
-
-    <!-- OPEN FEEDBACK -->
-    <div class="chart-card" id="feedbackCard" style="display:none; margin-bottom:2rem;">
-      <h3>Open Feedback — Appreciation</h3>
-      <div class="feedback-list" id="appreciationList"></div>
+    <div class="chart-box" id="fbCard" style="display:none;margin-bottom:2rem;">
+      <h3>Latest Feedback — Appreciation</h3>
+      <div id="fbList"></div>
     </div>
-
   </div>
 </div>
 
 <script>
 // ═══════════════════════════════════════
-// CONFIGURATION — REPLACE THIS URL
+// CONFIG
 // ═══════════════════════════════════════
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyps9DMk56mrKiFyRvFoJ2fzip0eaC3njV_8F4pN58rPxl6y6vjLcJ3Q8FnYOkBiLNi/exec';
-const ADMIN_PASSWORD = 'mvgfcES123'; // Change this password!
+const SCRIPT_URL   = 'https://script.google.com/macros/s/AKfycbyps9DMk56mrKiFyRvFoJ2fzip0eaC3njV_8F4pN58rPxl6y6vjLcJ3Q8FnYOkBiLNi/exec'; // ← paste your deployed Apps Script URL here
+const ADMIN_PASS   = 'mvgfcES123';            // ← change this password
 
-// ─── RATING QUESTIONS ───
-const ratingQuestions = [
-  { id: 'r1', text: '1. Finance Office services and payment processing' },
-  { id: 'r2', text: '2. Registrar\'s Office assistance and graduation requirements' },
-  { id: 'r3', text: '3. Clarity of graduation fees and procedures' },
-  { id: 'r4', text: '4. Efficiency of clearance signing and requirement completion' },
-  { id: 'r5', text: '5. Graduation photoshoot and attire arrangements' },
-  { id: 'r6', text: '6. Venue comfort and event setup' },
-  { id: 'r7', text: '7. Organization and flow of the graduation ceremony' },
-  { id: 'r8', text: '8. Overall graduation experience at MVGFC' },
-  { id: 'r9', text: '15. Overall flow and organization of the graduation program' },
+// ─── RATING QUESTIONS ─────────────────
+const RQS = [
+  {id:'r1', num:'1', text:'Finance Office services and payment processing'},
+  {id:'r2', num:'2', text:'Registrar\'s Office assistance and graduation requirements'},
+  {id:'r3', num:'3', text:'Clarity of graduation fees and procedures'},
+  {id:'r4', num:'4', text:'Efficiency of clearance signing and requirement completion'},
+  {id:'r5', num:'5', text:'Graduation photoshoot and attire arrangements'},
+  {id:'r6', num:'6', text:'Venue comfort and event setup'},
+  {id:'r7', num:'7', text:'Organization and flow of the graduation ceremony'},
+  {id:'r8', num:'8', text:'Overall graduation experience at MVGFC'},
+  {id:'r9', num:'15', text:'Overall flow and organization of the graduation program'},
 ];
-
-const ratingLabels = { 4: 'Strongly Satisfied', 3: 'Satisfied', 2: 'Dissatisfied', 1: 'Strongly Dissatisfied' };
+const FACES = [
+  {v:4, emoji:'😄', label:'Strongly\nSatisfied'},
+  {v:3, emoji:'🙂', label:'Satisfied'},
+  {v:2, emoji:'😕', label:'Dissatisfied'},
+  {v:1, emoji:'😞', label:'Strongly\nDissatisfied'},
+];
 const ratings = {};
 
-// ─── BUILD RATING ITEMS ───
-function buildRatingItems() {
-  const container = document.getElementById('ratingItems');
-  ratingQuestions.forEach(q => {
+// ─── BUILD RATING ITEMS ───────────────
+function buildRatings() {
+  const wrap = document.getElementById('ratingItems');
+  RQS.forEach(q => {
     ratings[q.id] = null;
     const div = document.createElement('div');
     div.className = 'rating-item';
-    div.id = 'item-' + q.id;
+    div.id = 'ri-'+q.id;
     div.innerHTML = `
-      <div class="rating-q">${q.text} <span class="req">*</span></div>
-      <div class="rating-options">
-        ${[4,3,2,1].map(v => `
-          <button type="button" class="rating-btn" onclick="selectRating('${q.id}',${v})" data-q="${q.id}" data-v="${v}">
-            <span class="score">${v}</span>
-            <span class="label">${ratingLabels[v]}</span>
+      <div class="rating-q">
+        <span class="q-num">${q.num}</span>
+        <span>${q.text} <span class="req">*</span></span>
+      </div>
+      <div class="rating-faces">
+        ${FACES.map(f=>`
+          <button type="button" class="face-btn" data-q="${q.id}" data-v="${f.v}" onclick="pickRating('${q.id}',${f.v})">
+            <span class="face-emoji">${f.emoji}</span>
+            <span class="face-score">${f.v}</span>
+            <span class="face-label">${f.label}</span>
           </button>
         `).join('')}
       </div>
-      <div class="error-msg" id="err-${q.id}">Please select a rating.</div>
+      <div class="err-msg" id="err-${q.id}">⚠ Please select a rating.</div>
     `;
-    container.appendChild(div);
+    wrap.appendChild(div);
   });
 }
 
-function selectRating(qId, val) {
+function pickRating(qId, val) {
   ratings[qId] = val;
   document.querySelectorAll(`[data-q="${qId}"]`).forEach(btn => {
     btn.classList.toggle('selected', parseInt(btn.dataset.v) === val);
   });
-  document.getElementById('err-' + qId).classList.remove('show');
-  document.getElementById('item-' + qId).style.borderColor = '#c0d8c0';
-  updateProgress();
+  document.getElementById('err-'+qId)?.classList.remove('show');
+  document.getElementById('ri-'+qId)?.classList.add('answered');
+  updateCounter();
+  updateXP();
+  updateSteps();
 }
 
-// ─── PAGE NAV ───
-function showPage(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
-  window.scrollTo(0,0);
+function updateCounter() {
+  const done = Object.values(ratings).filter(v => v !== null).length;
+  document.getElementById('ratingCounter').innerHTML = `${done} <span>/ ${RQS.length} answered</span>`;
 }
 
-// ─── ALUMNI TOGGLE ───
-function toggleAlumni(show) {
-  const sec = document.getElementById('alumniSection');
-  sec.classList.toggle('open', show);
+// ─── CONSENT & ALUMNI CHOICE ──────────
+let consentVal = null, alumniVal = null;
+
+function selectConsent(val) {
+  consentVal = val;
+  document.getElementById('btnAgree').className = 'choice-btn' + (val==='I Agree'?' selected-yes':'');
+  document.getElementById('btnDisagree').className = 'choice-btn' + (val==='I Disagree'?' selected-no':'');
+  document.getElementById('err-consent').classList.remove('show');
+  onFieldChange();
 }
 
-// ─── FILE UPLOAD ───
-function showFileName(input, displayId) {
-  const el = document.getElementById(displayId);
-  el.textContent = input.files[0] ? '✓ ' + input.files[0].name : '';
+function selectAlumni(val) {
+  alumniVal = val;
+  document.getElementById('btnAlumniYes').className = 'choice-btn' + (val==='Yes'?' selected-yes':'');
+  document.getElementById('btnAlumniNo').className = 'choice-btn' + (val==='No'?' selected-no':'');
+  document.getElementById('err-alumni').classList.remove('show');
+  document.getElementById('alumniFields').classList.toggle('open', val==='Yes');
+  onFieldChange();
 }
 
-// ─── PROGRESS ───
-function updateProgress() {
+// ─── PROGRESS XP ──────────────────────
+function updateXP() {
   const fields = ['email','name','program','yearGrad','contact','address','fbName'];
-  let filled = 0, total = fields.length + ratingQuestions.length + 3 + 1;
-  fields.forEach(f => { if (document.getElementById(f)?.value?.trim()) filled++; });
-  ratingQuestions.forEach(q => { if (ratings[q.id]) filled++; });
-  ['appreciate','improve','suggestions'].forEach(f => { if (document.getElementById(f)?.value?.trim()) filled++; });
-  if (document.querySelector('input[name="consent"]:checked')) filled++;
-  const pct = Math.round((filled / total) * 100);
-  document.getElementById('progressBar').style.width = pct + '%';
-  document.getElementById('progressPct').textContent = pct + '%';
-  const sections = ['Personal Information','Personal Information','Satisfaction Parameters','Open Feedback','Alumni ID'];
-  document.getElementById('progressLabel').textContent = pct < 30 ? sections[0] : pct < 60 ? sections[2] : pct < 85 ? sections[3] : 'Almost done!';
+  let done = 0, total = fields.length + RQS.length + 3 + 1 + 1;
+  fields.forEach(f => { if (document.getElementById(f)?.value?.trim()) done++; });
+  RQS.forEach(q => { if (ratings[q.id]) done++; });
+  ['appreciate','improve','suggestions'].forEach(f => { if (document.getElementById(f)?.value?.trim()) done++; });
+  if (consentVal) done++;
+  if (alumniVal) done++;
+  const pct = Math.min(100, Math.round((done/total)*100));
+  document.getElementById('xpBar').style.width = pct+'%';
+  document.getElementById('xpPct').textContent = pct+'%';
 }
 
-// ─── VALIDATION ───
+function updateSteps() {
+  const s0 = ['email','name','program','yearGrad','contact','address','fbName'].every(f=>document.getElementById(f)?.value?.trim());
+  const s1 = !!consentVal;
+  const s2 = Object.values(ratings).every(v=>v!==null);
+  const s3 = ['appreciate','improve','suggestions'].every(f=>document.getElementById(f)?.value?.trim());
+  const s4 = !!alumniVal;
+  [s0,s1,s2,s3,s4].forEach((done,i)=>{
+    const el = document.getElementById('step'+i);
+    if(!el)return;
+    const idx = [s0,s1,s2,s3,s4].findIndex((v,j)=>j>=i&&!v);
+    const active = (idx===-1?4:idx)===i||(done&&(idx===-1?4:idx)===i+1);
+    el.className = 'step-pill' + (done?' done':'') + (!done&&(i===(idx===-1?4:idx))?' active':'');
+  });
+}
+
+function onFieldChange() { updateXP(); updateSteps(); }
+function countChars(el,id){ document.getElementById(id).textContent=el.value.length; }
+
+// ─── FILE HANDLING (with preview) ─────
+const fileData = {};
+
+function handleFile(input, key) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 2*1024*1024) {
+    alert('File is too large. Please upload an image under 2MB.');
+    input.value = '';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = e => {
+    fileData[key] = { base64: e.target.result.split(',')[1], name: file.name, type: file.type };
+    document.getElementById('prev-'+key+'-img').src = e.target.result;
+    document.getElementById('prev-'+key+'-name').textContent = file.name;
+    document.getElementById('prev-'+key+'-size').textContent = (file.size/1024).toFixed(0)+' KB';
+    document.getElementById('prev-'+key).classList.add('show');
+    document.getElementById('zone-'+key).style.display='none';
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleDrop(e, key) {
+  e.preventDefault();
+  document.getElementById('zone-'+key).classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  const input = document.getElementById(key);
+  input.files = dt.files;
+  handleFile(input, key);
+}
+
+function removeFile(key) {
+  fileData[key] = null;
+  document.getElementById(key).value = '';
+  document.getElementById('prev-'+key).classList.remove('show');
+  document.getElementById('zone-'+key).style.display='';
+}
+
+// ─── VALIDATION ───────────────────────
 function validate() {
   let ok = true;
-  function check(id, errId, cond) {
+  function chk(id, errId, cond) {
     const el = document.getElementById(id);
-    const err = document.getElementById(errId);
-    if (cond && cond(el)) {
-      el?.classList.add('error');
-      err?.classList.add('show');
-      if (ok) { el?.scrollIntoView({ behavior:'smooth', block:'center' }); ok = false; }
+    const er = document.getElementById(errId);
+    if (cond(el)) {
+      el?.classList.add('err');
+      er?.classList.add('show');
+      if (ok) { el?.scrollIntoView({behavior:'smooth',block:'center'}); ok=false; }
     } else {
-      el?.classList.remove('error');
-      err?.classList.remove('show');
+      el?.classList.remove('err');
+      er?.classList.remove('show');
     }
   }
-  check('email','err-email', el => !el.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
-  check('name','err-name', el => !el.value.trim());
-  check('program','err-program', el => !el.value);
-  check('yearGrad','err-yearGrad', el => !el.value.trim());
-  check('contact','err-contact', el => !el.value.trim());
-  check('address','err-address', el => !el.value.trim());
-  check('fbName','err-fbName', el => !el.value.trim());
+  chk('email','err-email', el=>!el.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
+  chk('name','err-name', el=>!el.value.trim());
+  chk('program','err-program', el=>!el.value);
+  chk('yearGrad','err-yearGrad', el=>!el.value.trim());
+  chk('contact','err-contact', el=>!el.value.trim());
+  chk('address','err-address', el=>!el.value.trim());
+  chk('fbName','err-fbName', el=>!el.value.trim());
 
-  const consent = document.querySelector('input[name="consent"]:checked');
-  if (!consent) {
+  if (!consentVal) {
     document.getElementById('err-consent').classList.add('show');
-    if (ok) { document.getElementById('err-consent').scrollIntoView({ behavior:'smooth', block:'center' }); ok = false; }
-  } else {
-    document.getElementById('err-consent').classList.remove('show');
-    if (consent.value === 'I Disagree') {
-      document.getElementById('submitError').textContent = 'You must agree to the Data Privacy Consent to submit.';
-      document.getElementById('submitError').style.display = 'block';
-      ok = false;
-    }
+    if (ok){document.getElementById('err-consent').scrollIntoView({behavior:'smooth',block:'center'});ok=false;}
+  }
+  if (consentVal==='I Disagree') {
+    document.getElementById('submitError').textContent='You must agree to the Data Privacy Consent to submit this survey.';
+    document.getElementById('submitError').style.display='block';
+    ok=false;
   }
 
-  ratingQuestions.forEach(q => {
-    const err = document.getElementById('err-' + q.id);
+  RQS.forEach(q=>{
     if (!ratings[q.id]) {
-      err.classList.add('show');
-      document.getElementById('item-' + q.id).style.borderColor = '#e74c3c';
-      if (ok) { document.getElementById('item-' + q.id).scrollIntoView({ behavior:'smooth', block:'center' }); ok = false; }
-    } else {
-      err.classList.remove('show');
+      document.getElementById('err-'+q.id)?.classList.add('show');
+      if (ok){document.getElementById('ri-'+q.id)?.scrollIntoView({behavior:'smooth',block:'center'});ok=false;}
     }
   });
 
-  check('appreciate','err-appreciate', el => !el.value.trim());
-  check('improve','err-improve', el => !el.value.trim());
-  check('suggestions','err-suggestions', el => !el.value.trim());
+  chk('appreciate','err-appreciate', el=>!el.value.trim());
+  chk('improve','err-improve', el=>!el.value.trim());
+  chk('suggestions','err-suggestions', el=>!el.value.trim());
 
-  const alumniChoice = document.querySelector('input[name="alumniId"]:checked');
-  if (!alumniChoice) {
+  if (!alumniVal) {
     document.getElementById('err-alumni').classList.add('show');
-    if (ok) { document.getElementById('err-alumni').scrollIntoView({ behavior:'smooth', block:'center' }); ok = false; }
+    if (ok){document.getElementById('err-alumni').scrollIntoView({behavior:'smooth',block:'center'});ok=false;}
   }
-
   return ok;
 }
 
-// ─── FILE TO BASE64 ───
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    if (!file) { resolve(null); return; }
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
-// ─── SUBMIT ───
+// ─── SUBMIT ───────────────────────────
 async function submitSurvey() {
-  document.getElementById('submitError').style.display = 'none';
+  document.getElementById('submitError').style.display='none';
   if (!validate()) return;
 
   const btn = document.querySelector('.submit-btn');
-  btn.disabled = true;
-  btn.textContent = 'Submitting...';
-
-  const alumniChoice = document.querySelector('input[name="alumniId"]:checked')?.value;
-
-  const esigFile = document.getElementById('esig').files[0];
-  const photoFile = document.getElementById('photo').files[0];
-  let esigBase64 = null, photoBase64 = null;
-
-  if (alumniChoice === 'Yes') {
-    esigBase64 = await fileToBase64(esigFile);
-    photoBase64 = await fileToBase64(photoFile);
-  }
+  btn.disabled=true;
+  btn.innerHTML='Submitting… <span>⏳</span>';
 
   const payload = {
-    action: 'submit',
+    action:'submit',
     timestamp: new Date().toLocaleString('en-PH'),
     email: document.getElementById('email').value,
     name: document.getElementById('name').value,
@@ -1360,17 +1722,14 @@ async function submitSurvey() {
     address: document.getElementById('address').value,
     fbName: document.getElementById('fbName').value,
     employment: document.getElementById('employment').value,
-    consent: document.querySelector('input[name="consent"]:checked')?.value,
-    // Ratings
-    r1: ratings.r1, r2: ratings.r2, r3: ratings.r3,
-    r4: ratings.r4, r5: ratings.r5, r6: ratings.r6,
-    r7: ratings.r7, r8: ratings.r8, r9: ratings.r9,
-    // Open feedback
+    consent: consentVal,
+    r1:ratings.r1, r2:ratings.r2, r3:ratings.r3,
+    r4:ratings.r4, r5:ratings.r5, r6:ratings.r6,
+    r7:ratings.r7, r8:ratings.r8, r9:ratings.r9,
     appreciate: document.getElementById('appreciate').value,
     improve: document.getElementById('improve').value,
     suggestions: document.getElementById('suggestions').value,
-    // Alumni ID
-    alumniId: alumniChoice,
+    alumniId: alumniVal,
     dob: document.getElementById('dob').value,
     citizenship: document.getElementById('citizenship').value,
     homeAddress: document.getElementById('homeAddress').value,
@@ -1379,287 +1738,216 @@ async function submitSurvey() {
     emergencyContact: document.getElementById('emergencyContact').value,
     relationship: document.getElementById('relationship').value,
     emergencyAddress: document.getElementById('emergencyAddress').value,
-    esig: esigBase64,
-    photo: photoBase64
+    esig: fileData['esig']?.base64 || null,
+    esigName: fileData['esig']?.name || null,
+    photo: fileData['photo']?.base64 || null,
+    photoName: fileData['photo']?.name || null,
   };
 
-  if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
-    // Demo mode
-    setTimeout(() => {
-      document.getElementById('surveyForm').style.display = 'none';
-      document.getElementById('successScreen').classList.add('show');
-      document.getElementById('progressBar').style.width = '100%';
-      document.getElementById('progressPct').textContent = '100%';
-    }, 1200);
+  if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
+    setTimeout(()=>showSuccess(), 1200);
     return;
   }
 
   try {
-    const res = await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
+    const res = await fetch(SCRIPT_URL, { method:'POST', body: JSON.stringify(payload) });
     const data = await res.json();
-    if (data.status === 'success') {
-      document.getElementById('surveyForm').style.display = 'none';
-      document.getElementById('successScreen').classList.add('show');
-      document.getElementById('progressBar').style.width = '100%';
-      document.getElementById('progressPct').textContent = '100%';
-    } else {
-      throw new Error(data.message || 'Submission failed');
-    }
-  } catch (e) {
-    document.getElementById('submitError').textContent = 'Submission failed: ' + e.message + '. Please try again.';
-    document.getElementById('submitError').style.display = 'block';
-    btn.disabled = false;
-    btn.textContent = 'Submit Survey →';
-  }
-}
-
-// ═══════════════════════════════════════
-// ADMIN DASHBOARD
-// ═══════════════════════════════════════
-function adminLogin() {
-  const pwd = document.getElementById('adminPwd').value;
-  if (pwd === ADMIN_PASSWORD) {
-    document.getElementById('adminLogin').style.display = 'none';
-    document.getElementById('adminDashboard').classList.add('visible');
-    loadDashboardData();
-  } else {
-    document.getElementById('loginError').classList.add('show');
-    document.getElementById('adminPwd').value = '';
-  }
-}
-
-function adminLogout() {
-  document.getElementById('adminLogin').style.display = 'flex';
-  document.getElementById('adminDashboard').classList.remove('visible');
-  document.getElementById('adminPwd').value = '';
-  document.getElementById('loginError').classList.remove('show');
-}
-
-async function loadDashboardData() {
-  const statGrid = document.getElementById('statGrid');
-  statGrid.innerHTML = '<div class="loading-state" style="grid-column:1/-1"><div class="spinner"></div>Loading analytics...</div>';
-  document.getElementById('chartGrid').style.display = 'none';
-  document.getElementById('responsesCard').style.display = 'none';
-  document.getElementById('feedbackCard').style.display = 'none';
-
-  if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
-    renderDashboard(getMockData());
-    return;
-  }
-
-  try {
-    const res = await fetch(APPS_SCRIPT_URL + '?action=getAnalytics');
-    const data = await res.json();
-    renderDashboard(data);
+    if (data.status === 'success') { showSuccess(); }
+    else throw new Error(data.message||'Unknown error');
   } catch(e) {
-    statGrid.innerHTML = `<div class="loading-state" style="grid-column:1/-1; color: var(--error);">⚠ Failed to load data. Check your Apps Script URL and CORS settings.</div>`;
+    document.getElementById('submitError').textContent = 'Submission failed: '+e.message+'. Please try again.';
+    document.getElementById('submitError').style.display='block';
+    btn.disabled=false;
+    btn.innerHTML='Submit My Feedback <span class="btn-arrow">→</span>';
   }
 }
 
-function getMockData() {
+function showSuccess() {
+  document.getElementById('surveyForm').style.display='none';
+  document.getElementById('successPage').classList.add('show');
+  document.getElementById('xpBar').style.width='100%';
+  document.getElementById('xpPct').textContent='100%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ─── HIDDEN ADMIN TRIGGER ─────────────
+// Triple-click the invisible dot in bottom-right corner
+let adminClickCount=0, adminTimer=null;
+document.getElementById('adminTrigger').addEventListener('click',()=>{
+  adminClickCount++;
+  clearTimeout(adminTimer);
+  if(adminClickCount>=3){
+    adminClickCount=0;
+    showAdmin();
+  } else {
+    adminTimer=setTimeout(()=>{ adminClickCount=0; }, 600);
+  }
+});
+
+// Keyboard shortcut: Ctrl+Shift+A
+document.addEventListener('keydown', e=>{
+  if(e.ctrlKey && e.shiftKey && e.key==='A') showAdmin();
+});
+
+function showAdmin() {
+  document.getElementById('page-survey').classList.remove('active');
+  document.getElementById('page-admin').classList.add('active');
+  document.getElementById('adminLoginWrap').style.display='flex';
+  document.getElementById('dashWrap').classList.remove('visible');
+  document.getElementById('adminPwd').value='';
+}
+
+function showSurvey() {
+  document.getElementById('page-admin').classList.remove('active');
+  document.getElementById('page-survey').classList.add('active');
+}
+
+// ─── ADMIN LOGIN ──────────────────────
+function doLogin() {
+  const pwd = document.getElementById('adminPwd').value;
+  if (pwd===ADMIN_PASS) {
+    document.getElementById('adminLoginWrap').style.display='none';
+    document.getElementById('dashWrap').classList.add('visible');
+    loadDash();
+  } else {
+    document.getElementById('loginErr').classList.add('show');
+    document.getElementById('adminPwd').value='';
+  }
+}
+function doLogout() {
+  document.getElementById('dashWrap').classList.remove('visible');
+  document.getElementById('adminLoginWrap').style.display='flex';
+  document.getElementById('adminPwd').value='';
+  document.getElementById('loginErr').classList.remove('show');
+}
+
+// ─── DASHBOARD ────────────────────────
+async function loadDash() {
+  const sr=document.getElementById('statRow');
+  sr.innerHTML='<div class="loading-box" style="grid-column:1/-1"><div class="spinner"></div>Loading analytics…</div>';
+  document.getElementById('chartGrid').style.display='none';
+  document.getElementById('respCard').style.display='none';
+  document.getElementById('fbCard').style.display='none';
+
+  if(SCRIPT_URL==='YOUR_APPS_SCRIPT_URL'){
+    renderDash(mockData());
+    return;
+  }
+  try {
+    const res=await fetch(SCRIPT_URL+'?action=getAnalytics');
+    renderDash(await res.json());
+  } catch(e){
+    sr.innerHTML='<div class="loading-box" style="grid-column:1/-1;color:var(--err);">⚠ Failed to load. Check your Apps Script URL.</div>';
+  }
+}
+
+function mockData(){
   return {
-    total: 47,
-    programs: { 'BSN': 12, 'BSCRIM': 8, 'BSED-ENGLISH': 5, 'BSBA-MM': 7, 'BSCS': 6, 'BEED': 5, 'Other': 4 },
-    consent: { 'I Agree': 45, 'I Disagree': 2 },
-    alumni: { 'Yes': 31, 'No': 16 },
-    avgRatings: { r1:3.6, r2:3.4, r3:3.2, r4:3.5, r5:3.7, r6:3.8, r7:3.6, r8:3.9, r9:3.7 },
-    ratingDist: { '4': 18, '3': 20, '2': 6, '1': 3 },
-    recentResponses: [
-      { ts:'2025-06-05 10:23', name:'Santos, Maria L.', program:'BSN', year:'2025', consent:'I Agree', alumni:'Yes', avg:'3.8' },
-      { ts:'2025-06-05 10:41', name:'Reyes, Juan M.', program:'BSCRIM', year:'2025', consent:'I Agree', alumni:'No', avg:'3.4' },
-      { ts:'2025-06-05 11:02', name:'Cruz, Anna B.', program:'BSBA-MM', year:'2025', consent:'I Agree', alumni:'Yes', avg:'3.7' },
-      { ts:'2025-06-05 11:15', name:'Garcia, Pedro S.', program:'BSCS', year:'2025', consent:'I Agree', alumni:'Yes', avg:'3.9' },
-      { ts:'2025-06-05 12:00', name:'Flores, Lisa A.', program:'BEED', year:'2025', consent:'I Agree', alumni:'No', avg:'3.2' },
+    total:52, programs:{'BSN':13,'BSCRIM':9,'BSED-ENGLISH':6,'BSBA-MM':8,'BSCS':7,'BEED':5,'Other':4},
+    consent:{'I Agree':50,'I Disagree':2}, alumni:{'Yes':34,'No':18},
+    avgRatings:{r1:3.6,r2:3.4,r3:3.2,r4:3.5,r5:3.7,r6:3.8,r7:3.6,r8:3.9,r9:3.7},
+    ratingDist:{'4':22,'3':21,'2':6,'1':3},
+    recentResponses:[
+      {ts:'5/7/2026 10:23',name:'Santos, Maria L.',program:'BSN',year:'2025',consent:'I Agree',alumni:'Yes',avg:'3.8'},
+      {ts:'5/7/2026 10:41',name:'Reyes, Juan M.',program:'BSCRIM',year:'2025',consent:'I Agree',alumni:'No',avg:'3.4'},
+      {ts:'5/7/2026 11:02',name:'Cruz, Anna B.',program:'BSBA-MM',year:'2025',consent:'I Agree',alumni:'Yes',avg:'3.7'},
+      {ts:'5/7/2026 11:15',name:'Garcia, Pedro S.',program:'BSCS',year:'2025',consent:'I Agree',alumni:'Yes',avg:'3.9'},
     ],
-    appreciation: [
-      { name:'Santos, M.', text:'The overall ceremony was well-organized. The venue was beautiful and the program flow was smooth.' },
-      { name:'Reyes, J.', text:'I appreciated the support from the Registrar\'s Office in processing our requirements efficiently.' },
-      { name:'Cruz, A.', text:'The photoshoot arrangements were excellent. The photographer was professional and accommodating.' },
+    appreciation:[
+      {name:'Santos, M.',text:'The overall ceremony was well-organized. The venue was beautiful and the program flow was smooth.'},
+      {name:'Cruz, A.',text:'The photoshoot arrangements were excellent — the photographer was professional and very accommodating.'},
     ]
   };
 }
 
-function renderDashboard(data) {
-  const statGrid = document.getElementById('statGrid');
-  const ratingLabelsShort = { r1:'Finance Office', r2:'Registrar\'s Office', r3:'Grad Fees & Procedures', r4:'Clearance Signing', r5:'Photoshoot & Attire', r6:'Venue & Setup', r7:'Ceremony Flow', r8:'Overall Experience', r9:'Program Organization' };
+function renderDash(d){
+  const RLS={r1:'Finance Office',r2:'Registrar\'s Office',r3:'Fees & Procedures',r4:'Clearance Signing',r5:'Photoshoot & Attire',r6:'Venue & Setup',r7:'Ceremony Flow',r8:'Overall Experience',r9:'Program Organization'};
+  const overallAvg=Object.values(d.avgRatings).reduce((a,b)=>a+parseFloat(b),0)/Object.keys(d.avgRatings).length;
+  const alumniY=d.alumni?.Yes||0;
+  const top=Object.entries(d.programs).sort((a,b)=>b[1]-a[1])[0];
 
-  const overallAvg = Object.values(data.avgRatings).reduce((a,b) => a+parseFloat(b), 0) / Object.keys(data.avgRatings).length;
-  const alumniCount = data.alumni?.Yes || 0;
-  const topProgram = Object.entries(data.programs).sort((a,b) => b[1]-a[1])[0];
-
-  statGrid.innerHTML = `
-    <div class="stat-card highlight">
-      <div class="stat-label">Total Responses</div>
-      <div class="stat-value">${data.total}</div>
-      <div class="stat-sub">Survey submissions</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Overall Avg Rating</div>
-      <div class="stat-value">${overallAvg.toFixed(2)}</div>
-      <div class="stat-sub">Out of 4.00</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Alumni ID Requests</div>
-      <div class="stat-value">${alumniCount}</div>
-      <div class="stat-sub">${Math.round(alumniCount/data.total*100)}% of respondents</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Top Program</div>
-      <div class="stat-value" style="font-size:1.4rem;">${topProgram?.[0] || '—'}</div>
-      <div class="stat-sub">${topProgram?.[1] || 0} respondents</div>
-    </div>
+  document.getElementById('statRow').innerHTML=`
+    <div class="stat-box accent"><div class="s-label">Total Responses</div><div class="s-val">${d.total}</div><div class="s-sub">Survey submissions</div></div>
+    <div class="stat-box"><div class="s-label">Overall Avg Rating</div><div class="s-val">${overallAvg.toFixed(2)}</div><div class="s-sub">Out of 4.00</div></div>
+    <div class="stat-box"><div class="s-label">Alumni ID Requests</div><div class="s-val">${alumniY}</div><div class="s-sub">${Math.round(alumniY/d.total*100)}% of respondents</div></div>
+    <div class="stat-box"><div class="s-label">Top Program</div><div class="s-val" style="font-size:1.3rem">${top?.[0]||'—'}</div><div class="s-sub">${top?.[1]||0} respondents</div></div>
   `;
 
-  // ─── CHART GRID ───
-  const chartGrid = document.getElementById('chartGrid');
-  chartGrid.style.display = 'grid';
+  const cg=document.getElementById('chartGrid');
+  cg.style.display='grid';
 
-  // Avg Ratings Chart
-  const avgRatingsHTML = ratingQuestions.map(q => {
-    const score = parseFloat(data.avgRatings[q.id] || 0);
-    const pct = (score / 4) * 100;
-    const stars = [1,2,3,4].map(s => `<span class="${s <= Math.round(score) ? 'star-filled' : 'star-empty'}">★</span>`).join('');
-    return `
-      <div class="avg-item">
-        <div class="avg-label">${ratingLabelsShort[q.id]}</div>
-        <div class="avg-stars">${stars}</div>
-        <div class="avg-score">${score.toFixed(1)}</div>
-      </div>
-    `;
+  const progTotal=Object.values(d.programs).reduce((a,b)=>a+b,0);
+  const progBars=Object.entries(d.programs).sort((a,b)=>b[1]-a[1]).map(([p,c])=>{
+    const pct=Math.round(c/progTotal*100);
+    return `<div class="bar-r"><div class="bar-lbl">${p}</div><div class="bar-bg"><div class="bar-fg" style="width:${pct}%"><span class="bv">${pct}%</span></div></div><div class="bar-n">${c}</div></div>`;
   }).join('');
 
-  // Program Distribution
-  const programTotal = Object.values(data.programs).reduce((a,b) => a+b, 0);
-  const programBarsHTML = Object.entries(data.programs).sort((a,b) => b[1]-a[1]).map(([prog, cnt]) => {
-    const pct = Math.round((cnt / programTotal) * 100);
-    return `
-      <div class="bar-row">
-        <div class="bar-label">${prog}</div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:${pct}%">
-            <span class="bar-val">${pct}%</span>
-          </div>
-        </div>
-        <div class="bar-count">${cnt}</div>
-      </div>
-    `;
+  const rdTotal=Object.values(d.ratingDist).reduce((a,b)=>a+b,0);
+  const rdColors={'4':'#1e5e1e','3':'#2d7a2d','2':'#c9a84c','1':'#c0392b'};
+  const rdBars=[['4','Strongly Satisfied'],['3','Satisfied'],['2','Dissatisfied'],['1','Strongly Dissatisfied']].map(([v,l])=>{
+    const c=d.ratingDist[v]||0, pct=Math.round(c/rdTotal*100);
+    return `<div class="bar-r"><div class="bar-lbl">${v} — ${l}</div><div class="bar-bg"><div class="bar-fg" style="width:${pct}%;background:${rdColors[v]}"><span class="bv">${pct}%</span></div></div><div class="bar-n">${c}</div></div>`;
   }).join('');
 
-  // Rating Distribution
-  const ratingDistTotal = Object.values(data.ratingDist).reduce((a,b) => a+b, 0);
-  const ratingColors = { '4':'#2d6a2d', '3':'#4a8c4a', '2':'#c8a84b', '1':'#c0392b' };
-  const ratingDistBarsHTML = [['4','Strongly Satisfied'],['3','Satisfied'],['2','Dissatisfied'],['1','Strongly Dissatisfied']].map(([v, lbl]) => {
-    const cnt = data.ratingDist[v] || 0;
-    const pct = Math.round((cnt / ratingDistTotal) * 100);
-    return `
-      <div class="bar-row">
-        <div class="bar-label">${v} — ${lbl}</div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:${pct}%; background:${ratingColors[v]}">
-            <span class="bar-val">${pct}%</span>
-          </div>
-        </div>
-        <div class="bar-count">${cnt}</div>
-      </div>
-    `;
+  const avgRows=RQS.map(q=>{
+    const s=parseFloat(d.avgRatings[q.id]||0);
+    const stars=[1,2,3,4].map(x=>`<span class="${x<=Math.round(s)?'s-on':'s-off'}">★</span>`).join('');
+    return `<div class="avg-r"><div class="avg-lbl">${RLS[q.id]}</div><div class="avg-stars">${stars}</div><div class="avg-n">${s.toFixed(1)}</div></div>`;
   }).join('');
 
-  // Alumni Donut
-  const alumniYes = data.alumni?.Yes || 0;
-  const alumniNo = data.alumni?.No || 0;
-  const alumniTotal = alumniYes + alumniNo;
-  const alumniPct = Math.round((alumniYes / alumniTotal) * 100);
-  const r = 50, cx = 60, cy = 60;
-  const circ = 2 * Math.PI * r;
-  const filled = (alumniPct / 100) * circ;
+  const ay=d.alumni?.Yes||0,an=d.alumni?.No||0,at=ay+an,apct=Math.round(ay/at*100);
+  const R=48,CX=60,CY=60,circ=2*Math.PI*R,filled=(apct/100)*circ;
 
-  chartGrid.innerHTML = `
-    <div class="chart-card" style="grid-column: span 2;">
-      <h3>Average Satisfaction per Parameter</h3>
-      <div>${avgRatingsHTML}</div>
-    </div>
-
-    <div class="chart-card">
-      <h3>Respondents by Program</h3>
-      <div class="bar-chart">${programBarsHTML}</div>
-    </div>
-
-    <div class="chart-card">
-      <h3>Overall Rating Distribution</h3>
-      <div class="bar-chart">${ratingDistBarsHTML}</div>
-    </div>
-
-    <div class="chart-card">
-      <h3>Alumni ID Interest</h3>
-      <div class="donut-wrap">
+  cg.innerHTML=`
+    <div class="chart-box" style="grid-column:span 2"><h3>Average Satisfaction per Parameter</h3>${avgRows}</div>
+    <div class="chart-box"><h3>Respondents by Program</h3><div>${progBars}</div></div>
+    <div class="chart-box"><h3>Rating Distribution</h3><div>${rdBars}</div></div>
+    <div class="chart-box"><h3>Alumni ID Interest</h3>
+      <div class="donut-r">
         <svg width="120" height="120" viewBox="0 0 120 120">
-          <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e8f3e8" stroke-width="16"/>
-          <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#2d6a2d" stroke-width="16"
-            stroke-dasharray="${filled} ${circ}" stroke-dashoffset="${circ * 0.25}"
-            transform="rotate(-90 ${cx} ${cy})" stroke-linecap="round"/>
-          <text x="${cx}" y="${cy-6}" text-anchor="middle" font-size="18" font-weight="600" fill="#1a4a1a">${alumniPct}%</text>
-          <text x="${cx}" y="${cy+12}" text-anchor="middle" font-size="9" fill="#6a7e6a">want ID</text>
+          <circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="#eaf5ea" stroke-width="16"/>
+          <circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="#1e5e1e" stroke-width="16"
+            stroke-dasharray="${filled} ${circ}" stroke-linecap="round"
+            transform="rotate(-90 ${CX} ${CY})"/>
+          <text x="${CX}" y="${CY-5}" text-anchor="middle" font-size="17" font-weight="700" fill="#0f3d0f">${apct}%</text>
+          <text x="${CX}" y="${CY+12}" text-anchor="middle" font-size="8" fill="#7a8e7a">want ID</text>
         </svg>
         <div class="donut-legend">
-          <div class="legend-item"><div class="legend-dot" style="background:#2d6a2d"></div>Yes — ${alumniYes} (${alumniPct}%)</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#e8f3e8; border:1px solid #c0d8c0"></div>No — ${alumniNo} (${100-alumniPct}%)</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#1e5e1e"></div>Yes — ${ay} (${apct}%)</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#eaf5ea;border:1px solid #c5ddc5"></div>No — ${an} (${100-apct}%)</div>
         </div>
       </div>
     </div>
-
-    <div class="chart-card">
+    <div class="chart-box">
       <h3>Consent Distribution</h3>
-      <div class="bar-chart">
-        ${Object.entries(data.consent).map(([k,v]) => {
-          const pct = Math.round((v/(data.consent['I Agree']+data.consent['I Disagree']))*100);
-          return `<div class="bar-row">
-            <div class="bar-label">${k}</div>
-            <div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:${k==='I Agree'?'#2d6a2d':'#c0392b'}"><span class="bar-val">${pct}%</span></div></div>
-            <div class="bar-count">${v}</div>
-          </div>`;
-        }).join('')}
-      </div>
+      ${Object.entries(d.consent).map(([k,v])=>{
+        const tot=(d.consent['I Agree']||0)+(d.consent['I Disagree']||0);
+        const pct=Math.round(v/tot*100);
+        return `<div class="bar-r"><div class="bar-lbl">${k}</div><div class="bar-bg"><div class="bar-fg" style="width:${pct}%;background:${k==='I Agree'?'#1e5e1e':'#c0392b'}"><span class="bv">${pct}%</span></div></div><div class="bar-n">${v}</div></div>`;
+      }).join('')}
     </div>
   `;
 
-  // ─── RESPONSES TABLE ───
-  const responsesCard = document.getElementById('responsesCard');
-  const responsesBody = document.getElementById('responsesBody');
-  responsesCard.style.display = 'block';
-  responsesBody.innerHTML = (data.recentResponses || []).map((r, i) => `
-    <tr>
-      <td>${i+1}</td>
-      <td>${r.ts}</td>
-      <td style="font-weight:500;">${r.name}</td>
-      <td>${r.program}</td>
-      <td>${r.year}</td>
-      <td><span class="badge ${r.consent==='I Agree'?'badge-green':'badge-red'}">${r.consent}</span></td>
-      <td><span class="badge ${r.alumni==='Yes'?'badge-green':'badge-red'}">${r.alumni}</span></td>
-      <td><strong>${r.avg}</strong>/4.0</td>
-    </tr>
+  const rb=document.getElementById('respBody');
+  rb.innerHTML=(d.recentResponses||[]).map((r,i)=>`
+    <tr><td>${i+1}</td><td>${r.ts}</td><td style="font-weight:600">${r.name}</td><td>${r.program}</td><td>${r.year}</td>
+    <td><span class="bdg ${r.consent==='I Agree'?'bdg-g':'bdg-r'}">${r.consent}</span></td>
+    <td><span class="bdg ${r.alumni==='Yes'?'bdg-g':'bdg-r'}">${r.alumni}</span></td>
+    <td><strong>${r.avg}</strong>/4.0</td></tr>
   `).join('');
+  document.getElementById('respCard').style.display='block';
 
-  // ─── FEEDBACK ───
-  const feedbackCard = document.getElementById('feedbackCard');
-  feedbackCard.style.display = 'block';
-  document.getElementById('appreciationList').innerHTML = (data.appreciation || []).map(f => `
-    <div class="feedback-item">
-      <div class="fb-meta">— ${f.name}</div>
-      ${f.text}
-    </div>
+  document.getElementById('fbList').innerHTML=(d.appreciation||[]).map(f=>`
+    <div class="fb-item"><div class="fb-who">— ${f.name}</div>${f.text}</div>
   `).join('');
+  document.getElementById('fbCard').style.display='block';
+
+  if(SCRIPT_URL!=='YOUR_APPS_SCRIPT_URL') document.getElementById('cfgAlert').style.display='none';
 }
 
-// ─── INIT ───
-buildRatingItems();
-document.querySelectorAll('input, select, textarea').forEach(el => {
-  el.addEventListener('input', updateProgress);
-  el.addEventListener('change', updateProgress);
-});
-updateProgress();
+// ─── INIT ──────────────────────────────
+buildRatings();
+updateXP();
 </script>
 </body>
 </html>
