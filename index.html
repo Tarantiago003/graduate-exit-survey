@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MVGFC Graduation Satisfaction Survey</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mvg-green: #2d6a2d;
+    --mvg-green-dark: #1a4a1a;
+    --mvg-green-light: #4a8c4a;
+    --mvg-green-pale: #e8f3e8;
+    --mvg-green-mid: #3d7a3d;
+    --mvg-gold: #c8a84b;
+    --mvg-gold-light: #f0d98a;
+    --mvg-cream: #fafdf7;
+    --white: #ffffff;
+    --text-dark: #1a2e1a;
+    --text-mid: #3a4e3a;
+    --text-light: #6a7e6a;
+    --border: #c0d8c0;
+    --border-light: #daeeda;
+    --error: #c0392b;
+    --success: #27ae60;
+    --shadow: 0 4px 24px rgba(45,106,45,0.10);
+    --shadow-sm: 0 2px 8px rgba(45,106,45,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito Sans', sans-serif;
+    background: var(--mvg-cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+
+  /* ─── NAV ─── */
+  .top-nav {
+    background: var(--mvg-green-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-brand {
+    color: var(--mvg-gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .nav-brand span { color: rgba(255,255,255,0.65); font-family: 'Nunito Sans', sans-serif; font-size: 0.75rem; font-weight: 300; margin-left: 8px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .admin-btn {
+    background: transparent;
+    border: 1px solid rgba(200,168,75,0.4);
+    color: var(--mvg-gold-light);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .admin-btn:hover { background: rgba(200,168,75,0.15); border-color: var(--mvg-gold); }
+
+  /* ─── PAGE TOGGLE ─── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--mvg-green-dark) 0%, var(--mvg-green) 60%, var(--mvg-green-light) 100%);
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 44px solid rgba(200,168,75,0.13);
+    animation: heroFloat 6s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -30px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 32px solid rgba(255,255,255,0.07);
+    animation: heroFloat 8s ease-in-out infinite reverse;
+  }
+  @keyframes heroFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(200,168,75,0.18);
+    border: 1px solid rgba(200,168,75,0.4);
+    color: var(--mvg-gold-light);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 1.1rem;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+    color: #ffffff;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 0.85rem;
+    letter-spacing: 0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--mvg-gold-light);
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.78);
+    font-size: 0.95rem;
+    font-weight: 400;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.75;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  /* ─── PROGRESS ─── */
+  .progress-wrap {
+    background: var(--white);
+    border-bottom: 1px solid var(--border-light);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 56px;
+    z-index: 90;
+  }
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .progress-label { font-size: 0.78rem; font-weight: 500; color: var(--text-mid); }
+  .progress-pct { font-size: 0.78rem; font-weight: 600; color: var(--mvg-green); }
+  .progress-bar-bg {
+    background: var(--mvg-green-pale);
+    border-radius: 8px;
+    height: 6px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    background: linear-gradient(90deg, var(--mvg-green), var(--mvg-green-light));
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* ─── FORM CONTAINER ─── */
+  .form-outer {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* ─── SECTION CARDS ─── */
+  .section-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    transition: box-shadow 0.2s;
+  }
+  .section-card:hover { box-shadow: var(--shadow); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--mvg-green-pale);
+  }
+  .section-icon {
+    width: 40px; height: 40px;
+    background: var(--mvg-green-pale);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    border: 1.5px solid var(--border-light);
+    transition: transform 0.2s;
+  }
+  .section-card:hover .section-icon { transform: scale(1.1) rotate(-4deg); }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--mvg-green-dark);
+    letter-spacing: 0.01em;
+  }
+  .section-num {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--mvg-green-light);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  /* ─── FORM FIELDS ─── */
+  .field-group { margin-bottom: 1.25rem; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
+
+  label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    margin-bottom: 6px;
+    font-family: 'Nunito Sans', sans-serif;
+    letter-spacing: 0.02em;
+  }
+  label .req { color: var(--mvg-green); margin-left: 2px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    outline: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--mvg-green);
+    box-shadow: 0 0 0 3px rgba(45,106,45,0.1);
+    transform: translateY(-1px);
+  }
+  input.error, select.error, textarea.error {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(192,57,43,0.08);
+  }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+  select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236a7e6a' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+
+  .error-msg {
+    font-size: 0.75rem;
+    color: var(--error);
+    margin-top: 4px;
+    display: none;
+  }
+  .error-msg.show { display: block; }
+
+  /* ─── CONSENT BOX ─── */
+  .consent-box {
+    background: var(--mvg-green-pale);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--text-mid);
+    margin-bottom: 1.25rem;
+  }
+  .radio-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.75rem;
+  }
+  .radio-opt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .radio-opt input[type="radio"] {
+    width: 18px; height: 18px;
+    accent-color: var(--mvg-green);
+    cursor: pointer;
+  }
+
+  /* ─── RATING SCALE ─── */
+  .rating-item {
+    border: 1.5px solid var(--border-light);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .rating-item:hover { border-color: var(--border); background: #fafff8; }
+  .rating-q {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+  }
+  .rating-q .req { color: var(--mvg-green); }
+  .rating-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  @media (max-width: 480px) { .rating-options { grid-template-columns: repeat(2,1fr); } }
+  .rating-btn {
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    border-radius: 10px;
+    padding: 8px 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .rating-btn:hover { border-color: var(--mvg-green-light); background: var(--mvg-green-pale); }
+  .rating-btn.selected {
+    background: var(--mvg-green);
+    border-color: var(--mvg-green-dark);
+    color: white;
+  }
+  .rating-btn .score {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--mvg-green);
+    transition: color 0.15s;
+  }
+  .rating-btn.selected .score { color: var(--mvg-gold-light); }
+  .rating-btn .label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--text-light);
+    margin-top: 2px;
+    transition: color 0.15s;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+  }
+  .rating-btn.selected .label { color: rgba(255,255,255,0.85); }
+
+  /* ─── SCALE LEGEND ─── */
+  .scale-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: #f6faf6;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 1.25rem;
+    font-size: 0.78rem;
+    color: var(--text-mid);
+  }
+  .scale-legend span { font-weight: 600; color: var(--mvg-green-dark); margin-right: 4px; }
+
+  /* ─── ALUMNI SECTION ─── */
+  .toggle-section {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease, opacity 0.3s;
+    opacity: 0;
+  }
+  .toggle-section.open { max-height: 2000px; opacity: 1; }
+
+  .alumni-banner {
+    background: linear-gradient(135deg, var(--mvg-green-dark), var(--mvg-green-mid));
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .alumni-banner .icon { font-size: 2rem; }
+  .alumni-banner h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.01em;
+  }
+  .alumni-banner p { font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.5; }
+
+  .file-upload-area {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    background: #fafff8;
+  }
+  .file-upload-area:hover { border-color: var(--mvg-green); background: var(--mvg-green-pale); }
+  .file-upload-area input[type="file"] { display: none; }
+  .file-upload-area .upload-icon { font-size: 1.8rem; margin-bottom: 6px; }
+  .file-upload-area .upload-label { font-size: 0.85rem; font-weight: 500; color: var(--mvg-green-dark); }
+  .file-upload-area .upload-hint { font-size: 0.75rem; color: var(--text-light); margin-top: 4px; }
+  .file-name-display { font-size: 0.78rem; color: var(--mvg-green); margin-top: 6px; font-weight: 500; }
+
+  /* ─── SUBMIT ─── */
+  .submit-wrap {
+    text-align: center;
+    padding: 1rem 0;
+  }
+  .submit-btn {
+    background: var(--mvg-green-dark);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 52px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+    box-shadow: 0 4px 20px rgba(26,74,26,0.35);
+    position: relative;
+    overflow: hidden;
+  }
+  .submit-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+    transition: left 0.5s;
+  }
+  .submit-btn:hover::after { left: 150%; }
+  .submit-btn:hover { background: var(--mvg-green); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(26,74,26,0.4); }
+  .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled { background: #999; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  /* ─── SUCCESS ─── */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .success-screen.show { display: block; }
+  .success-icon {
+    width: 80px; height: 80px;
+    background: var(--mvg-green-pale);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto 1.5rem;
+    border: 3px solid var(--mvg-green-light);
+  }
+  .success-screen h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--mvg-green-dark);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+  .success-screen p { color: var(--text-mid); font-size: 0.95rem; line-height: 1.7; }
+
+  /* ═══════════════════════════════════════
+     ADMIN DASHBOARD
+  ═══════════════════════════════════════ */
+  .admin-page { min-height: 100vh; background: #f0f4f0; }
+
+  .admin-login {
+    display: flex; align-items: center; justify-content: center;
+    min-height: calc(100vh - 56px);
+    padding: 2rem;
+  }
+  .login-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+  .login-card .lock-icon {
+    width: 56px; height: 56px;
+    background: var(--mvg-green-pale);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1.25rem;
+  }
+  .login-card h2 {
+    font-family: 'Syne', sans-serif;
+    color: var(--mvg-green-dark);
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+  }
+  .login-card p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.5rem; font-family: 'Plus Jakarta Sans', sans-serif; }
+  .login-card input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    outline: none;
+  }
+  .login-card input:focus { border-color: var(--mvg-green); box-shadow: 0 0 0 3px rgba(45,106,45,0.1); }
+  .login-error { font-size: 0.78rem; color: var(--error); margin-bottom: 0.75rem; display: none; }
+  .login-error.show { display: block; }
+  .login-submit {
+    width: 100%;
+    background: var(--mvg-green-dark);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .login-submit:hover { background: var(--mvg-green); }
+
+  /* ─── DASHBOARD ─── */
+  .dashboard { display: none; padding: 2rem; }
+  .dashboard.visible { display: block; }
+
+  .dash-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .dash-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--mvg-green-dark);
+    letter-spacing: -0.02em;
+  }
+  .dash-header p { font-size: 0.82rem; color: var(--text-light); margin-top: 2px; }
+
+  .refresh-btn {
+    background: var(--mvg-green-dark);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .refresh-btn:hover { background: var(--mvg-green); }
+
+  /* ─── STAT CARDS ─── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .stat-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 1.25rem;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-card .stat-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--mvg-green-dark);
+    line-height: 1;
+  }
+  .stat-card .stat-sub {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .stat-card.highlight { background: var(--mvg-green-dark); border-color: transparent; }
+  .stat-card.highlight .stat-label { color: rgba(255,255,255,0.65); }
+  .stat-card.highlight .stat-value { color: var(--mvg-gold-light); }
+  .stat-card.highlight .stat-sub { color: rgba(255,255,255,0.5); }
+
+  /* ─── CHART SECTION ─── */
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .chart-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+  }
+  .chart-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--mvg-green-dark);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-light);
+    letter-spacing: 0.01em;
+  }
+
+  /* ─── BAR CHARTS ─── */
+  .bar-chart { display: flex; flex-direction: column; gap: 8px; }
+  .bar-row { display: flex; align-items: center; gap: 10px; }
+  .bar-label { font-size: 0.75rem; color: var(--text-mid); width: 130px; flex-shrink: 0; font-weight: 500; }
+  .bar-track { flex: 1; background: var(--mvg-green-pale); border-radius: 6px; height: 22px; overflow: hidden; }
+  .bar-fill { height: 100%; background: linear-gradient(90deg, var(--mvg-green-dark), var(--mvg-green-light)); border-radius: 6px; transition: width 0.6s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; }
+  .bar-fill .bar-val { font-size: 0.7rem; font-weight: 600; color: white; }
+  .bar-count { font-size: 0.72rem; color: var(--text-light); width: 28px; text-align: right; }
+
+  /* ─── DONUT ─── */
+  .donut-wrap { display: flex; align-items: center; gap: 1.5rem; }
+  .donut-legend { flex: 1; }
+  .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 0.78rem; color: var(--text-mid); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ─── RATING AVERAGES ─── */
+  .avg-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .avg-label { font-size: 0.75rem; color: var(--text-mid); flex: 1; }
+  .avg-score {
+    font-size: 1rem; font-weight: 600; color: var(--mvg-green-dark);
+    width: 32px; text-align: right;
+  }
+  .avg-stars { display: flex; gap: 2px; }
+  .star-filled { color: var(--mvg-gold); font-size: 0.8rem; }
+  .star-empty { color: #ddd; font-size: 0.8rem; }
+
+  /* ─── RESPONSES TABLE ─── */
+  .table-wrap { overflow-x: auto; }
+  .responses-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .responses-table th {
+    background: var(--mvg-green-pale);
+    color: var(--mvg-green-dark);
+    font-weight: 600;
+    padding: 10px 12px;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 2px solid var(--border);
+  }
+  .responses-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-mid);
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .responses-table tr:hover td { background: #fafff8; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    font-weight: 600;
+  }
+  .badge-green { background: #d4edda; color: #155724; }
+  .badge-red { background: #f8d7da; color: #721c24; }
+
+  /* ─── OPEN FEEDBACK ─── */
+  .feedback-list { display: flex; flex-direction: column; gap: 10px; }
+  .feedback-item {
+    background: #fafff8;
+    border-left: 3px solid var(--mvg-green-light);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+  .feedback-item .fb-meta { font-size: 0.72rem; color: var(--text-light); margin-bottom: 4px; font-weight: 500; }
+
+  .loading-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+  .spinner {
+    width: 32px; height: 32px;
+    border: 3px solid var(--border);
+    border-top-color: var(--mvg-green);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .config-banner {
+    background: #fff8e1;
+    border: 1px solid #ffd54f;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.82rem;
+    color: #5d4037;
+    line-height: 1.6;
+  }
+  .config-banner strong { color: #bf360c; }
+  .config-banner code {
+    background: #fff3e0;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+  }
+
+  /* ─── FOOTER ─── */
+  .form-footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.72rem;
+    color: var(--text-light);
+    border-top: 1px solid var(--border-light);
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 2rem 1.25rem 2rem; }
+    .form-outer { padding: 1.5rem 1rem 3rem; }
+    .section-card { padding: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="nav-brand">MVGFC <span>Student Affairs Office</span></div>
+  <button class="admin-btn" onclick="showPage('admin')">⚙ Admin</button>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     SURVEY PAGE
+═══════════════════════════════════════ -->
+<div id="page-survey" class="page active">
+
+  <div class="hero">
+    <div class="hero-badge">Academic Year 2022-2023 & 2024–2025</div>
+    <h1>Graduate <em>Exit</em> Survey</h1>
+    <p class="hero-sub">Your feedback helps shape a better graduation experience for future MVGFC graduates. Thank you for taking a few minutes to share your thoughts.</p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-info">
+      <span class="progress-label" id="progressLabel">Personal Information</span>
+      <span class="progress-pct" id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+  </div>
+
+  <div class="form-outer">
+    <div id="surveyForm">
+
+      <!-- PURPOSE CARD -->
+      <div class="section-card">
+        <div style="font-size: 0.82rem; color: var(--text-mid); line-height: 1.7;">
+          <p style="margin-bottom: 0.75rem;"><strong style="color: var(--mvg-green-dark);">Purpose of this Survey:</strong> The purpose of this survey is to gather feedback from graduates about the experiences during the graduation process at MVGFC. Your insights will help us assess communication, organization, and overall satisfaction, allowing us to identify areas for improvement and ensure future ceremonies meet graduates' expectations.</p>
+          <p><strong style="color: var(--mvg-green-dark);">Use of Collected Information:</strong> The responses will be analyzed to improve the graduation process at MVGFC. Your feedback will help us identify strengths and weaknesses, enhance communication, optimize the organization by addressing logistical challenges, and improve support services for graduates and their families.</p>
+        </div>
+      </div>
+
+      <!-- SECTION 1: PERSONAL INFO -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-icon">👤</div>
+          <div>
+            <div class="section-num">Section 1</div>
+            <div class="section-title">Personal Information</div>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="email">Email Address <span class="req">*</span></label>
+            <input type="email" id="email" placeholder="your@email.com">
+            <div class="error-msg" id="err-email">Please enter a valid email address.</div>
+          </div>
+          <div class="field-group">
+            <label for="name">Full Name <span class="req">*</span></label>
+            <input type="text" id="name" placeholder="Last Name, First Name MI.">
+            <div class="error-msg" id="err-name">Name is required.</div>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="program">Program <span class="req">*</span></label>
+            <select id="program">
+              <option value="">— Select your program —</option>
+              <option>BSN</option>
+              <option>BSCRIM</option>
+              <option>BSED-ENGLISH</option>
+              <option>BSED-FILIPINO</option>
+              <option>BSED-MATH</option>
+              <option>BSED-SCIENCE</option>
+              <option>BEED</option>
+              <option>BSIS</option>
+              <option>BSCS</option>
+              <option>BSBA-MM</option>
+              <option>BSBA-FM</option>
+              <option>Other</option>
+            </select>
+            <div class="error-msg" id="err-program">Please select your program.</div>
+          </div>
+          <div class="field-group">
+            <label for="yearGrad">Year Graduated <span class="req">*</span></label>
+            <input type="text" id="yearGrad" placeholder="e.g. 2024">
+            <div class="error-msg" id="err-yearGrad">Year graduated is required.</div>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="contact">Contact Number <span class="req">*</span></label>
+            <input type="tel" id="contact" placeholder="09XXXXXXXXX">
+            <div class="error-msg" id="err-contact">Contact number is required.</div>
+          </div>
+          <div class="field-group">
+            <label for="fbName">Facebook Name <span class="req">*</span></label>
+            <input type="text" id="fbName" placeholder="Your Facebook display name">
+            <div class="error-msg" id="err-fbName">Facebook name is required.</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="address">Permanent Address <span class="req">*</span></label>
+          <input type="text" id="address" placeholder="House No., Street, Barangay, City/Municipality, Province">
+          <div class="error-msg" id="err-address">Address is required.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="employment">Employment Status / Company & Position</label>
+          <input type="text" id="employment" placeholder="e.g. Employed — ABC Company, Staff Nurse (optional)">
+        </div>
+      </div>
+
+      <!-- SECTION 2: DATA PRIVACY -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-icon">🔐</div>
+          <div>
+            <div class="section-num">Section 2</div>
+            <div class="section-title">Data Privacy Consent</div>
+          </div>
+        </div>
+        <div class="consent-box">
+          I hereby authorize MVGFCI Student Affairs to collect and process my personal data in accordance with <strong>RA 10173 or the Data Privacy Act of 2012</strong>. The information gathered will be used solely for survey evaluation, alumni services, and institutional improvement purposes. All data will be treated confidentially and accessed only by authorized personnel. By proceeding with this form, I voluntarily give my consent to the collection, storage, and processing of my personal information.
+          <div class="radio-row">
+            <label class="radio-opt">
+              <input type="radio" name="consent" value="I Agree"> I Agree
+            </label>
+            <label class="radio-opt">
+              <input type="radio" name="consent" value="I Disagree"> I Disagree
+            </label>
+          </div>
+          <div class="error-msg" id="err-consent" style="margin-top:8px;">You must agree to the data privacy consent to proceed.</div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: PARAMETERS / RATINGS -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-icon">📊</div>
+          <div>
+            <div class="section-num">Section 3</div>
+            <div class="section-title">Satisfaction Parameters</div>
+          </div>
+        </div>
+
+        <div class="scale-legend">
+          <div><span>4</span> Strongly Satisfied</div>
+          <div><span>3</span> Satisfied</div>
+          <div><span>2</span> Dissatisfied</div>
+          <div><span>1</span> Strongly Dissatisfied</div>
+        </div>
+
+        <div id="ratingItems"></div>
+      </div>
+
+      <!-- SECTION 4: OPEN FEEDBACK -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-icon">💬</div>
+          <div>
+            <div class="section-num">Section 4</div>
+            <div class="section-title">Open Feedback</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="appreciate">1. What aspect of the graduation process did you appreciate the most? <span class="req">*</span></label>
+          <textarea id="appreciate" placeholder="Share what you valued most about your graduation experience..."></textarea>
+          <div class="error-msg" id="err-appreciate">This field is required.</div>
+        </div>
+        <div class="field-group">
+          <label for="improve">2. What aspect needs improvement? <span class="req">*</span></label>
+          <textarea id="improve" placeholder="Let us know what could have been done better..."></textarea>
+          <div class="error-msg" id="err-improve">This field is required.</div>
+        </div>
+        <div class="field-group">
+          <label for="suggestions">3. Suggestions for future graduation ceremonies <span class="req">*</span></label>
+          <textarea id="suggestions" placeholder="Your suggestions are very important to us..."></textarea>
+          <div class="error-msg" id="err-suggestions">This field is required.</div>
+        </div>
+      </div>
+
+      <!-- SECTION 5: ALUMNI ID -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-icon">🪪</div>
+          <div>
+            <div class="section-num">Section 5</div>
+            <div class="section-title">MVGFC Alumni ID</div>
+          </div>
+        </div>
+
+        <div class="alumni-banner">
+          <div class="icon">🎓</div>
+          <div>
+            <h3>Enjoy Exclusive Alumni Benefits</h3>
+            <p>Get discounts from our alumni-owned businesses by showing your MVGFC Alumni ID. It's free!</p>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label style="font-size:0.9rem; font-weight:500; color: var(--text-dark);">Are you willing to have your MVGFC Alumni ID? <span class="req">*</span></label>
+          <div class="radio-row">
+            <label class="radio-opt">
+              <input type="radio" name="alumniId" value="Yes" onchange="toggleAlumni(true)"> Yes
+            </label>
+            <label class="radio-opt">
+              <input type="radio" name="alumniId" value="No" onchange="toggleAlumni(false)"> No
+            </label>
+          </div>
+          <div class="error-msg" id="err-alumni">Please select an option.</div>
+        </div>
+
+        <div class="toggle-section" id="alumniSection">
+          <p style="font-size:0.82rem; color: var(--text-light); margin-bottom:1.25rem; font-style:italic;">Please fill up this section for your Alumni ID.</p>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="dob">Date of Birth <span class="req">*</span></label>
+              <input type="date" id="dob">
+            </div>
+            <div class="field-group">
+              <label for="citizenship">Citizenship <span class="req">*</span></label>
+              <input type="text" id="citizenship" placeholder="e.g. Filipino">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="homeAddress">Home Address <span class="req">*</span></label>
+            <input type="text" id="homeAddress" placeholder="Complete home address">
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="primaryContact">Primary Contact Number <span class="req">*</span></label>
+              <input type="tel" id="primaryContact" placeholder="09XXXXXXXXX">
+            </div>
+            <div class="field-group">
+              <label for="emergencyPerson">Contact Person in Case of Emergency <span class="req">*</span></label>
+              <input type="text" id="emergencyPerson" placeholder="Full name">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="emergencyContact">Emergency Contact Number <span class="req">*</span></label>
+              <input type="tel" id="emergencyContact" placeholder="09XXXXXXXXX">
+            </div>
+            <div class="field-group">
+              <label for="relationship">Relationship <span class="req">*</span></label>
+              <input type="text" id="relationship" placeholder="e.g. Parent, Sibling, Spouse">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="emergencyAddress">Emergency Contact Address <span class="req">*</span></label>
+            <input type="text" id="emergencyAddress" placeholder="Complete address">
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label>E-Signature <span class="req">*</span></label>
+              <div class="file-upload-area" onclick="document.getElementById('esig').click()">
+                <input type="file" id="esig" accept="image/*" onchange="showFileName(this,'esig-name')">
+                <div class="upload-icon">✍️</div>
+                <div class="upload-label">Upload E-Signature</div>
+                <div class="upload-hint">PNG, JPG — max 2MB</div>
+                <div class="file-name-display" id="esig-name"></div>
+              </div>
+            </div>
+            <div class="field-group">
+              <label>2×2 Picture <span class="req">*</span></label>
+              <div class="file-upload-area" onclick="document.getElementById('photo').click()">
+                <input type="file" id="photo" accept="image/*" onchange="showFileName(this,'photo-name')">
+                <div class="upload-icon">📸</div>
+                <div class="upload-label">Upload 2×2 Photo</div>
+                <div class="upload-hint">PNG, JPG — max 2MB</div>
+                <div class="file-name-display" id="photo-name"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="submit-wrap">
+        <div id="submitError" style="font-size:0.82rem; color: var(--error); margin-bottom:1rem; display:none;"></div>
+        <button class="submit-btn" onclick="submitSurvey()">Submit Survey →</button>
+        <p style="font-size:0.75rem; color: var(--text-light); margin-top:0.75rem;">By submitting, you confirm all information provided is accurate.</p>
+      </div>
+
+    </div><!-- end surveyForm -->
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✅</div>
+      <h2>Thank You!</h2>
+      <p>Your feedback has been successfully submitted. Thank you for sharing your graduation experience with us at MVGFC. Your insights will help us improve future ceremonies for the next batch of graduates.</p>
+      <p style="margin-top:1rem; color: var(--mvg-green-dark); font-weight:500;">🎓 Congratulations, Graduate!</p>
+    </div>
+
+  </div><!-- end form-outer -->
+
+  <div class="form-footer">
+    © MVGFC Student Affairs Office · Satisfaction Survey System · Powered by Google Sheets
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     ADMIN PAGE
+═══════════════════════════════════════ -->
+<div id="page-admin" class="page admin-page">
+
+  <!-- LOGIN -->
+  <div class="admin-login" id="adminLogin">
+    <div class="login-card">
+      <div class="lock-icon">🔒</div>
+      <h2>Admin Dashboard</h2>
+      <p>Enter the admin password to access survey analytics.</p>
+      <input type="password" id="adminPwd" placeholder="Password" onkeydown="if(event.key==='Enter') adminLogin()">
+      <div class="login-error" id="loginError">Incorrect password. Please try again.</div>
+      <button class="login-submit" onclick="adminLogin()">Sign In</button>
+      <div style="margin-top:1rem;">
+        <button onclick="showPage('survey')" style="background:none; border:none; color: var(--text-light); font-size:0.78rem; cursor:pointer; text-decoration:underline;">← Back to Survey</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard" id="adminDashboard">
+
+    <div class="dash-header">
+      <div>
+        <h2>Survey Analytics Dashboard</h2>
+        <p>MVGFC Graduation Satisfaction Survey — Live Data from Google Sheets</p>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button class="refresh-btn" onclick="loadDashboardData()">↻ Refresh</button>
+        <button onclick="adminLogout()" style="background:transparent; border:1px solid var(--border); border-radius:8px; padding:8px 16px; font-size:0.82rem; cursor:pointer; color: var(--text-mid);">Sign Out</button>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stat-grid" id="statGrid">
+      <div class="loading-state" style="grid-column:1/-1">
+        <div class="spinner"></div>
+        Loading analytics...
+      </div>
+    </div>
+
+    <!-- CHARTS -->
+    <div class="chart-grid" id="chartGrid" style="display:none;"></div>
+
+    <!-- RECENT RESPONSES -->
+    <div class="chart-card" id="responsesCard" style="display:none; margin-bottom:1.5rem;">
+      <h3>Recent Responses</h3>
+      <div class="table-wrap">
+        <table class="responses-table" id="responsesTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Timestamp</th>
+              <th>Name</th>
+              <th>Program</th>
+              <th>Year</th>
+              <th>Consent</th>
+              <th>Alumni ID</th>
+              <th>Avg Rating</th>
+            </tr>
+          </thead>
+          <tbody id="responsesBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- OPEN FEEDBACK -->
+    <div class="chart-card" id="feedbackCard" style="display:none; margin-bottom:2rem;">
+      <h3>Open Feedback — Appreciation</h3>
+      <div class="feedback-list" id="appreciationList"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+// CONFIGURATION — REPLACE THIS URL
+// ═══════════════════════════════════════
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyps9DMk56mrKiFyRvFoJ2fzip0eaC3njV_8F4pN58rPxl6y6vjLcJ3Q8FnYOkBiLNi/exec';
+const ADMIN_PASSWORD = 'mvgfcES123'; // Change this password!
+
+// ─── RATING QUESTIONS ───
+const ratingQuestions = [
+  { id: 'r1', text: '1. Finance Office services and payment processing' },
+  { id: 'r2', text: '2. Registrar\'s Office assistance and graduation requirements' },
+  { id: 'r3', text: '3. Clarity of graduation fees and procedures' },
+  { id: 'r4', text: '4. Efficiency of clearance signing and requirement completion' },
+  { id: 'r5', text: '5. Graduation photoshoot and attire arrangements' },
+  { id: 'r6', text: '6. Venue comfort and event setup' },
+  { id: 'r7', text: '7. Organization and flow of the graduation ceremony' },
+  { id: 'r8', text: '8. Overall graduation experience at MVGFC' },
+  { id: 'r9', text: '15. Overall flow and organization of the graduation program' },
+];
+
+const ratingLabels = { 4: 'Strongly Satisfied', 3: 'Satisfied', 2: 'Dissatisfied', 1: 'Strongly Dissatisfied' };
+const ratings = {};
+
+// ─── BUILD RATING ITEMS ───
+function buildRatingItems() {
+  const container = document.getElementById('ratingItems');
+  ratingQuestions.forEach(q => {
+    ratings[q.id] = null;
+    const div = document.createElement('div');
+    div.className = 'rating-item';
+    div.id = 'item-' + q.id;
+    div.innerHTML = `
+      <div class="rating-q">${q.text} <span class="req">*</span></div>
+      <div class="rating-options">
+        ${[4,3,2,1].map(v => `
+          <button type="button" class="rating-btn" onclick="selectRating('${q.id}',${v})" data-q="${q.id}" data-v="${v}">
+            <span class="score">${v}</span>
+            <span class="label">${ratingLabels[v]}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="error-msg" id="err-${q.id}">Please select a rating.</div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function selectRating(qId, val) {
+  ratings[qId] = val;
+  document.querySelectorAll(`[data-q="${qId}"]`).forEach(btn => {
+    btn.classList.toggle('selected', parseInt(btn.dataset.v) === val);
+  });
+  document.getElementById('err-' + qId).classList.remove('show');
+  document.getElementById('item-' + qId).style.borderColor = '#c0d8c0';
+  updateProgress();
+}
+
+// ─── PAGE NAV ───
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ─── ALUMNI TOGGLE ───
+function toggleAlumni(show) {
+  const sec = document.getElementById('alumniSection');
+  sec.classList.toggle('open', show);
+}
+
+// ─── FILE UPLOAD ───
+function showFileName(input, displayId) {
+  const el = document.getElementById(displayId);
+  el.textContent = input.files[0] ? '✓ ' + input.files[0].name : '';
+}
+
+// ─── PROGRESS ───
+function updateProgress() {
+  const fields = ['email','name','program','yearGrad','contact','address','fbName'];
+  let filled = 0, total = fields.length + ratingQuestions.length + 3 + 1;
+  fields.forEach(f => { if (document.getElementById(f)?.value?.trim()) filled++; });
+  ratingQuestions.forEach(q => { if (ratings[q.id]) filled++; });
+  ['appreciate','improve','suggestions'].forEach(f => { if (document.getElementById(f)?.value?.trim()) filled++; });
+  if (document.querySelector('input[name="consent"]:checked')) filled++;
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+  const sections = ['Personal Information','Personal Information','Satisfaction Parameters','Open Feedback','Alumni ID'];
+  document.getElementById('progressLabel').textContent = pct < 30 ? sections[0] : pct < 60 ? sections[2] : pct < 85 ? sections[3] : 'Almost done!';
+}
+
+// ─── VALIDATION ───
+function validate() {
+  let ok = true;
+  function check(id, errId, cond) {
+    const el = document.getElementById(id);
+    const err = document.getElementById(errId);
+    if (cond && cond(el)) {
+      el?.classList.add('error');
+      err?.classList.add('show');
+      if (ok) { el?.scrollIntoView({ behavior:'smooth', block:'center' }); ok = false; }
+    } else {
+      el?.classList.remove('error');
+      err?.classList.remove('show');
+    }
+  }
+  check('email','err-email', el => !el.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
+  check('name','err-name', el => !el.value.trim());
+  check('program','err-program', el => !el.value);
+  check('yearGrad','err-yearGrad', el => !el.value.trim());
+  check('contact','err-contact', el => !el.value.trim());
+  check('address','err-address', el => !el.value.trim());
+  check('fbName','err-fbName', el => !el.value.trim());
+
+  const consent = document.querySelector('input[name="consent"]:checked');
+  if (!consent) {
+    document.getElementById('err-consent').classList.add('show');
+    if (ok) { document.getElementById('err-consent').scrollIntoView({ behavior:'smooth', block:'center' }); ok = false; }
+  } else {
+    document.getElementById('err-consent').classList.remove('show');
+    if (consent.value === 'I Disagree') {
+      document.getElementById('submitError').textContent = 'You must agree to the Data Privacy Consent to submit.';
+      document.getElementById('submitError').style.display = 'block';
+      ok = false;
+    }
+  }
+
+  ratingQuestions.forEach(q => {
+    const err = document.getElementById('err-' + q.id);
+    if (!ratings[q.id]) {
+      err.classList.add('show');
+      document.getElementById('item-' + q.id).style.borderColor = '#e74c3c';
+      if (ok) { document.getElementById('item-' + q.id).scrollIntoView({ behavior:'smooth', block:'center' }); ok = false; }
+    } else {
+      err.classList.remove('show');
+    }
+  });
+
+  check('appreciate','err-appreciate', el => !el.value.trim());
+  check('improve','err-improve', el => !el.value.trim());
+  check('suggestions','err-suggestions', el => !el.value.trim());
+
+  const alumniChoice = document.querySelector('input[name="alumniId"]:checked');
+  if (!alumniChoice) {
+    document.getElementById('err-alumni').classList.add('show');
+    if (ok) { document.getElementById('err-alumni').scrollIntoView({ behavior:'smooth', block:'center' }); ok = false; }
+  }
+
+  return ok;
+}
+
+// ─── FILE TO BASE64 ───
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    if (!file) { resolve(null); return; }
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// ─── SUBMIT ───
+async function submitSurvey() {
+  document.getElementById('submitError').style.display = 'none';
+  if (!validate()) return;
+
+  const btn = document.querySelector('.submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  const alumniChoice = document.querySelector('input[name="alumniId"]:checked')?.value;
+
+  const esigFile = document.getElementById('esig').files[0];
+  const photoFile = document.getElementById('photo').files[0];
+  let esigBase64 = null, photoBase64 = null;
+
+  if (alumniChoice === 'Yes') {
+    esigBase64 = await fileToBase64(esigFile);
+    photoBase64 = await fileToBase64(photoFile);
+  }
+
+  const payload = {
+    action: 'submit',
+    timestamp: new Date().toLocaleString('en-PH'),
+    email: document.getElementById('email').value,
+    name: document.getElementById('name').value,
+    program: document.getElementById('program').value,
+    yearGrad: document.getElementById('yearGrad').value,
+    contact: document.getElementById('contact').value,
+    address: document.getElementById('address').value,
+    fbName: document.getElementById('fbName').value,
+    employment: document.getElementById('employment').value,
+    consent: document.querySelector('input[name="consent"]:checked')?.value,
+    // Ratings
+    r1: ratings.r1, r2: ratings.r2, r3: ratings.r3,
+    r4: ratings.r4, r5: ratings.r5, r6: ratings.r6,
+    r7: ratings.r7, r8: ratings.r8, r9: ratings.r9,
+    // Open feedback
+    appreciate: document.getElementById('appreciate').value,
+    improve: document.getElementById('improve').value,
+    suggestions: document.getElementById('suggestions').value,
+    // Alumni ID
+    alumniId: alumniChoice,
+    dob: document.getElementById('dob').value,
+    citizenship: document.getElementById('citizenship').value,
+    homeAddress: document.getElementById('homeAddress').value,
+    primaryContact: document.getElementById('primaryContact').value,
+    emergencyPerson: document.getElementById('emergencyPerson').value,
+    emergencyContact: document.getElementById('emergencyContact').value,
+    relationship: document.getElementById('relationship').value,
+    emergencyAddress: document.getElementById('emergencyAddress').value,
+    esig: esigBase64,
+    photo: photoBase64
+  };
+
+  if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
+    // Demo mode
+    setTimeout(() => {
+      document.getElementById('surveyForm').style.display = 'none';
+      document.getElementById('successScreen').classList.add('show');
+      document.getElementById('progressBar').style.width = '100%';
+      document.getElementById('progressPct').textContent = '100%';
+    }, 1200);
+    return;
+  }
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (data.status === 'success') {
+      document.getElementById('surveyForm').style.display = 'none';
+      document.getElementById('successScreen').classList.add('show');
+      document.getElementById('progressBar').style.width = '100%';
+      document.getElementById('progressPct').textContent = '100%';
+    } else {
+      throw new Error(data.message || 'Submission failed');
+    }
+  } catch (e) {
+    document.getElementById('submitError').textContent = 'Submission failed: ' + e.message + '. Please try again.';
+    document.getElementById('submitError').style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Submit Survey →';
+  }
+}
+
+// ═══════════════════════════════════════
+// ADMIN DASHBOARD
+// ═══════════════════════════════════════
+function adminLogin() {
+  const pwd = document.getElementById('adminPwd').value;
+  if (pwd === ADMIN_PASSWORD) {
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminDashboard').classList.add('visible');
+    loadDashboardData();
+  } else {
+    document.getElementById('loginError').classList.add('show');
+    document.getElementById('adminPwd').value = '';
+  }
+}
+
+function adminLogout() {
+  document.getElementById('adminLogin').style.display = 'flex';
+  document.getElementById('adminDashboard').classList.remove('visible');
+  document.getElementById('adminPwd').value = '';
+  document.getElementById('loginError').classList.remove('show');
+}
+
+async function loadDashboardData() {
+  const statGrid = document.getElementById('statGrid');
+  statGrid.innerHTML = '<div class="loading-state" style="grid-column:1/-1"><div class="spinner"></div>Loading analytics...</div>';
+  document.getElementById('chartGrid').style.display = 'none';
+  document.getElementById('responsesCard').style.display = 'none';
+  document.getElementById('feedbackCard').style.display = 'none';
+
+  if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
+    renderDashboard(getMockData());
+    return;
+  }
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL + '?action=getAnalytics');
+    const data = await res.json();
+    renderDashboard(data);
+  } catch(e) {
+    statGrid.innerHTML = `<div class="loading-state" style="grid-column:1/-1; color: var(--error);">⚠ Failed to load data. Check your Apps Script URL and CORS settings.</div>`;
+  }
+}
+
+function getMockData() {
+  return {
+    total: 47,
+    programs: { 'BSN': 12, 'BSCRIM': 8, 'BSED-ENGLISH': 5, 'BSBA-MM': 7, 'BSCS': 6, 'BEED': 5, 'Other': 4 },
+    consent: { 'I Agree': 45, 'I Disagree': 2 },
+    alumni: { 'Yes': 31, 'No': 16 },
+    avgRatings: { r1:3.6, r2:3.4, r3:3.2, r4:3.5, r5:3.7, r6:3.8, r7:3.6, r8:3.9, r9:3.7 },
+    ratingDist: { '4': 18, '3': 20, '2': 6, '1': 3 },
+    recentResponses: [
+      { ts:'2025-06-05 10:23', name:'Santos, Maria L.', program:'BSN', year:'2025', consent:'I Agree', alumni:'Yes', avg:'3.8' },
+      { ts:'2025-06-05 10:41', name:'Reyes, Juan M.', program:'BSCRIM', year:'2025', consent:'I Agree', alumni:'No', avg:'3.4' },
+      { ts:'2025-06-05 11:02', name:'Cruz, Anna B.', program:'BSBA-MM', year:'2025', consent:'I Agree', alumni:'Yes', avg:'3.7' },
+      { ts:'2025-06-05 11:15', name:'Garcia, Pedro S.', program:'BSCS', year:'2025', consent:'I Agree', alumni:'Yes', avg:'3.9' },
+      { ts:'2025-06-05 12:00', name:'Flores, Lisa A.', program:'BEED', year:'2025', consent:'I Agree', alumni:'No', avg:'3.2' },
+    ],
+    appreciation: [
+      { name:'Santos, M.', text:'The overall ceremony was well-organized. The venue was beautiful and the program flow was smooth.' },
+      { name:'Reyes, J.', text:'I appreciated the support from the Registrar\'s Office in processing our requirements efficiently.' },
+      { name:'Cruz, A.', text:'The photoshoot arrangements were excellent. The photographer was professional and accommodating.' },
+    ]
+  };
+}
+
+function renderDashboard(data) {
+  const statGrid = document.getElementById('statGrid');
+  const ratingLabelsShort = { r1:'Finance Office', r2:'Registrar\'s Office', r3:'Grad Fees & Procedures', r4:'Clearance Signing', r5:'Photoshoot & Attire', r6:'Venue & Setup', r7:'Ceremony Flow', r8:'Overall Experience', r9:'Program Organization' };
+
+  const overallAvg = Object.values(data.avgRatings).reduce((a,b) => a+parseFloat(b), 0) / Object.keys(data.avgRatings).length;
+  const alumniCount = data.alumni?.Yes || 0;
+  const topProgram = Object.entries(data.programs).sort((a,b) => b[1]-a[1])[0];
+
+  statGrid.innerHTML = `
+    <div class="stat-card highlight">
+      <div class="stat-label">Total Responses</div>
+      <div class="stat-value">${data.total}</div>
+      <div class="stat-sub">Survey submissions</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Overall Avg Rating</div>
+      <div class="stat-value">${overallAvg.toFixed(2)}</div>
+      <div class="stat-sub">Out of 4.00</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Alumni ID Requests</div>
+      <div class="stat-value">${alumniCount}</div>
+      <div class="stat-sub">${Math.round(alumniCount/data.total*100)}% of respondents</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Top Program</div>
+      <div class="stat-value" style="font-size:1.4rem;">${topProgram?.[0] || '—'}</div>
+      <div class="stat-sub">${topProgram?.[1] || 0} respondents</div>
+    </div>
+  `;
+
+  // ─── CHART GRID ───
+  const chartGrid = document.getElementById('chartGrid');
+  chartGrid.style.display = 'grid';
+
+  // Avg Ratings Chart
+  const avgRatingsHTML = ratingQuestions.map(q => {
+    const score = parseFloat(data.avgRatings[q.id] || 0);
+    const pct = (score / 4) * 100;
+    const stars = [1,2,3,4].map(s => `<span class="${s <= Math.round(score) ? 'star-filled' : 'star-empty'}">★</span>`).join('');
+    return `
+      <div class="avg-item">
+        <div class="avg-label">${ratingLabelsShort[q.id]}</div>
+        <div class="avg-stars">${stars}</div>
+        <div class="avg-score">${score.toFixed(1)}</div>
+      </div>
+    `;
+  }).join('');
+
+  // Program Distribution
+  const programTotal = Object.values(data.programs).reduce((a,b) => a+b, 0);
+  const programBarsHTML = Object.entries(data.programs).sort((a,b) => b[1]-a[1]).map(([prog, cnt]) => {
+    const pct = Math.round((cnt / programTotal) * 100);
+    return `
+      <div class="bar-row">
+        <div class="bar-label">${prog}</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${pct}%">
+            <span class="bar-val">${pct}%</span>
+          </div>
+        </div>
+        <div class="bar-count">${cnt}</div>
+      </div>
+    `;
+  }).join('');
+
+  // Rating Distribution
+  const ratingDistTotal = Object.values(data.ratingDist).reduce((a,b) => a+b, 0);
+  const ratingColors = { '4':'#2d6a2d', '3':'#4a8c4a', '2':'#c8a84b', '1':'#c0392b' };
+  const ratingDistBarsHTML = [['4','Strongly Satisfied'],['3','Satisfied'],['2','Dissatisfied'],['1','Strongly Dissatisfied']].map(([v, lbl]) => {
+    const cnt = data.ratingDist[v] || 0;
+    const pct = Math.round((cnt / ratingDistTotal) * 100);
+    return `
+      <div class="bar-row">
+        <div class="bar-label">${v} — ${lbl}</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${pct}%; background:${ratingColors[v]}">
+            <span class="bar-val">${pct}%</span>
+          </div>
+        </div>
+        <div class="bar-count">${cnt}</div>
+      </div>
+    `;
+  }).join('');
+
+  // Alumni Donut
+  const alumniYes = data.alumni?.Yes || 0;
+  const alumniNo = data.alumni?.No || 0;
+  const alumniTotal = alumniYes + alumniNo;
+  const alumniPct = Math.round((alumniYes / alumniTotal) * 100);
+  const r = 50, cx = 60, cy = 60;
+  const circ = 2 * Math.PI * r;
+  const filled = (alumniPct / 100) * circ;
+
+  chartGrid.innerHTML = `
+    <div class="chart-card" style="grid-column: span 2;">
+      <h3>Average Satisfaction per Parameter</h3>
+      <div>${avgRatingsHTML}</div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Respondents by Program</h3>
+      <div class="bar-chart">${programBarsHTML}</div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Overall Rating Distribution</h3>
+      <div class="bar-chart">${ratingDistBarsHTML}</div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Alumni ID Interest</h3>
+      <div class="donut-wrap">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e8f3e8" stroke-width="16"/>
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#2d6a2d" stroke-width="16"
+            stroke-dasharray="${filled} ${circ}" stroke-dashoffset="${circ * 0.25}"
+            transform="rotate(-90 ${cx} ${cy})" stroke-linecap="round"/>
+          <text x="${cx}" y="${cy-6}" text-anchor="middle" font-size="18" font-weight="600" fill="#1a4a1a">${alumniPct}%</text>
+          <text x="${cx}" y="${cy+12}" text-anchor="middle" font-size="9" fill="#6a7e6a">want ID</text>
+        </svg>
+        <div class="donut-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#2d6a2d"></div>Yes — ${alumniYes} (${alumniPct}%)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#e8f3e8; border:1px solid #c0d8c0"></div>No — ${alumniNo} (${100-alumniPct}%)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Consent Distribution</h3>
+      <div class="bar-chart">
+        ${Object.entries(data.consent).map(([k,v]) => {
+          const pct = Math.round((v/(data.consent['I Agree']+data.consent['I Disagree']))*100);
+          return `<div class="bar-row">
+            <div class="bar-label">${k}</div>
+            <div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:${k==='I Agree'?'#2d6a2d':'#c0392b'}"><span class="bar-val">${pct}%</span></div></div>
+            <div class="bar-count">${v}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+  `;
+
+  // ─── RESPONSES TABLE ───
+  const responsesCard = document.getElementById('responsesCard');
+  const responsesBody = document.getElementById('responsesBody');
+  responsesCard.style.display = 'block';
+  responsesBody.innerHTML = (data.recentResponses || []).map((r, i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td>${r.ts}</td>
+      <td style="font-weight:500;">${r.name}</td>
+      <td>${r.program}</td>
+      <td>${r.year}</td>
+      <td><span class="badge ${r.consent==='I Agree'?'badge-green':'badge-red'}">${r.consent}</span></td>
+      <td><span class="badge ${r.alumni==='Yes'?'badge-green':'badge-red'}">${r.alumni}</span></td>
+      <td><strong>${r.avg}</strong>/4.0</td>
+    </tr>
+  `).join('');
+
+  // ─── FEEDBACK ───
+  const feedbackCard = document.getElementById('feedbackCard');
+  feedbackCard.style.display = 'block';
+  document.getElementById('appreciationList').innerHTML = (data.appreciation || []).map(f => `
+    <div class="feedback-item">
+      <div class="fb-meta">— ${f.name}</div>
+      ${f.text}
+    </div>
+  `).join('');
+}
+
+// ─── INIT ───
+buildRatingItems();
+document.querySelectorAll('input, select, textarea').forEach(el => {
+  el.addEventListener('input', updateProgress);
+  el.addEventListener('change', updateProgress);
+});
+updateProgress();
+</script>
+</body>
+</html>
